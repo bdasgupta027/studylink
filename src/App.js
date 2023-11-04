@@ -1,23 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
+import LandingPage1 from "./ui-components/LandingPage1"
+import LandingPage2 from "./ui-components/LandingPage2"
+import LandingPage3 from "./ui-components/LandingPage3"
+import CTASection from "./ui-components/CTASection"
+import NavBarHeader2 from "./ui-components/NavBarHeader2"
+import ProfilePageDetails from "./ui-components/ProfilePageDetails"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBarHeader2/>
+      <LandingPage1/>
+      {/* <LandingPage2/> */}
+      {/* <LandingPage3/> */}
+      {/* <CTASection/> */}
     </div>
   );
 }

@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-studylink-staging-163143-authRole",
+      "UnauthRoleArn": "arn:aws:iam::753145094235:role/amplify-studylink-staging-163143-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::753145094235:role/amplify-studylink-staging-163143-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-studylink-staging-163143-deployment",
+      "UnauthRoleName": "amplify-studylink-staging-163143-unauthRole",
+      "StackName": "amplify-studylink-staging-163143",
+      "StackId": "arn:aws:cloudformation:us-west-2:753145094235:stack/amplify-studylink-staging-163143/cf923830-7741-11ee-8f4d-020793fef6c9",
+      "AmplifyAppId": "d2ptlly582u07f"
+    },
+    "categories": {
+      "auth": {
+        "studylink": {}
+      }
+    }
+  }
+}
