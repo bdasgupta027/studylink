@@ -15,8 +15,8 @@ export default function ProfilePageDetails(props) {
     <Flex
       gap="10px"
       direction="row"
-      width="1280px"
-      height="278px"
+      width="100vw"
+      marginTop="10px"
       justifyContent="flex-start"
       alignItems="flex-start"
       overflow="hidden"
