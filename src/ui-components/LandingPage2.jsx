@@ -15,18 +15,18 @@ export default function LandingPage2(props) {
     <Flex
       gap="0"
       direction="column"
-      width="1440px"
+      width="100vw"
       height="unset"
+      marginTop="10px"
       justifyContent="center"
       alignItems="center"
       position="relative"
-      padding="40px 160px 40px 160px"
+      padding="40px 160px"
       backgroundColor="rgba(250,250,250,1)"
       {...getOverrideProps(overrides, "LandingPage2")}
       {...rest}
     >
       <Flex
-        gap="24px"
         direction="column"
         width="unset"
         height="unset"
@@ -39,7 +39,6 @@ export default function LandingPage2(props) {
         {...getOverrideProps(overrides, "Frame 13629766592")}
       >
         <Flex
-          gap="24px"
           direction="row"
           width="unset"
           height="unset"
@@ -52,7 +51,6 @@ export default function LandingPage2(props) {
           {...getOverrideProps(overrides, "Frame 13629766593")}
         >
           <Flex
-            gap="16px"
             direction="column"
             width="unset"
             height="unset"
@@ -147,7 +145,6 @@ export default function LandingPage2(props) {
             ></Text>
           </Flex>
           <Flex
-            gap="16px"
             direction="column"
             width="unset"
             height="unset"
@@ -243,7 +240,6 @@ export default function LandingPage2(props) {
           </Flex>
         </Flex>
         <Flex
-          gap="24px"
           direction="row"
           width="unset"
           height="unset"
@@ -256,7 +252,6 @@ export default function LandingPage2(props) {
           {...getOverrideProps(overrides, "Frame 393")}
         >
           <Flex
-            gap="16px"
             direction="column"
             width="unset"
             height="unset"
@@ -352,7 +347,6 @@ export default function LandingPage2(props) {
             ></Text>
           </Flex>
           <Flex
-            gap="16px"
             direction="column"
             width="unset"
             height="unset"

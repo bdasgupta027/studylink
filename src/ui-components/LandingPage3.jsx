@@ -38,13 +38,13 @@ export default function LandingPage3(props) {
     <Flex
       gap="10px"
       direction="column"
-      width="1440px"
-      height="548px"
-      justifyContent="center"
+      width="100vw"
+      // height="50vh"
+      justifyContent="center-between"
       alignItems="center"
       overflow="hidden"
       position="relative"
-      padding="160px 240px 160px 240px"
+      padding="20vh 240px"
       backgroundColor="rgba(233,249,252,1)"
       display="flex"
       {...getOverrideProps(overrides, "LandingPage3")}

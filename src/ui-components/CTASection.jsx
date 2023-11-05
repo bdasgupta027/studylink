@@ -14,13 +14,13 @@ export default function CTASection(props) {
     <Flex
       gap="10px"
       direction="column"
-      width="1440px"
+      width="100vw"
       height="unset"
       justifyContent="center"
       alignItems="flex-start"
       overflow="hidden"
       position="relative"
-      padding="160px 160px 160px 160px"
+      padding="10vh"
       backgroundColor="rgba(255,255,255,1)"
       {...getOverrideProps(overrides, "CTASection")}
       {...rest}
