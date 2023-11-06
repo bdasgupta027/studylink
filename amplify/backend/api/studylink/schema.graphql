@@ -4,6 +4,19 @@ type MemberCard @model @auth(rules: [{allow: public}]) {
   StudyGroupCards: [StudyGroupCard] @manyToMany(relationName: "MemberCardStudyGroupCard")
 }
 
+enum Priority {
+  LOW
+  NORMAL
+  HIGH
+}
+
+type Todo @model@auth(rules: [{ allow: public }]) {
+  id: ID!
+  name: String!
+  priority: Priority
+  description: String
+}
+
 type ProfileCard @model @auth(rules: [{allow: public}]) {
   id: ID!
   firstName: String!
