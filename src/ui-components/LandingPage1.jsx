@@ -172,20 +172,6 @@ export default function LandingPage1(props) {
           display="flex"
           {...getOverrideProps(overrides, "Right")}
         >
-          <Image
-            width="90%"
-            // height="100%"
-            gap="unset"
-            alignItems="unset"
-            justifyContent="unset"
-            grow="1"
-            shrink="1"
-            basis="0"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            objectFit="unset"
-            {...getOverrideProps(overrides, "image")}
-          ></Image>
         </Flex>
       </Flex>
     </div>

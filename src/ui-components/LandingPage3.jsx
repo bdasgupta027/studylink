@@ -33,7 +33,7 @@ export default function LandingPage3(props) {
     getOverridesFromVariants(variants, props),
     overridesProp || {}
   );
-  const buttonOnClick = useNavigateAction({ type: "url", url: "/sign-up/" });
+  const buttonOnClick = useNavigateAction({ type: "url", url: "/dashboard/" });
   return (
     <Flex
       gap="10px"

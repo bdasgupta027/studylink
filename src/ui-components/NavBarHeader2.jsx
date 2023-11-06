@@ -5,16 +5,21 @@
  **************************************************************************/
 
 /* eslint-disable */
+import { useNavigate } from 'react-router-dom';
 import * as React from "react";
 import { getOverrideProps } from "./utils";
 import { Button, Flex, Icon, Text, View } from "@aws-amplify/ui-react";
 export default function NavBarHeader2(props) {
   const { overrides, ...rest } = props;
+  const navigate = useNavigate();
+  const handleButtonClick = () => {
+    navigate('/dashboard');
+  };
   return (
     <Flex
       gap="10px"
       direction="row"
-      width="100vw"
+      width="1440px"
       height="unset"
       justifyContent="space-between"
       alignItems="center"
@@ -117,6 +122,7 @@ export default function NavBarHeader2(props) {
           isDisabled={false}
           variation="link"
           children="Log in"
+          onClick={handleButtonClick}
           {...getOverrideProps(overrides, "Button39493466")}
         ></Button>
         <Button
@@ -127,6 +133,7 @@ export default function NavBarHeader2(props) {
           isDisabled={false}
           variation="primary"
           children="Sign up"
+          onClick={handleButtonClick}
           {...getOverrideProps(overrides, "Button39493467")}
         ></Button>
       </Flex>
