@@ -10,6 +10,7 @@ import { withAuthenticator } from '@aws-amplify/ui-react';
 import NavBarHeader2 from "./NavBarHeader2";
 import { DataStore } from 'aws-amplify';
 import { useState, useEffect } from "react";
+import StudyGroupCardCollection from "./StudyGroupCardCollection";
 
 function Dashboard() {
   // const [studygroups, setStudygroups] = useState(null);

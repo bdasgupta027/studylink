@@ -30,7 +30,6 @@ export declare type StudyGroupCardCreateFormInputValues = {
     groupOwner?: string;
     image?: string;
     memberList?: string[];
-    accepting?: boolean;
 };
 export declare type StudyGroupCardCreateFormValidationValues = {
     groupName?: ValidationFunction<string>;
@@ -41,7 +40,6 @@ export declare type StudyGroupCardCreateFormValidationValues = {
     groupOwner?: ValidationFunction<string>;
     image?: ValidationFunction<string>;
     memberList?: ValidationFunction<string>;
-    accepting?: ValidationFunction<boolean>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type StudyGroupCardCreateFormOverridesProps = {
@@ -54,7 +52,6 @@ export declare type StudyGroupCardCreateFormOverridesProps = {
     groupOwner?: PrimitiveOverrideProps<TextFieldProps>;
     image?: PrimitiveOverrideProps<TextFieldProps>;
     memberList?: PrimitiveOverrideProps<TextFieldProps>;
-    accepting?: PrimitiveOverrideProps<SwitchFieldProps>;
 } & EscapeHatchProps;
 export declare type StudyGroupCardCreateFormProps = React.PropsWithChildren<{
     overrides?: StudyGroupCardCreateFormOverridesProps | undefined | null;
