@@ -7,7 +7,7 @@
 /* eslint-disable */
 import * as React from "react";
 import { withAuthenticator } from '@aws-amplify/ui-react';
-import NavBarHeader2 from "./NavBarHeader2";
+import SLNavBarHeader2 from "./SLNavBarHeader2";
 import { DataStore } from 'aws-amplify';
 import { useState, useEffect } from "react";
 
@@ -24,7 +24,7 @@ function Dashboard() {
 
   return (
     <div>
-      <NavBarHeader2/>
+      <SLNavBarHeader></SLNavBarHeader>
     </div>
   );
 }

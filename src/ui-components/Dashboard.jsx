@@ -7,8 +7,8 @@
 /* eslint-disable */
 import * as React from "react";
 import { withAuthenticator } from '@aws-amplify/ui-react';
-import NavBarHeader2 from "./NavBarHeader2";
-import NavBarHeader from "./NavBarHeader";
+import SLNavBarHeader2 from "./SLNavBarHeader2";
+import SLNavBarHeader from "./SLNavBarHeader";
 import { DataStore } from 'aws-amplify';
 import { useState, useEffect } from "react";
 import StudyGroupCardCollection from "./StudyGroupCardCollection";
@@ -17,7 +17,7 @@ function Dashboard() {
 
   return (
     <div>
-      <NavBarHeader/>
+      <SLNavBarHeader></SLNavBarHeader>
       <StudyGroupCardCollection />
     </div>
   );

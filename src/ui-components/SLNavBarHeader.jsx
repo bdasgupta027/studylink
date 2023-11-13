@@ -6,12 +6,21 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { getOverrideProps } from "./utils";
+import { getOverrideProps, useNavigateAction } from "./utils";
 import { Flex, Image, Text, Button } from "@aws-amplify/ui-react";
 import MyIcon from "./MyIcon";
 import { Link } from "react-router-dom";
 
 export default function SLNavBarHeader(props) {
+  const dashboardOnClick = useNavigateAction({
+    type: "url",
+    url: "/dashboard",
+  });
+  const createaNewStudyGroupOnClick = useNavigateAction({
+    type: "url",
+    url: "",
+  });
+  const contactOnClick = useNavigateAction({ type: "url", url: "/contact" });
   const { overrides, ...rest } = props;
   return (
     <Flex
@@ -50,6 +59,9 @@ export default function SLNavBarHeader(props) {
           isDisabled={false}
           variation="link"
           children="Dashboard"
+          onClick={() => {
+            dashboardOnClick();
+          }}
         ></Button>
         <Button
           width="unset"
@@ -59,6 +71,9 @@ export default function SLNavBarHeader(props) {
           isDisabled={false}
           variation="link"
           children="Create a New Study Group"
+          onClick={() => {
+            createaNewStudyGroupOnClick();
+          }}
         ></Button>
         <Button
           width="unset"
@@ -68,6 +83,9 @@ export default function SLNavBarHeader(props) {
           isDisabled={false}
           variation="link"
           children="Contact"
+          onClick={() => {
+            contactOnClick();
+          }}
         ></Button>
         
       </Flex>
