@@ -7,7 +7,7 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "./utils";
-import { Flex, Image, Text, Button } from "@aws-amplify/ui-react";
+import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import MyIcon from "./MyIcon";
 import { Link } from "react-router-dom";
 
@@ -17,7 +17,7 @@ export default function NavBarHeader(props) {
     <Flex
       gap="40px"
       direction="row"
-      width="100vw"
+      width="1440px"
       height="unset"
       justifyContent="center"
       alignItems="center"
@@ -42,34 +42,69 @@ export default function NavBarHeader(props) {
         padding="0px 0px 0px 0px"
         {...getOverrideProps(overrides, "Frame 32129767076")}
       >
-        <Button
+        <Text
+          fontFamily="Inter"
+          fontSize="16px"
+          fontWeight="400"
+          color="rgba(92,102,112,1)"
+          lineHeight="24px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
           width="unset"
           height="unset"
+          gap="unset"
+          alignItems="unset"
           shrink="0"
-          size="default"
-          isDisabled={false}
-          variation="link"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
           children="Dashboard"
-        ></Button>
-        <Button
+          {...getOverrideProps(overrides, "Dashboard")}
+        ></Text>
+        <Text
+          fontFamily="Inter"
+          fontSize="16px"
+          fontWeight="400"
+          color="rgba(92,102,112,1)"
+          lineHeight="24px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
           width="unset"
           height="unset"
+          gap="unset"
+          alignItems="unset"
           shrink="0"
-          size="default"
-          isDisabled={false}
-          variation="link"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
           children="Create a New Study Group"
-        ></Button>
-        <Button
+          {...getOverrideProps(overrides, "Create a New Study Group")}
+        ></Text>
+        <Text
+          fontFamily="Inter"
+          fontSize="16px"
+          fontWeight="400"
+          color="rgba(92,102,112,1)"
+          lineHeight="24px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
           width="unset"
           height="unset"
+          gap="unset"
+          alignItems="unset"
           shrink="0"
-          size="default"
-          isDisabled={false}
-          variation="link"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
           children="Contact"
-        ></Button>
-        
+          {...getOverrideProps(overrides, "Contact")}
+        ></Text>
       </Flex>
       <Flex
         gap="32px"

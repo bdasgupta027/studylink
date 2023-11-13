@@ -6,7 +6,6 @@
 
 import * as React from "react";
 import { ButtonProps, FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
-import { MyIconProps } from "./MyIcon";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -32,7 +31,6 @@ export declare type ProfilePageDetailsOverridesProps = {
     "CSE 103, CSE 180, CSE 115A"?: PrimitiveOverrideProps<TextProps>;
     Article?: PrimitiveOverrideProps<FlexProps>;
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."?: PrimitiveOverrideProps<TextProps>;
-    MyIcon?: MyIconProps;
 } & EscapeHatchProps;
 export declare type ProfilePageDetailsProps = React.PropsWithChildren<Partial<FlexProps> & {
     profileCard?: any;

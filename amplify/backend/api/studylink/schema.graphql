@@ -4,19 +4,6 @@ type MemberCard @model @auth(rules: [{allow: public}]) {
   StudyGroupCards: [StudyGroupCard] @manyToMany(relationName: "MemberCardStudyGroupCard")
 }
 
-enum Priority {
-  LOW
-  NORMAL
-  HIGH
-}
-
-type Todo @model@auth(rules: [{ allow: public }]) {
-  id: ID!
-  name: String!
-  priority: Priority
-  description: String
-}
-
 type ProfileCard @model @auth(rules: [{allow: public}]) {
   id: ID!
   firstName: String!
@@ -57,6 +44,5 @@ type StudyGroupCard @model @auth(rules: [{allow: public}]) {
   Announcements: [Announcement] @hasMany(indexName: "byStudyGroupCard", fields: ["id"])
   memberList: [String]
   membercards: [MemberCard] @manyToMany(relationName: "MemberCardStudyGroupCard")
-  accepting: Boolean!
 }
  

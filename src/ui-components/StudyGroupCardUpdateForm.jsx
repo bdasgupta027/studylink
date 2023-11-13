@@ -200,7 +200,6 @@ export default function StudyGroupCardUpdateForm(props) {
     groupOwner: "",
     image: "",
     memberList: [],
-    accepting: false,
   };
   const [groupName, setGroupName] = React.useState(initialValues.groupName);
   const [numMembers, setNumMembers] = React.useState(initialValues.numMembers);
@@ -214,7 +213,6 @@ export default function StudyGroupCardUpdateForm(props) {
   const [groupOwner, setGroupOwner] = React.useState(initialValues.groupOwner);
   const [image, setImage] = React.useState(initialValues.image);
   const [memberList, setMemberList] = React.useState(initialValues.memberList);
-  const [accepting, setAccepting] = React.useState(initialValues.accepting);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = studyGroupCardRecord
@@ -229,7 +227,6 @@ export default function StudyGroupCardUpdateForm(props) {
     setImage(cleanValues.image);
     setMemberList(cleanValues.memberList ?? []);
     setCurrentMemberListValue("");
-    setAccepting(cleanValues.accepting);
     setErrors({});
   };
   const [studyGroupCardRecord, setStudyGroupCardRecord] = React.useState(
@@ -262,7 +259,6 @@ export default function StudyGroupCardUpdateForm(props) {
     groupOwner: [{ type: "Required" }, { type: "Email" }],
     image: [],
     memberList: [],
-    accepting: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -298,7 +294,6 @@ export default function StudyGroupCardUpdateForm(props) {
           groupOwner,
           image: image ?? null,
           memberList: memberList ?? null,
-          accepting,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -367,7 +362,6 @@ export default function StudyGroupCardUpdateForm(props) {
               groupOwner,
               image,
               memberList,
-              accepting,
             };
             const result = onChange(modelFields);
             value = result?.groupName ?? value;
@@ -403,7 +397,6 @@ export default function StudyGroupCardUpdateForm(props) {
               groupOwner,
               image,
               memberList,
-              accepting,
             };
             const result = onChange(modelFields);
             value = result?.numMembers ?? value;
@@ -435,7 +428,6 @@ export default function StudyGroupCardUpdateForm(props) {
               groupOwner,
               image,
               memberList,
-              accepting,
             };
             const result = onChange(modelFields);
             value = result?.className ?? value;
@@ -467,7 +459,6 @@ export default function StudyGroupCardUpdateForm(props) {
               groupOwner,
               image,
               memberList,
-              accepting,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -499,7 +490,6 @@ export default function StudyGroupCardUpdateForm(props) {
               groupOwner,
               image,
               memberList,
-              accepting,
             };
             const result = onChange(modelFields);
             value = result?.acceptingMembers ?? value;
@@ -531,7 +521,6 @@ export default function StudyGroupCardUpdateForm(props) {
               groupOwner: value,
               image,
               memberList,
-              accepting,
             };
             const result = onChange(modelFields);
             value = result?.groupOwner ?? value;
@@ -563,7 +552,6 @@ export default function StudyGroupCardUpdateForm(props) {
               groupOwner,
               image: value,
               memberList,
-              accepting,
             };
             const result = onChange(modelFields);
             value = result?.image ?? value;
@@ -591,7 +579,6 @@ export default function StudyGroupCardUpdateForm(props) {
               groupOwner,
               image,
               memberList: values,
-              accepting,
             };
             const result = onChange(modelFields);
             values = result?.memberList ?? values;
@@ -633,38 +620,6 @@ export default function StudyGroupCardUpdateForm(props) {
           {...getOverrideProps(overrides, "memberList")}
         ></TextField>
       </ArrayField>
-      <SwitchField
-        label="Accepting"
-        defaultChecked={false}
-        isDisabled={false}
-        isChecked={accepting}
-        onChange={(e) => {
-          let value = e.target.checked;
-          if (onChange) {
-            const modelFields = {
-              groupName,
-              numMembers,
-              className,
-              description,
-              acceptingMembers,
-              groupOwner,
-              image,
-              memberList,
-              accepting: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.accepting ?? value;
-          }
-          if (errors.accepting?.hasError) {
-            runValidationTasks("accepting", value);
-          }
-          setAccepting(value);
-        }}
-        onBlur={() => runValidationTasks("accepting", accepting)}
-        errorMessage={errors.accepting?.errorMessage}
-        hasError={errors.accepting?.hasError}
-        {...getOverrideProps(overrides, "accepting")}
-      ></SwitchField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

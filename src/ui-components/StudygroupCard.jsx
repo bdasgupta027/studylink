@@ -35,6 +35,7 @@ export default function StudygroupCard(props) {
         position="relative"
         padding="0px 0px 0px 0px"
         objectFit="cover"
+        src={studyGroupCard?.image}
         {...getOverrideProps(overrides, "image")}
       ></Image>
       <Flex

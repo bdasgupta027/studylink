@@ -8,15 +8,14 @@
 import * as React from "react";
 import { getOverrideProps } from "./utils";
 import { Button, Flex, Image, Text } from "@aws-amplify/ui-react";
-import MyIcon from "./MyIcon";
 export default function ProfilePageDetails(props) {
   const { profileCard, overrides, ...rest } = props;
   return (
     <Flex
       gap="10px"
       direction="row"
-      width="100vw"
-      marginTop="10px"
+      width="1280px"
+      height="278px"
       justifyContent="flex-start"
       alignItems="flex-start"
       overflow="hidden"
@@ -215,20 +214,6 @@ export default function ProfilePageDetails(props) {
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                 )}
               ></Text>
-              <MyIcon
-                width="24px"
-                height="24px"
-                display="block"
-                gap="unset"
-                alignItems="unset"
-                justifyContent="unset"
-                overflow="hidden"
-                shrink="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                type="arrow-right"
-                {...getOverrideProps(overrides, "MyIcon")}
-              ></MyIcon>
             </Flex>
           </Flex>
         </Flex>
