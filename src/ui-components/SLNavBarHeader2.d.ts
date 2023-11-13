@@ -17,8 +17,8 @@ export declare type Variant = {
     overrides: EscapeHatchProps;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type NavBarHeader2OverridesProps = {
-    NavBarHeader2?: PrimitiveOverrideProps<FlexProps>;
+export declare type SLNavBarHeader2OverridesProps = {
+    SLNavBarHeader2?: PrimitiveOverrideProps<FlexProps>;
     "Frame 5"?: PrimitiveOverrideProps<FlexProps>;
     "Screenshot 2023-11-12 200518 1"?: PrimitiveOverrideProps<ImageProps>;
     Home?: PrimitiveOverrideProps<TextProps>;
@@ -27,7 +27,7 @@ export declare type NavBarHeader2OverridesProps = {
     Button39493466?: PrimitiveOverrideProps<ButtonProps>;
     Button39493467?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
-export declare type NavBarHeader2Props = React.PropsWithChildren<Partial<FlexProps> & {
-    overrides?: NavBarHeader2OverridesProps | undefined | null;
+export declare type SLNavBarHeader2Props = React.PropsWithChildren<Partial<FlexProps> & {
+    overrides?: SLNavBarHeader2OverridesProps | undefined | null;
 }>;
-export default function NavBarHeader2(props: NavBarHeader2Props): React.ReactElement;
+export default function SLNavBarHeader2(props: SLNavBarHeader2Props): React.ReactElement;

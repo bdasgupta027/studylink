@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { ButtonProps, FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
+import { FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -17,17 +17,16 @@ export declare type Variant = {
     overrides: EscapeHatchProps;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type NavBarHeader2OverridesProps = {
-    NavBarHeader2?: PrimitiveOverrideProps<FlexProps>;
-    "Frame 5"?: PrimitiveOverrideProps<FlexProps>;
-    "Screenshot 2023-11-12 200518 1"?: PrimitiveOverrideProps<ImageProps>;
-    Home?: PrimitiveOverrideProps<TextProps>;
+export declare type SLNavBarHeaderOverridesProps = {
+    SLNavBarHeader?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 32129767076"?: PrimitiveOverrideProps<FlexProps>;
+    Dashboard?: PrimitiveOverrideProps<TextProps>;
+    "Create a New Study Group"?: PrimitiveOverrideProps<TextProps>;
     Contact?: PrimitiveOverrideProps<TextProps>;
-    actions?: PrimitiveOverrideProps<FlexProps>;
-    Button39493466?: PrimitiveOverrideProps<ButtonProps>;
-    Button39493467?: PrimitiveOverrideProps<ButtonProps>;
+    "Frame 32129767081"?: PrimitiveOverrideProps<FlexProps>;
+    image?: PrimitiveOverrideProps<ImageProps>;
 } & EscapeHatchProps;
-export declare type NavBarHeader2Props = React.PropsWithChildren<Partial<FlexProps> & {
-    overrides?: NavBarHeader2OverridesProps | undefined | null;
+export declare type SLNavBarHeaderProps = React.PropsWithChildren<Partial<FlexProps> & {
+    overrides?: SLNavBarHeaderOverridesProps | undefined | null;
 }>;
-export default function NavBarHeader2(props: NavBarHeader2Props): React.ReactElement;
+export default function SLNavBarHeader(props: SLNavBarHeaderProps): React.ReactElement;

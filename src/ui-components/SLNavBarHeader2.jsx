@@ -5,56 +5,66 @@
  **************************************************************************/
 
 /* eslint-disable */
+import { useNavigate } from "react-router-dom";
 import * as React from "react";
 import { getOverrideProps, useNavigateAction } from "./utils";
-import { Flex, Image, Text } from "@aws-amplify/ui-react";
-export default function NavBarHeader(props) {
+import { Button, Flex, Image, Text } from "@aws-amplify/ui-react";
+export default function SLNavBarHeader2(props) {
   const { overrides, ...rest } = props;
-  const dashboardOnClick = useNavigateAction({
-    type: "url",
-    url: "/dashboard",
-  });
-  const createaNewStudyGroupOnClick = useNavigateAction({
-    type: "url",
-    url: "",
-  });
-  const contactOnClick = useNavigateAction({ type: "url", url: "" });
+  const navigate = useNavigate();
+  const handleButtonOnClick = () => {
+    navigate('/dashboard');
+  };
+  const homeOnClick = useNavigateAction({ type: "reload" });
+  const contactOnClick = useNavigateAction({ type: "url", url: '"/contact/"' });
   return (
     <Flex
-      gap="40px"
+      gap="10px"
       direction="row"
-      width="1440px"
+      width="100%"
       height="unset"
-      justifyContent="center"
+      justifyContent="space-between"
       alignItems="center"
+      overflow="hidden"
       position="relative"
       boxShadow="0px 2px 6px rgba(0.05098039284348488, 0.10196078568696976, 0.14901961386203766, 0.15000000596046448)"
-      padding="24px 32px 24px 32px"
+      padding="16px 32px 16px 32px"
       backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "NavBarHeader")}
+      {...getOverrideProps(overrides, "SLNavBarHeader2")}
       {...rest}
     >
       <Flex
-        gap="40px"
+        gap="32px"
         direction="row"
         width="unset"
         height="unset"
-        justifyContent="flex-start"
+        justifyContent="center"
         alignItems="center"
-        grow="1"
-        shrink="1"
-        basis="0"
+        shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Frame 32129767076")}
+        {...getOverrideProps(overrides, "Frame 5")}
       >
+        <Image
+          width="175.5px"
+          height="77px"
+          display="block"
+          gap="unset"
+          alignItems="unset"
+          justifyContent="unset"
+          shrink="0"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          objectFit="cover"
+          src="https://i.postimg.cc/CKLBW65p/logo.png" 
+        ></Image>
         <Text
           fontFamily="Inter"
           fontSize="16px"
           fontWeight="400"
-          color="rgba(92,102,112,1)"
+          color="rgba(13,26,38,1)"
           lineHeight="24px"
-          textAlign="left"
+          textAlign="left" 
           display="block"
           direction="column"
           justifyContent="unset"
@@ -66,41 +76,17 @@ export default function NavBarHeader(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Dashboard"
+          children="Home"
           onClick={() => {
-            dashboardOnClick();
+            homeOnClick();
           }}
-          {...getOverrideProps(overrides, "Dashboard")}
+          {...getOverrideProps(overrides, "Home")}
         ></Text>
         <Text
           fontFamily="Inter"
           fontSize="16px"
           fontWeight="400"
-          color="rgba(92,102,112,1)"
-          lineHeight="24px"
-          textAlign="left"
-          display="block"
-          direction="column"
-          justifyContent="unset"
-          width="unset"
-          height="unset"
-          gap="unset"
-          alignItems="unset"
-          shrink="0"
-          position="relative"
-          padding="0px 0px 0px 0px"
-          whiteSpace="pre-wrap"
-          children="Create a New Study Group"
-          onClick={() => {
-            createaNewStudyGroupOnClick();
-          }}
-          {...getOverrideProps(overrides, "Create a New Study Group")}
-        ></Text>
-        <Text
-          fontFamily="Inter"
-          fontSize="16px"
-          fontWeight="400"
-          color="rgba(92,102,112,1)"
+          color="rgba(13,26,38,1)"
           lineHeight="24px"
           textAlign="left"
           display="block"
@@ -122,33 +108,39 @@ export default function NavBarHeader(props) {
         ></Text>
       </Flex>
       <Flex
-        gap="32px"
+        gap="8px"
         direction="row"
         width="unset"
         height="unset"
-        justifyContent="flex-end"
-        alignItems="center"
-        grow="1"
-        shrink="1"
-        basis="0"
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Frame 32129767081")}
+        {...getOverrideProps(overrides, "actions")}
       >
-        <Image
-          width="45px"
-          height="45px"
-          display="block"
-          gap="unset"
-          alignItems="unset"
-          justifyContent="unset"
+        <Button
+          width="unset"
+          height="unset"
           shrink="0"
-          position="relative"
-          borderRadius="160px"
-          padding="0px 0px 0px 0px"
-          objectFit="cover"
-          {...getOverrideProps(overrides, "image")}
-        ></Image>
+          size="default"
+          isDisabled={false}
+          variation="link"
+          children="Log in"
+          onClick={handleButtonOnClick}
+          {...getOverrideProps(overrides, "Button39493466")}
+        ></Button>
+        <Button
+          width="unset"
+          height="unset"
+          shrink="0"
+          size="default"
+          isDisabled={false}
+          variation="primary"
+          children="Sign up"
+          onClick={handleButtonOnClick}
+          {...getOverrideProps(overrides, "Button39493467")}
+        ></Button>
       </Flex>
     </Flex>
   );

@@ -5,7 +5,8 @@
  **************************************************************************/
 
 import * as React from "react";
-import { ButtonProps, FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
+import { AnnouncementCardProps } from "./AnnouncementCard";
+import { CollectionProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -17,17 +18,17 @@ export declare type Variant = {
     overrides: EscapeHatchProps;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type NavBarHeader2OverridesProps = {
-    NavBarHeader2?: PrimitiveOverrideProps<FlexProps>;
-    "Frame 5"?: PrimitiveOverrideProps<FlexProps>;
-    "Screenshot 2023-11-12 200518 1"?: PrimitiveOverrideProps<ImageProps>;
-    Home?: PrimitiveOverrideProps<TextProps>;
-    Contact?: PrimitiveOverrideProps<TextProps>;
-    actions?: PrimitiveOverrideProps<FlexProps>;
-    Button39493466?: PrimitiveOverrideProps<ButtonProps>;
-    Button39493467?: PrimitiveOverrideProps<ButtonProps>;
+export declare type AnnouncementCardCollectionOverridesProps = {
+    AnnouncementCardCollection?: PrimitiveOverrideProps<CollectionProps>;
+    AnnouncementCard?: AnnouncementCardProps;
 } & EscapeHatchProps;
-export declare type NavBarHeader2Props = React.PropsWithChildren<Partial<FlexProps> & {
-    overrides?: NavBarHeader2OverridesProps | undefined | null;
+export declare type AnnouncementCardCollectionProps = React.PropsWithChildren<Partial<CollectionProps<any>> & {
+    items?: any[];
+    overrideItems?: (collectionItem: {
+        item: any;
+        index: number;
+    }) => AnnouncementCardProps;
+} & {
+    overrides?: AnnouncementCardCollectionOverridesProps | undefined | null;
 }>;
-export default function NavBarHeader2(props: NavBarHeader2Props): React.ReactElement;
+export default function AnnouncementCardCollection(props: AnnouncementCardCollectionProps): React.ReactElement;

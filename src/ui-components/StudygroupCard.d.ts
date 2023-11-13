@@ -17,19 +17,20 @@ export declare type Variant = {
     overrides: EscapeHatchProps;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type StudygroupCardOverridesProps = {
-    StudygroupCard?: PrimitiveOverrideProps<FlexProps>;
+export declare type StudyGroupCardOverridesProps = {
+    StudyGroupCard?: PrimitiveOverrideProps<FlexProps>;
     image?: PrimitiveOverrideProps<ImageProps>;
     "Card Area"?: PrimitiveOverrideProps<FlexProps>;
-    "Study Group Name"?: PrimitiveOverrideProps<TextProps>;
+    "Group name"?: PrimitiveOverrideProps<TextProps>;
     "Class Name"?: PrimitiveOverrideProps<TextProps>;
-    "23 Members"?: PrimitiveOverrideProps<TextProps>;
-    "Owned By: owner@ucsc.edu"?: PrimitiveOverrideProps<TextProps>;
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."?: PrimitiveOverrideProps<TextProps>;
+    "Group Owner: hjha@ucsc.edu"?: PrimitiveOverrideProps<TextProps>;
+    "Number of Members: 20"?: PrimitiveOverrideProps<TextProps>;
+    "Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi scelerisque eu ultrices vitae auctor eu. Urna id volutpat lacus laoreet non curabitur gravida arcu. Morbi non arcu risus quis varius quam quisque id diam. Mi proin sed libero enim sed faucibus. Ultricies tristique nulla aliquet enim tortor at auctor urna."?: PrimitiveOverrideProps<TextProps>;
+    "Accepting Members: True"?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
-export declare type StudygroupCardProps = React.PropsWithChildren<Partial<FlexProps> & {
+export declare type StudyGroupCardProps = React.PropsWithChildren<Partial<FlexProps> & {
     studyGroupCard?: any;
 } & {
-    overrides?: StudygroupCardOverridesProps | undefined | null;
+    overrides?: StudyGroupCardOverridesProps | undefined | null;
 }>;
-export default function StudygroupCard(props: StudygroupCardProps): React.ReactElement;
+export default function StudyGroupCard(props: StudyGroupCardProps): React.ReactElement;

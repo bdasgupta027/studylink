@@ -192,8 +192,8 @@ export default function StudyGroupCardCreateForm(props) {
     groupName: "",
     numMembers: "",
     className: "",
-    description: "",
     acceptingMembers: false,
+    description: "",
     groupOwner: "",
     image: "",
     memberList: [],
@@ -201,11 +201,11 @@ export default function StudyGroupCardCreateForm(props) {
   const [groupName, setGroupName] = React.useState(initialValues.groupName);
   const [numMembers, setNumMembers] = React.useState(initialValues.numMembers);
   const [className, setClassName] = React.useState(initialValues.className);
-  const [description, setDescription] = React.useState(
-    initialValues.description
-  );
   const [acceptingMembers, setAcceptingMembers] = React.useState(
     initialValues.acceptingMembers
+  );
+  const [description, setDescription] = React.useState(
+    initialValues.description
   );
   const [groupOwner, setGroupOwner] = React.useState(initialValues.groupOwner);
   const [image, setImage] = React.useState(initialValues.image);
@@ -215,8 +215,8 @@ export default function StudyGroupCardCreateForm(props) {
     setGroupName(initialValues.groupName);
     setNumMembers(initialValues.numMembers);
     setClassName(initialValues.className);
-    setDescription(initialValues.description);
     setAcceptingMembers(initialValues.acceptingMembers);
+    setDescription(initialValues.description);
     setGroupOwner(initialValues.groupOwner);
     setImage(initialValues.image);
     setMemberList(initialValues.memberList);
@@ -230,11 +230,11 @@ export default function StudyGroupCardCreateForm(props) {
     groupName: [{ type: "Required" }],
     numMembers: [{ type: "Required" }],
     className: [{ type: "Required" }],
-    description: [],
     acceptingMembers: [{ type: "Required" }],
+    description: [{ type: "Required" }],
     groupOwner: [{ type: "Required" }, { type: "Email" }],
-    image: [],
-    memberList: [],
+    image: [{ type: "URL" }],
+    memberList: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -265,8 +265,8 @@ export default function StudyGroupCardCreateForm(props) {
           groupName,
           numMembers,
           className,
-          description,
           acceptingMembers,
+          description,
           groupOwner,
           image,
           memberList,
@@ -340,8 +340,8 @@ export default function StudyGroupCardCreateForm(props) {
               groupName: value,
               numMembers,
               className,
-              description,
               acceptingMembers,
+              description,
               groupOwner,
               image,
               memberList,
@@ -380,8 +380,8 @@ export default function StudyGroupCardCreateForm(props) {
               groupName,
               numMembers: value,
               className,
-              description,
               acceptingMembers,
+              description,
               groupOwner,
               image,
               memberList,
@@ -416,8 +416,8 @@ export default function StudyGroupCardCreateForm(props) {
               groupName,
               numMembers,
               className: value,
-              description,
               acceptingMembers,
+              description,
               groupOwner,
               image,
               memberList,
@@ -435,37 +435,6 @@ export default function StudyGroupCardCreateForm(props) {
         hasError={errors.className?.hasError}
         {...getOverrideProps(overrides, "className")}
       ></TextField>
-      <TextField
-        label="Description"
-        isRequired={false}
-        isReadOnly={false}
-        value={description}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              groupName,
-              numMembers,
-              className,
-              description: value,
-              acceptingMembers,
-              groupOwner,
-              image,
-              memberList,
-            };
-            const result = onChange(modelFields);
-            value = result?.description ?? value;
-          }
-          if (errors.description?.hasError) {
-            runValidationTasks("description", value);
-          }
-          setDescription(value);
-        }}
-        onBlur={() => runValidationTasks("description", description)}
-        errorMessage={errors.description?.errorMessage}
-        hasError={errors.description?.hasError}
-        {...getOverrideProps(overrides, "description")}
-      ></TextField>
       <SwitchField
         label="Accepting members"
         defaultChecked={false}
@@ -478,8 +447,8 @@ export default function StudyGroupCardCreateForm(props) {
               groupName,
               numMembers,
               className,
-              description,
               acceptingMembers: value,
+              description,
               groupOwner,
               image,
               memberList,
@@ -500,6 +469,42 @@ export default function StudyGroupCardCreateForm(props) {
       <TextField
         label={
           <span style={{ display: "inline-flex" }}>
+            <span>Description</span>
+            <span style={{ color: "red" }}>*</span>
+          </span>
+        }
+        isRequired={true}
+        isReadOnly={false}
+        value={description}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              groupName,
+              numMembers,
+              className,
+              acceptingMembers,
+              description: value,
+              groupOwner,
+              image,
+              memberList,
+            };
+            const result = onChange(modelFields);
+            value = result?.description ?? value;
+          }
+          if (errors.description?.hasError) {
+            runValidationTasks("description", value);
+          }
+          setDescription(value);
+        }}
+        onBlur={() => runValidationTasks("description", description)}
+        errorMessage={errors.description?.errorMessage}
+        hasError={errors.description?.hasError}
+        {...getOverrideProps(overrides, "description")}
+      ></TextField>
+      <TextField
+        label={
+          <span style={{ display: "inline-flex" }}>
             <span>Group owner</span>
             <span style={{ color: "red" }}>*</span>
           </span>
@@ -514,8 +519,8 @@ export default function StudyGroupCardCreateForm(props) {
               groupName,
               numMembers,
               className,
-              description,
               acceptingMembers,
+              description,
               groupOwner: value,
               image,
               memberList,
@@ -545,8 +550,8 @@ export default function StudyGroupCardCreateForm(props) {
               groupName,
               numMembers,
               className,
-              description,
               acceptingMembers,
+              description,
               groupOwner,
               image: value,
               memberList,
@@ -572,8 +577,8 @@ export default function StudyGroupCardCreateForm(props) {
               groupName,
               numMembers,
               className,
-              description,
               acceptingMembers,
+              description,
               groupOwner,
               image,
               memberList: values,
@@ -585,7 +590,12 @@ export default function StudyGroupCardCreateForm(props) {
           setCurrentMemberListValue("");
         }}
         currentFieldValue={currentMemberListValue}
-        label={"Member list"}
+        label={
+          <span style={{ display: "inline-flex" }}>
+            <span>Member list</span>
+            <span style={{ color: "red" }}>*</span>
+          </span>
+        }
         items={memberList}
         hasError={errors?.memberList?.hasError}
         runValidationTasks={async () =>
@@ -598,7 +608,7 @@ export default function StudyGroupCardCreateForm(props) {
       >
         <TextField
           label="Member list"
-          isRequired={false}
+          isRequired={true}
           isReadOnly={false}
           value={currentMemberListValue}
           onChange={(e) => {

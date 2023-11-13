@@ -26,6 +26,7 @@ export declare type StandardCardOverridesProps = {
     "4bds 3 ba 2,530 sqft - Active"?: PrimitiveOverrideProps<TextProps>;
     "832 34th Ave, Seattle, WA 9812229766790"?: PrimitiveOverrideProps<TextProps>;
     "832 34th Ave, Seattle, WA 981223895462"?: PrimitiveOverrideProps<TextProps>;
+    "View Group"?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
 export declare type StandardCardProps = React.PropsWithChildren<Partial<FlexProps> & {
     studyGroupCard?: any;

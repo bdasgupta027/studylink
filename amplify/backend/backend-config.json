@@ -59,6 +59,24 @@
       "service": "Cognito"
     }
   },
+  "parameters": {
+    "AMPLIFY_storage_studylink3b2cf560_bucketName": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "studylink3b2cf560"
+        }
+      ]
+    },
+    "AMPLIFY_storage_studylink3b2cf560_region": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "studylink3b2cf560"
+        }
+      ]
+    }
+  },
   "storage": {
     "studylink3b2cf560": {
       "dependsOn": [],

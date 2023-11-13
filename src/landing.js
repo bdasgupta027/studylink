@@ -1,16 +1,18 @@
 import './App.css';
-import LandingPage1 from "./ui-components/LandingPage1"
-import LandingPage2 from "./ui-components/LandingPage2"
-import LandingPage3 from "./ui-components/LandingPage3"
+import SLLandingPage1 from "./ui-components/SLLandingPage1"
+import SLLandingPage2 from "./ui-components/SLLandingPage2"
+import SLLandingPage3 from "./ui-components/SLLandingPage3"
 import CTASection from "./ui-components/CTASection"
+import SLNavBarHeader2 from './ui-components/SLNavBarHeader2';
 
 function Landing() {
     return (
         <div className="Landing">
             {/* landing page */}
-            <LandingPage1 />
-            <LandingPage2 />
-            <LandingPage3 />
+            <SLNavBarHeader2 />
+            <SLLandingPage1 />
+            <SLLandingPage2 />
+            <SLLandingPage3 />
             <CTASection />
         </div>
     );

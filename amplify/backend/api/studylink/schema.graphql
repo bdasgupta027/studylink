@@ -1,7 +1,18 @@
+type StudyGroupCard @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  groupName: String!
+  numMembers: Int!
+  className: String!
+  acceptingMembers: Boolean!
+  description: String!
+  groupOwner: AWSEmail!
+  image: AWSURL
+  memberList: [String!]
+}
+
 type MemberCard @model @auth(rules: [{allow: public}]) {
   id: ID!
   username: AWSEmail
-  StudyGroupCards: [StudyGroupCard] @manyToMany(relationName: "MemberCardStudyGroupCard")
 }
 
 type ProfileCard @model @auth(rules: [{allow: public}]) {
@@ -25,24 +36,9 @@ type Comment @model @auth(rules: [{allow: public}]) {
 type Announcement @model @auth(rules: [{allow: public}]) {
   id: ID!
   title: String!
-  studygroupcardID: ID! @index(name: "byStudyGroupCard")
   username: AWSEmail!
   date: AWSDateTime!
   announcement: String!
   Comments: [Comment] @hasMany(indexName: "byAnnouncement", fields: ["id"])
-}
-
-type StudyGroupCard @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  groupName: String!
-  numMembers: Int!
-  className: String!
-  description: String
-  acceptingMembers: Boolean!
-  groupOwner: AWSEmail!
-  image: String
-  Announcements: [Announcement] @hasMany(indexName: "byStudyGroupCard", fields: ["id"])
-  memberList: [String]
-  membercards: [MemberCard] @manyToMany(relationName: "MemberCardStudyGroupCard")
 }
  

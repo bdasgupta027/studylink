@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "studylink": {}
+      },
+      "storage": {
+        "studylink3b2cf560": {
+          "bucketName": "amplify-studylink-staging-163143-deployment",
+          "region": "us-west-2"
+        }
       }
     }
   }
