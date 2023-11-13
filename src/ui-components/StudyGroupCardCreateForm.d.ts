@@ -25,8 +25,8 @@ export declare type StudyGroupCardCreateFormInputValues = {
     groupName?: string;
     numMembers?: number;
     className?: string;
-    description?: string;
     acceptingMembers?: boolean;
+    description?: string;
     groupOwner?: string;
     image?: string;
     memberList?: string[];
@@ -35,8 +35,8 @@ export declare type StudyGroupCardCreateFormValidationValues = {
     groupName?: ValidationFunction<string>;
     numMembers?: ValidationFunction<number>;
     className?: ValidationFunction<string>;
-    description?: ValidationFunction<string>;
     acceptingMembers?: ValidationFunction<boolean>;
+    description?: ValidationFunction<string>;
     groupOwner?: ValidationFunction<string>;
     image?: ValidationFunction<string>;
     memberList?: ValidationFunction<string>;
@@ -47,8 +47,8 @@ export declare type StudyGroupCardCreateFormOverridesProps = {
     groupName?: PrimitiveOverrideProps<TextFieldProps>;
     numMembers?: PrimitiveOverrideProps<TextFieldProps>;
     className?: PrimitiveOverrideProps<TextFieldProps>;
-    description?: PrimitiveOverrideProps<TextFieldProps>;
     acceptingMembers?: PrimitiveOverrideProps<SwitchFieldProps>;
+    description?: PrimitiveOverrideProps<TextFieldProps>;
     groupOwner?: PrimitiveOverrideProps<TextFieldProps>;
     image?: PrimitiveOverrideProps<TextFieldProps>;
     memberList?: PrimitiveOverrideProps<TextFieldProps>;

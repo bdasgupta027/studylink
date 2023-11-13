@@ -8,7 +8,7 @@
 import * as React from "react";
 import { getOverrideProps } from "./utils";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
-export default function StudygroupCard(props) {
+export default function StudyGroupCard(props) {
   const { studyGroupCard, overrides, ...rest } = props;
   return (
     <Flex
@@ -20,7 +20,7 @@ export default function StudygroupCard(props) {
       alignItems="flex-start"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "StudygroupCard")}
+      {...getOverrideProps(overrides, "StudyGroupCard")}
       {...rest}
     >
       <Image
@@ -39,7 +39,7 @@ export default function StudygroupCard(props) {
         {...getOverrideProps(overrides, "image")}
       ></Image>
       <Flex
-        gap="10px"
+        gap="24px"
         direction="column"
         width="unset"
         height="unset"
@@ -73,73 +73,7 @@ export default function StudygroupCard(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children={studyGroupCard?.groupName}
-          {...getOverrideProps(overrides, "Study Group Name")}
-        ></Text>
-        <Text
-          fontFamily="Inter"
-          fontSize="16px"
-          fontWeight="400"
-          color="rgba(0,0,0,1)"
-          lineHeight="24px"
-          textAlign="left"
-          display="block"
-          direction="column"
-          justifyContent="unset"
-          letterSpacing="0.01px"
-          width="unset"
-          height="unset"
-          gap="unset"
-          alignItems="unset"
-          shrink="0"
-          position="relative"
-          padding="0px 0px 0px 0px"
-          whiteSpace="pre-wrap"
-          children={studyGroupCard?.className}
-          {...getOverrideProps(overrides, "Class Name")}
-        ></Text>
-        <Text
-          fontFamily="Inter"
-          fontSize="16px"
-          fontWeight="400"
-          color="rgba(0,0,0,1)"
-          lineHeight="24px"
-          textAlign="left"
-          display="block"
-          direction="column"
-          justifyContent="unset"
-          letterSpacing="0.01px"
-          width="unset"
-          height="unset"
-          gap="unset"
-          alignItems="unset"
-          shrink="0"
-          position="relative"
-          padding="0px 0px 0px 0px"
-          whiteSpace="pre-wrap"
-          children={`${studyGroupCard?.numMembers}${" Members"}`}
-          {...getOverrideProps(overrides, "23 Members")}
-        ></Text>
-        <Text
-          fontFamily="Inter"
-          fontSize="16px"
-          fontWeight="400"
-          color="rgba(0,0,0,1)"
-          lineHeight="24px"
-          textAlign="left"
-          display="block"
-          direction="column"
-          justifyContent="unset"
-          letterSpacing="0.01px"
-          width="unset"
-          height="unset"
-          gap="unset"
-          alignItems="unset"
-          shrink="0"
-          position="relative"
-          padding="0px 0px 0px 0px"
-          whiteSpace="pre-wrap"
-          children={`${"Owned by "}${studyGroupCard?.groupOwner}`}
-          {...getOverrideProps(overrides, "Owned By: owner@ucsc.edu")}
+          {...getOverrideProps(overrides, "Group name")}
         ></Text>
         <Text
           fontFamily="Inter"
@@ -151,19 +85,113 @@ export default function StudygroupCard(props) {
           display="block"
           direction="column"
           justifyContent="unset"
-          width="576px"
-          height="94px"
+          letterSpacing="0.01px"
+          width="unset"
+          height="unset"
           gap="unset"
           alignItems="unset"
           shrink="0"
+          alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children={studyGroupCard?.description}
+          children={studyGroupCard?.className}
+          {...getOverrideProps(overrides, "Class Name")}
+        ></Text>
+        <Text
+          fontFamily="Inter"
+          fontSize="16px"
+          fontWeight="400"
+          color="rgba(13,26,38,1)"
+          lineHeight="24px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          letterSpacing="0.01px"
+          width="unset"
+          height="unset"
+          gap="unset"
+          alignItems="unset"
+          shrink="0"
+          alignSelf="stretch"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children={`${"Group Owner: "}${studyGroupCard?.groupOwner}`}
+          {...getOverrideProps(overrides, "Group Owner: hjha@ucsc.edu")}
+        ></Text>
+        <Text
+          fontFamily="Inter"
+          fontSize="16px"
+          fontWeight="400"
+          color="rgba(13,26,38,1)"
+          lineHeight="24px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          letterSpacing="0.01px"
+          width="unset"
+          height="unset"
+          gap="unset"
+          alignItems="unset"
+          shrink="0"
+          alignSelf="stretch"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children={`${"Number of Members: "}${studyGroupCard?.numMembers}`}
+          {...getOverrideProps(overrides, "Number of Members: 20")}
+        ></Text>
+        <Text
+          fontFamily="Inter"
+          fontSize="16px"
+          fontWeight="400"
+          color="rgba(13,26,38,1)"
+          lineHeight="24px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          letterSpacing="0.01px"
+          width="unset"
+          height="unset"
+          gap="unset"
+          alignItems="unset"
+          shrink="0"
+          alignSelf="stretch"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children={`${"Description: "}${studyGroupCard?.description}`}
           {...getOverrideProps(
             overrides,
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            "Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi scelerisque eu ultrices vitae auctor eu. Urna id volutpat lacus laoreet non curabitur gravida arcu. Morbi non arcu risus quis varius quam quisque id diam. Mi proin sed libero enim sed faucibus. Ultricies tristique nulla aliquet enim tortor at auctor urna."
           )}
+        ></Text>
+        <Text
+          fontFamily="Inter"
+          fontSize="16px"
+          fontWeight="400"
+          color="rgba(13,26,38,1)"
+          lineHeight="24px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          letterSpacing="0.01px"
+          width="unset"
+          height="unset"
+          gap="unset"
+          alignItems="unset"
+          shrink="0"
+          alignSelf="stretch"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children="Accepting Members: True"
+          {...getOverrideProps(overrides, "Accepting Members: True")}
         ></Text>
       </Flex>
     </Flex>

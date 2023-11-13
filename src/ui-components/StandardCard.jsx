@@ -17,14 +17,18 @@ export default function StandardCard(props) {
   } = props;
   const standardCardOnClick = useNavigateAction({
     type: "url",
-    url: studyGroupCard?.id,
+    url: `/studygroup/${studyGroupCard?.id}`,
+  });
+  const viewGroupOnClick = useNavigateAction({
+    type: "url",
+    url: `/studygroup/${studyGroupCard?.id}`,
   });
   return (
     <Flex
       gap="0"
       direction="column"
       width="320px"
-      height="unset"
+      height="339px"
       justifyContent="center"
       alignItems="flex-start"
       position="relative"
@@ -55,7 +59,7 @@ export default function StandardCard(props) {
         gap="16px"
         direction="column"
         width="unset"
-        height="unset"
+        height="179px"
         justifyContent="flex-start"
         alignItems="flex-start"
         shrink="0"
@@ -173,6 +177,31 @@ export default function StandardCard(props) {
             )}
           ></Text>
         </Flex>
+        <Text
+          fontFamily="Inter"
+          fontSize="16px"
+          fontWeight="400"
+          color="rgba(13,26,38,1)"
+          lineHeight="22px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          textDecoration="underline"
+          width="unset"
+          height="unset"
+          gap="unset"
+          alignItems="unset"
+          shrink="0"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children="View Group"
+          onClick={() => {
+            viewGroupOnClick();
+          }}
+          {...getOverrideProps(overrides, "View Group")}
+        ></Text>
       </Flex>
     </Flex>
   );

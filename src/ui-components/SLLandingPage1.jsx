@@ -12,7 +12,7 @@ import {
   mergeVariantsAndOverrides,
 } from "./utils";
 import { Flex, Image, Text, View } from "@aws-amplify/ui-react";
-export default function LandingPage1(props) {
+export default function SLLandingPage1(props) {
   const { overrides: overridesProp, ...rest } = props;
   const variants = [
     {
@@ -25,7 +25,7 @@ export default function LandingPage1(props) {
         Left: {},
         image: {},
         Right: {},
-        LandingPage1: {},
+        SLLandingPage1: {},
       },
       variantValues: { mode: "Light" },
     },
@@ -37,14 +37,15 @@ export default function LandingPage1(props) {
   return (
     <View
       width="1210px"
-      height="420px"
+      height="300px"
+      marginTop="50px"
       display="block"
       gap="unset"
       alignItems="unset"
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "LandingPage1")}
+      {...getOverrideProps(overrides, "SLLandingPage1")}
       {...rest}
     >
       <Flex
@@ -177,7 +178,7 @@ export default function LandingPage1(props) {
         {...getOverrideProps(overrides, "Right")}
       >
         <Image
-          width="720px"
+          width="100%"
           height="unset"
           display="block"
           gap="unset"
@@ -187,7 +188,7 @@ export default function LandingPage1(props) {
           shrink="1"
           basis="0"
           position="relative"
-          padding="0px 0px 0px 0px"
+          padding="30px 30px 30px 30px"
           objectFit="unset"
           src="https://t3.ftcdn.net/jpg/02/55/22/68/360_F_255226859_Rhqr5hflr2esVXHQE1sS1bWxmZxs0gWI.jpg"
           {...getOverrideProps(overrides, "image")}

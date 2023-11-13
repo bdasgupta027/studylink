@@ -1,5 +1,5 @@
 import './App.css';
-import NavBarHeader from "./ui-components/NavBarHeader"
+import SLNavBarHeader from "./ui-components/SLNavBarHeader"
 import ProfilePageDetails from "./ui-components/ProfilePageDetails"
 import StudyGroupCardCollection from "./ui-components/StudyGroupCardCollection"
 
@@ -8,7 +8,7 @@ import StudyGroupCardCollection from "./ui-components/StudyGroupCardCollection"
 function Profile() {
     return (
         <div className="Profile">
-            <NavBarHeader></NavBarHeader>
+            <SLNavBarHeader></SLNavBarHeader>
             <ProfilePageDetails />
             <StudyGroupCardCollection />
         </div>

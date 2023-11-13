@@ -8,17 +8,23 @@
 import * as React from "react";
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import NavBarHeader2 from "./NavBarHeader2";
-import NavBarHeader from "./NavBarHeader";
 import { DataStore } from 'aws-amplify';
 import { useState, useEffect } from "react";
-import StudyGroupCardCollection from "./StudyGroupCardCollection";
 
 function Dashboard() {
+  // const [studygroups, setStudygroups] = useState(null);
+
+  // useEffect(() => {
+  //   async function queryStudygroups() {
+  //     const groups = await DataStore.query(StudyGroupCard)
+  //     setStudygroups(groups);
+  //   }
+  //   queryStudygroups();
+  // }, [])
 
   return (
     <div>
-      <NavBarHeader/>
-      <StudyGroupCardCollection />
+      <NavBarHeader2/>
     </div>
   );
 }
