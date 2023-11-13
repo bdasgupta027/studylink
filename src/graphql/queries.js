@@ -234,7 +234,6 @@ export const getStudyGroupCard = /* GraphQL */ `
         nextToken
         __typename
       }
-      accepting
       createdAt
       updatedAt
       __typename
@@ -258,7 +257,6 @@ export const listStudyGroupCards = /* GraphQL */ `
         groupOwner
         image
         memberList
-        accepting
         createdAt
         updatedAt
         __typename
@@ -291,7 +289,6 @@ export const getMemberCardStudyGroupCard = /* GraphQL */ `
         groupOwner
         image
         memberList
-        accepting
         createdAt
         updatedAt
         __typename

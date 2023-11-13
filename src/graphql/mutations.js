@@ -252,7 +252,6 @@ export const createStudyGroupCard = /* GraphQL */ `
         nextToken
         __typename
       }
-      accepting
       createdAt
       updatedAt
       __typename
@@ -282,7 +281,6 @@ export const updateStudyGroupCard = /* GraphQL */ `
         nextToken
         __typename
       }
-      accepting
       createdAt
       updatedAt
       __typename
@@ -312,7 +310,6 @@ export const deleteStudyGroupCard = /* GraphQL */ `
         nextToken
         __typename
       }
-      accepting
       createdAt
       updatedAt
       __typename
@@ -345,7 +342,6 @@ export const createMemberCardStudyGroupCard = /* GraphQL */ `
         groupOwner
         image
         memberList
-        accepting
         createdAt
         updatedAt
         __typename
@@ -382,7 +378,6 @@ export const updateMemberCardStudyGroupCard = /* GraphQL */ `
         groupOwner
         image
         memberList
-        accepting
         createdAt
         updatedAt
         __typename
@@ -419,7 +414,6 @@ export const deleteMemberCardStudyGroupCard = /* GraphQL */ `
         groupOwner
         image
         memberList
-        accepting
         createdAt
         updatedAt
         __typename

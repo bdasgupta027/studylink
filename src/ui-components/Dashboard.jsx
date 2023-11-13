@@ -8,6 +8,7 @@
 import * as React from "react";
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import NavBarHeader2 from "./NavBarHeader2";
+import NavBarHeader from "./NavBarHeader";
 import { DataStore } from 'aws-amplify';
 import { useState, useEffect } from "react";
 
@@ -24,7 +25,7 @@ function Dashboard() {
 
   return (
     <div>
-      <NavBarHeader2/>
+      <NavBarHeader/>
     </div>
   );
 }

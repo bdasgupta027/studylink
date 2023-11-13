@@ -9,6 +9,8 @@ import * as React from "react";
 import { getOverrideProps } from "./utils";
 import { Flex, Image, Text, Button } from "@aws-amplify/ui-react";
 import MyIcon from "./MyIcon";
+import { Link } from "react-router-dom";
+
 export default function NavBarHeader(props) {
   const { overrides, ...rest } = props;
   return (
@@ -97,6 +99,7 @@ export default function NavBarHeader(props) {
           type="notification"
           {...getOverrideProps(overrides, "MyIcon")}
         ></MyIcon>
+      < Link to="/profile">
         <Image
           width="45px"
           height="45px"
@@ -109,8 +112,11 @@ export default function NavBarHeader(props) {
           borderRadius="160px"
           padding="0px 0px 0px 0px"
           objectFit="cover"
+          src="https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png" // Replace this with the actual source of your image
+          alt="profile image"
           {...getOverrideProps(overrides, "image")}
-        ></Image>
+        />
+        </Link>
       </Flex>
     </Flex>
   );
