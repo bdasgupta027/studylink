@@ -1,7 +1,7 @@
 import './App.css';
 import Landing from './landing';
 import Profile from './profile';
-import StudyGroup from './studygroup';
+//import StudyGroup from './studygroup';
 import Dashboard from './ui-components/Dashboard';
 import EditProfile from './ui-components/SLEditProfile';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
