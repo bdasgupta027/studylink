@@ -10,6 +10,7 @@ import { getOverrideProps, useNavigateAction } from "./utils";
 import { Flex, Image, Text, Button } from "@aws-amplify/ui-react";
 import MyIcon from "./MyIcon";
 import { Link } from "react-router-dom";
+import { Auth } from "aws-amplify";
 
 export default function SLNavBarHeader(props) {
   const dashboardOnClick = useNavigateAction({
@@ -22,6 +23,16 @@ export default function SLNavBarHeader(props) {
   });
   const contactOnClick = useNavigateAction({ type: "url", url: "/contact" });
   const { overrides, ...rest } = props;
+
+  const logoutOnClick = async () => {
+    try {
+      await Auth.signOut();
+      console.log("User signed out successfully");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
   return (
     <Flex
       gap="40px"
@@ -134,6 +145,18 @@ export default function SLNavBarHeader(props) {
           alt="profile image"
           {...getOverrideProps(overrides, "image")}
         />
+        </Link>
+        <Link to="/">
+        <Button
+          width="unset"
+          height="unset"
+          shrink="0"
+          size="default"
+          isDisabled={false}
+          variation="link"
+          children="Log Out"
+          onClick={logoutOnClick}
+        ></Button>
         </Link>
       </Flex>
     </Flex>
