@@ -24,8 +24,8 @@ export default function ProductCard(props) {
     <Flex
       gap="0"
       direction="row"
-      width="960px"
-      height="unset"
+      width="1040px"
+      height="366px"
       justifyContent="flex-start"
       alignItems="flex-start"
       position="relative"

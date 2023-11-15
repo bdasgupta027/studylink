@@ -19,7 +19,17 @@
         "studylink3b2cf560": {
           "bucketName": "amplify-studylink-staging-163143-deployment",
           "region": "us-west-2"
+        },
+        "s35f9e7f82": {}
+      },
+      "function": {
+        "S3Triggera0c6feac": {
+          "deploymentBucketName": "amplify-studylink-staging-163143-deployment",
+          "s3Key": "amplify-builds/S3Triggera0c6feac-5a696d4b6c51424b3974-build.zip"
         }
+      },
+      "api": {
+        "studylink": {}
       }
     }
   }

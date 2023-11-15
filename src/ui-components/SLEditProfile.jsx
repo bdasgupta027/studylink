@@ -8,29 +8,39 @@
 import * as React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { API } from "aws-amplify";
+import { API, Storage } from "aws-amplify";
 import { updateProfileCard } from "../graphql/mutations";
 import { getOverrideProps } from "./utils";
 import MyIcon from "./MyIcon";
 import { Button, Flex, Image, Text, TextField } from "@aws-amplify/ui-react";
+
 export default function EditProfile(props) {
   const { profileCard, overrides, ...rest } = props;
+
+  const [profileImage, setProfileImage] = useState(
+    profileCard?.profileImage || "https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png"
+  );
+
   const [
     textFieldTwoNineSevenSixSixNineTwoTwoValue,
     setTextFieldTwoNineSevenSixSixNineTwoTwoValue,
-  ] = useState("");
+  ] = useState(profileCard?.firstName || "");
+
   const [
     textFieldTwoNineSevenSixSixNineTwoThreeValue,
     setTextFieldTwoNineSevenSixSixNineTwoThreeValue,
-  ] = useState("");
+  ] = useState(profileCard?.lastName || "");
+
   const [
     textFieldTwoNineSevenSixSixNineTwoFourValue,
     setTextFieldTwoNineSevenSixSixNineTwoFourValue,
-  ] = useState("");
+  ] = useState(profileCard?.email || "");
+
   const [
     textFieldThreeEightFiveZeroSixTwoEightValue,
     setTextFieldThreeEightFiveZeroSixTwoEightValue,
-  ] = useState("");
+  ] = useState(profileCard?.major || "");
+
   const buttonOnClick = async () => {
     await API.graphql({
       query: updateProfileCard.replaceAll("__typename", ""),
@@ -41,33 +51,28 @@ export default function EditProfile(props) {
           email: textFieldTwoNineSevenSixSixNineTwoFourValue,
           major: textFieldThreeEightFiveZeroSixTwoEightValue,
           id: profileCard?.id,
+          profileImage: profileImage,
         },
       },
     });
   };
 
-  // Define a state variable to hold the profile image URL
-  const [profileImage, setProfileImage] = useState("https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png");
-
   const handleImageUpload = async (event) => {
     if (event.target && event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0]; // Get the uploaded file
+      const file = event.target.files[0];
 
       try {
-        // Code to upload the image and obtain the URL after upload completion
-        const uploadResult = await Storage.put('profile.jpg', file, {
-          contentType: 'image/jpeg', // Set the appropriate content type
+        const uploadResult = await Storage.put("profile.jpg", file, {
+          contentType: "image/jpeg",
         });
-      
-        const imageUrl = uploadResult.key; // Retrieve the URL of the uploaded file
-      
-        setProfileImage(imageUrl + `?timestamp=${Date.now()}`); // Add a timestamp query parameter
+
+        const imageUrl = uploadResult.key;
+        setProfileImage(imageUrl + `?timestamp=${Date.now()}`);
       } catch (error) {
-        console.error('Error uploading image:', error);
+        console.error("Error uploading image:", error);
       }
     }
   };
-
   return (
     <Flex
       gap="16px"
@@ -160,55 +165,55 @@ export default function EditProfile(props) {
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "Profile")}
         >
-<Image
-  width="45px"
-  height="45px"
-  display="block"
-  gap="unset"
-  alignItems="unset"
-  justifyContent="unset"
-  shrink="0"
-  position="relative"
-  borderRadius="160px"
-  padding="0px 0px 0px 0px"
-  objectFit="cover"
-  src={`${profileImage}?${new Date().getTime()}`} // Add a random query parameter
-  alt="profile image"
-  key={profileImage} // Maintain the key to trigger re-render
-  {...getOverrideProps(overrides, "image")}
-></Image>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-            style={{ display: 'none' }} // Hides the input visually
-            id="imageInput"
-          />
-          <label htmlFor="imageInput">
-            <text
-              fontFamily="Inter"
-              fontSize="16px"
-              fontWeight="400"
-              color="rgba(13,26,38,1)"
-              lineHeight="22px"
-              textAlign="left"
-              display="block"
-              direction="column"
-              justifyContent="unset"
-              textDecoration="underline"
-              width="unset"
-              height="unset"
-              gap="unset"
-              alignItems="unset"
-              shrink="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children="Upload New Image"
-              onClick={handleImageUpload}
-              {...getOverrideProps(overrides, "Upload New Image")}
-            ></text>
-          </label>
+        <Image
+          width="45px"
+          height="45px"
+          display="block"
+          gap="unset"
+          alignItems="unset"
+          justifyContent="unset"
+          shrink="0"
+          position="relative"
+          borderRadius="160px"
+          padding="0px 0px 0px 0px"
+          objectFit="cover"
+          src={`${profileImage}?${new Date().getTime()}`}
+          alt="profile image"
+          key={profileImage}
+          {...getOverrideProps(overrides, "image")}
+        />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          style={{ display: "none" }}
+          id="imageInput"
+        />
+        <label htmlFor="imageInput">
+          <text
+            fontFamily="Inter"
+            fontSize="16px"
+            fontWeight="400"
+            color="rgba(13,26,38,1)"
+            lineHeight="22px"
+            textAlign="left"
+            display="block"
+            direction="column"
+            justifyContent="unset"
+            textDecoration="underline"
+            width="unset"
+            height="unset"
+            gap="unset"
+            alignItems="unset"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            whiteSpace="pre-wrap"
+            children="Upload New Image"
+            onClick={handleImageUpload}
+            {...getOverrideProps(overrides, "Upload New Image")}
+          ></text>
+        </label>
         </Flex>
         <Flex
           gap="16px"

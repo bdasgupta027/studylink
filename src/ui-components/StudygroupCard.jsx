@@ -14,8 +14,8 @@ export default function StudyGroupCard(props) {
     <Flex
       gap="0"
       direction="row"
-      width="960px"
-      height="unset"
+      width="1040px"
+      height="481px"
       justifyContent="flex-start"
       alignItems="flex-start"
       position="relative"
@@ -24,7 +24,7 @@ export default function StudyGroupCard(props) {
       {...rest}
     >
       <Image
-        width="320px"
+        width="325px"
         height="unset"
         display="block"
         gap="unset"
@@ -48,6 +48,7 @@ export default function StudyGroupCard(props) {
         grow="1"
         shrink="1"
         basis="0"
+        alignSelf="stretch"
         position="relative"
         padding="32px 32px 32px 32px"
         backgroundColor="rgba(255,255,255,1)"
@@ -190,7 +191,11 @@ export default function StudyGroupCard(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Accepting Members: True"
+          children={
+            studyGroupCard?.acceptingMembers == 1
+              ? "Accepting Members: True"
+              : "Accepting Members: False"
+          }
           {...getOverrideProps(overrides, "Accepting Members: True")}
         ></Text>
       </Flex>
