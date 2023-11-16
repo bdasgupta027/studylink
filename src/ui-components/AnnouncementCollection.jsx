@@ -6,14 +6,14 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { listStudyGroupCards } from "../graphql/queries";
-import StudyGroupCard from "./StudygroupCard";
+import { listAnnouncements } from "../graphql/queries";
+import SocialPost from "./SocialPost";
 import { getOverrideProps } from "./utils";
 import { Collection, Pagination, Placeholder } from "@aws-amplify/ui-react";
 import { API } from "aws-amplify";
 const nextToken = {};
 const apiCache = {};
-export default function StudyGroupCardCollection(props) {
+export default function AnnouncementCollection(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
   const [pageIndex, setPageIndex] = React.useState(1);
   const [hasMorePages, setHasMorePages] = React.useState(true);
@@ -23,7 +23,7 @@ export default function StudyGroupCardCollection(props) {
   const [loading, setLoading] = React.useState(true);
   const [maxViewed, setMaxViewed] = React.useState(1);
   const pageSize = 6;
-  const isPaginated = false;
+  const isPaginated = true;
   React.useEffect(() => {
     nextToken[instanceKey] = "";
     apiCache[instanceKey] = [];
@@ -54,10 +54,10 @@ export default function StudyGroupCardCollection(props) {
       }
       const result = (
         await API.graphql({
-          query: listStudyGroupCards.replaceAll("__typename", ""),
+          query: listAnnouncements.replaceAll("__typename", ""),
           variables,
         })
-      ).data.listStudyGroupCards;
+      ).data.listAnnouncements;
       newCache.push(...result.items);
       newNext = result.nextToken;
     }
@@ -79,16 +79,15 @@ export default function StudyGroupCardCollection(props) {
   return (
     <div>
       <Collection
-        type="grid"
+        type="list"
+        isSearchable={true}
         searchPlaceholder="Search..."
-        templateColumns="1fr 1fr 1fr"
-        autoFlow="row"
-        alignItems="stretch"
-        justifyContent="stretch"
+        direction="column"
+        justifyContent="left"
         itemsPerPage={pageSize}
         isPaginated={!isApiPagination && isPaginated}
         items={itemsProp || (loading ? new Array(pageSize).fill({}) : items)}
-        {...getOverrideProps(overrides, "StudyGroupCardCollection")}
+        {...getOverrideProps(overrides, "AnnouncementCollection")}
         {...rest}
       >
         {(item, index) => {
@@ -96,12 +95,11 @@ export default function StudyGroupCardCollection(props) {
             return <Placeholder key={index} size="large" />;
           }
           return (
-            <StudyGroupCard
-              studyGroupCard={item}
-              margin="10px 10px 10px 10px"
+            <SocialPost
+              announcement={item}
               key={item.id}
               {...(overrideItems && overrideItems({ item, index }))}
-            ></StudyGroupCard>
+            ></SocialPost>
           );
         }}
       </Collection>

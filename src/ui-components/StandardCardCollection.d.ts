@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { StudyGroupCardProps } from "./StudyGroupCard";
+import { StandardCardProps } from "./StandardCard";
 import { CollectionProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
@@ -18,17 +18,17 @@ export declare type Variant = {
     overrides: EscapeHatchProps;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type StudyGroupCardCollectionOverridesProps = {
-    StudyGroupCardCollection?: PrimitiveOverrideProps<CollectionProps>;
-    StudyGroupCard?: StudyGroupCardProps;
+export declare type StandardCardCollectionOverridesProps = {
+    StandardCardCollection?: PrimitiveOverrideProps<CollectionProps>;
+    StandardCard?: StandardCardProps;
 } & EscapeHatchProps;
-export declare type StudyGroupCardCollectionProps = React.PropsWithChildren<Partial<CollectionProps<any>> & {
+export declare type StandardCardCollectionProps = React.PropsWithChildren<Partial<CollectionProps<any>> & {
     items?: any[];
     overrideItems?: (collectionItem: {
         item: any;
         index: number;
-    }) => StudyGroupCardProps;
+    }) => StandardCardProps;
 } & {
-    overrides?: StudyGroupCardCollectionOverridesProps | undefined | null;
+    overrides?: StandardCardCollectionOverridesProps | undefined | null;
 }>;
-export default function StudyGroupCardCollection(props: StudyGroupCardCollectionProps): React.ReactElement;
+export default function StandardCardCollection(props: StandardCardCollectionProps): React.ReactElement;

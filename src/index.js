@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 // import { ThemeProvider } from "@aws-amplify/ui-react";
-import { Amplify } from 'aws-amplify';
+import { Amplify} from 'aws-amplify';
 import awsconfig from './aws-exports';
 import "@aws-amplify/ui-react/styles.css";
 // import studioTheme from './ui-components/studioTheme';
