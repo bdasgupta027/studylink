@@ -29,8 +29,8 @@ export declare type StandardCardOverridesProps = {
     "View Group"?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
 export declare type StandardCardProps = React.PropsWithChildren<Partial<FlexProps> & {
-    studyGroupCard?: any;
     openGroup?: String;
+    studyGroupCard?: any;
 } & {
     overrides?: StandardCardOverridesProps | undefined | null;
 }>;

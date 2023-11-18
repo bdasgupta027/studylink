@@ -18,7 +18,7 @@ export default function NavBarHeader(props) {
     type: "url",
     url: "",
   });
-  const contactOnClick = useNavigateAction({ type: "url", url: "" });
+  const contactOnClick = useNavigateAction({ type: "url", url: "/contact" });
   return (
     <Flex
       gap="40px"

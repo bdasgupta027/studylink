@@ -7,13 +7,13 @@
 /* eslint-disable */
 import * as React from "react";
 import { listStudyGroupCards } from "../graphql/queries";
-import StudyGroupCard from "./StandardCard";
+import StandardCard from "./StandardCard";
 import { getOverrideProps } from "./utils";
 import { Collection, Pagination, Placeholder } from "@aws-amplify/ui-react";
 import { API } from "aws-amplify";
 const nextToken = {};
 const apiCache = {};
-export default function StudyGroupCardCollection(props) {
+export default function StandardCardCollection(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
   const [pageIndex, setPageIndex] = React.useState(1);
   const [hasMorePages, setHasMorePages] = React.useState(true);
@@ -23,7 +23,7 @@ export default function StudyGroupCardCollection(props) {
   const [loading, setLoading] = React.useState(true);
   const [maxViewed, setMaxViewed] = React.useState(1);
   const pageSize = 6;
-  const isPaginated = false;
+  const isPaginated = true;
   React.useEffect(() => {
     nextToken[instanceKey] = "";
     apiCache[instanceKey] = [];
@@ -80,6 +80,7 @@ export default function StudyGroupCardCollection(props) {
     <div>
       <Collection
         type="grid"
+        isSearchable={true}
         searchPlaceholder="Search..."
         templateColumns="1fr 1fr 1fr"
         autoFlow="row"
@@ -88,7 +89,7 @@ export default function StudyGroupCardCollection(props) {
         itemsPerPage={pageSize}
         isPaginated={!isApiPagination && isPaginated}
         items={itemsProp || (loading ? new Array(pageSize).fill({}) : items)}
-        {...getOverrideProps(overrides, "StudyGroupCardCollection")}
+        {...getOverrideProps(overrides, "StandardCardCollection")}
         {...rest}
       >
         {(item, index) => {
@@ -96,12 +97,12 @@ export default function StudyGroupCardCollection(props) {
             return <Placeholder key={index} size="large" />;
           }
           return (
-            <StudyGroupCard
+            <StandardCard
               studyGroupCard={item}
-              margin="10px 10px 10px 10px"
+              margin="0 15px 15px 0"
               key={item.id}
               {...(overrideItems && overrideItems({ item, index }))}
-            ></StudyGroupCard>
+            ></StandardCard>
           );
         }}
       </Collection>

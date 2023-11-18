@@ -5,8 +5,42 @@ import Profile from './profile';
 import Dashboard from './ui-components/Dashboard';
 import EditProfile from './ui-components/SLEditProfile';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { API, DataStore, Amplify, Hub } from 'aws-amplify'
+import { useEffect } from 'react';
+
+
+const CreateProfileCardMutation = `
+mutation createProfileCard($input: CreateProfileCardInput!) {
+  createProfileCard(input: $input) {
+    id
+    firstName
+    email
+  }
+}
+`
 
 function App() {
+  useEffect(() => {
+    const removeListener = Hub.listen('auth', async (data) => {
+      if (data.payload.event === 'signIn') {
+        const userInfo = data.payload.data.attributes;
+        const newUser = {
+          id: userInfo.sub,
+          firstName: userInfo.name,
+          email: userInfo.email,
+        }
+        await API.graphql({
+          query: CreateProfileCardMutation, 
+          variables: { input: newUser } 
+        });
+        
+      }
+    });
+    return () => {
+      removeListener();
+    };
+  }, []);
+
   return (
     <div className="App">
       <Router>

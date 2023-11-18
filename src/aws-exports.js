@@ -52,7 +52,7 @@ const awsmobile = {
     "aws_cognito_verification_mechanisms": [
         "EMAIL"
     ],
-    "aws_user_files_s3_bucket": "amplify-studylink-staging-163143-deployment",
+    "aws_user_files_s3_bucket": "studylink94d4859e4f414645bbb6773a08ee98ad163143-staging",
     "aws_user_files_s3_bucket_region": "us-west-2"
 };
 
