@@ -19,7 +19,7 @@ const Notes = () => {
         <View height="100vh" display="flex" justifyContent="center" alignItems="center">
             <input type="file" onChange={(e) => setFileData(e.target.files[0])} />
             <Button onClick={uploadFile}>
-                Upload Files lorem ipsum
+                Upload Files
             </Button>
             {fileStatus ? "FileUploaded successfully" : ""}
         </View>
