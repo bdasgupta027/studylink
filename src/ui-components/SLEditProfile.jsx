@@ -13,34 +13,26 @@ import { updateProfileCard } from "../graphql/mutations";
 import { getOverrideProps } from "./utils";
 import MyIcon from "./MyIcon";
 import { Button, Flex, Image, Text, TextField } from "@aws-amplify/ui-react";
+import axios from 'axios';
 
 export default function EditProfile(props) {
   const { profileCard, overrides, ...rest } = props;
-
-  const [profileImage, setProfileImage] = useState(
-    profileCard?.profileImage || "https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png"
-  );
-
   const [
     textFieldTwoNineSevenSixSixNineTwoTwoValue,
     setTextFieldTwoNineSevenSixSixNineTwoTwoValue,
-  ] = useState(profileCard?.firstName || "");
-
+  ] = useState("");
   const [
     textFieldTwoNineSevenSixSixNineTwoThreeValue,
     setTextFieldTwoNineSevenSixSixNineTwoThreeValue,
-  ] = useState(profileCard?.lastName || "");
-
+  ] = useState("");
   const [
     textFieldTwoNineSevenSixSixNineTwoFourValue,
     setTextFieldTwoNineSevenSixSixNineTwoFourValue,
-  ] = useState(profileCard?.email || "");
-
+  ] = useState("");
   const [
     textFieldThreeEightFiveZeroSixTwoEightValue,
     setTextFieldThreeEightFiveZeroSixTwoEightValue,
-  ] = useState(profileCard?.major || "");
-
+  ] = useState("");
   const buttonOnClick = async () => {
     await API.graphql({
       query: updateProfileCard.replaceAll("__typename", ""),
@@ -51,28 +43,38 @@ export default function EditProfile(props) {
           email: textFieldTwoNineSevenSixSixNineTwoFourValue,
           major: textFieldThreeEightFiveZeroSixTwoEightValue,
           id: profileCard?.id,
-          profileImage: profileImage,
         },
       },
     });
   };
 
+  // Initialize the profileImage state with the default image only if it's falsy
+  const [profileImage, setProfileImage] = useState("https://th.bing.com/th/id/OIP.ncOCV5LVCL8j70Edjgyn6QHaGy?rs=1&pid=ImgDetMain"
+  );
+
   const handleImageUpload = async (event) => {
     if (event.target && event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
-
+      console.log("whattttttttt");
       try {
-        const uploadResult = await Storage.put("profile.jpg", file, {
-          contentType: "image/jpeg",
+        const uploadResult = await Storage.put(file.name, file, {
+          contentType: 'image/jpeg',
         });
 
-        const imageUrl = uploadResult.key;
-        setProfileImage(imageUrl + `?timestamp=${Date.now()}`);
+        const imageUrl = await Storage.get(uploadResult.key);
+        console.log(imageUrl);
+        const imageUrlWithoutParams = imageUrl.split('?')[0];
+        
+        console.log(imageUrlWithoutParams);
+        setProfileImage(imageUrlWithoutParams + `?timestamp=${Date.now()}`);
+
       } catch (error) {
-        console.error("Error uploading image:", error);
+        console.error('Error uploading image:', error);
       }
     }
   };
+  
+
   return (
     <Flex
       gap="16px"
@@ -165,55 +167,55 @@ export default function EditProfile(props) {
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "Profile")}
         >
-        <Image
-          width="45px"
-          height="45px"
-          display="block"
-          gap="unset"
-          alignItems="unset"
-          justifyContent="unset"
-          shrink="0"
-          position="relative"
-          borderRadius="160px"
-          padding="0px 0px 0px 0px"
-          objectFit="cover"
-          src={`${profileImage}?${new Date().getTime()}`}
-          alt="profile image"
-          key={profileImage}
-          {...getOverrideProps(overrides, "image")}
-        />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          style={{ display: "none" }}
-          id="imageInput"
-        />
-        <label htmlFor="imageInput">
-          <text
-            fontFamily="Inter"
-            fontSize="16px"
-            fontWeight="400"
-            color="rgba(13,26,38,1)"
-            lineHeight="22px"
-            textAlign="left"
+          <Image
+            width="45px"
+            height="45px"
             display="block"
-            direction="column"
-            justifyContent="unset"
-            textDecoration="underline"
-            width="unset"
-            height="unset"
             gap="unset"
             alignItems="unset"
+            justifyContent="unset"
             shrink="0"
             position="relative"
+            borderRadius="160px"
             padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children="Upload New Image"
-            onClick={handleImageUpload}
-            {...getOverrideProps(overrides, "Upload New Image")}
-          ></text>
-        </label>
+            objectFit="cover"
+            src={`${profileImage}?${new Date().getTime()}`}
+            alt="profile image"
+            key={profileImage}
+            {...getOverrideProps(overrides, "image")}
+          />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            style={{ display: "none" }}
+            id="imageInput"
+          />
+          <label htmlFor="imageInput">
+            <span
+              fontFamily="Inter"
+              fontSize="16px"
+              fontWeight="400"
+              color="rgba(13,26,38,1)"
+              lineHeight="22px"
+              textAlign="left"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              textDecoration="underline"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children="Upload New Image"
+              onClick={handleImageUpload}
+              {...getOverrideProps(overrides, "Upload New Image")}
+            ></span>
+          </label>
         </Flex>
         <Flex
           gap="16px"
