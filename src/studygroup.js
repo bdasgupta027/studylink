@@ -5,12 +5,13 @@ import StudyGroupCardCollection from "./ui-components/StudyGroupCardCollection"
 import { StudyGroupCard } from './ui-components';
 import { API, DataStore, Amplify, Auth, Hub } from 'aws-amplify'
 import React, { useEffect, useState } from 'react';
-import { listMemberCards } from './graphql/queries';
+import { listMemberCards, getStudyGroupCard } from './graphql/queries';
 import { useParams } from 'react-router-dom';
 
 
 
 function StudyGroup() {
+
     const CreateMemberCardMutation = `
         mutation createMemberCard($input: CreateMemberCardInput!) {
         createMemberCard(input: $input) {
@@ -23,6 +24,26 @@ function StudyGroup() {
 
     const { id } = useParams();
     const [members, setMembers] = useState([]);
+    const [studyGroupCard, setStudyGroupCard] = useState(null);
+
+    useEffect(() => {
+      async function fetchStudyGroupCard() {
+        try {
+          const response = await API.graphql({
+            query: getStudyGroupCard,
+            variables: { id: id }
+          });
+  
+          const fetchedStudyGroupCard = response.data.getStudyGroupCard;
+          setStudyGroupCard(fetchedStudyGroupCard);
+        } catch (error) {
+          console.error('Error fetching study group card:', error);
+        }
+      }
+  
+      fetchStudyGroupCard();
+    }, [id]);
+
 
     async function addMember() {
         try {
@@ -69,6 +90,9 @@ function StudyGroup() {
 
     return (
         <div className="Profile">
+            {studyGroupCard && (
+        <StudyGroupCard studyGroupCard={studyGroupCard} />
+            )}
             <button onClick={addMember}>Join Group</button>
             <h1>Member Usernames</h1>
             <ul>
@@ -77,6 +101,7 @@ function StudyGroup() {
                 ))}
             </ul>
         </div>
+
     );
 }
 
