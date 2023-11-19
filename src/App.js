@@ -1,13 +1,13 @@
 import './App.css';
 import Landing from './landing';
 import Profile from './profile';
-//import StudyGroup from './studygroup';
+import StudyGroup from './studygroup';
 import Dashboard from './ui-components/Dashboard';
 import EditProfile from './ui-components/SLEditProfile';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import { API, DataStore, Amplify, Hub } from 'aws-amplify'
+import { API, DataStore, Amplify, Auth, Hub } from 'aws-amplify'
 import { useEffect } from 'react';
-
+// import StudyGroupCard from './ui-components/StudyroupCard';
 
 const CreateProfileCardMutation = `
 mutation createProfileCard($input: CreateProfileCardInput!) {
@@ -29,6 +29,7 @@ function App() {
           firstName: userInfo.name,
           email: userInfo.email,
         }
+        // console.log(userInfo.name);
         await API.graphql({
           query: CreateProfileCardMutation, 
           variables: { input: newUser } 
@@ -40,6 +41,7 @@ function App() {
       removeListener();
     };
   }, []);
+ 
 
   return (
     <div className="App">
@@ -49,7 +51,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/Edit-Profile" element={<EditProfile />} />
-          {/* <Route path="/studygroup/:id" element={<StudyGroup />} /> */}
+          <Route path="/:id" element={<StudyGroup />} />
         </Routes>
       </Router>
     </div>

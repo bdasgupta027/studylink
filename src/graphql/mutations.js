@@ -1,6 +1,69 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createStudyGroupCard = /* GraphQL */ `
+  mutation CreateStudyGroupCard(
+    $input: CreateStudyGroupCardInput!
+    $condition: ModelStudyGroupCardConditionInput
+  ) {
+    createStudyGroupCard(input: $input, condition: $condition) {
+      id
+      groupName
+      numMembers
+      className
+      acceptingMembers
+      description
+      groupOwner
+      image
+      memberList
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateStudyGroupCard = /* GraphQL */ `
+  mutation UpdateStudyGroupCard(
+    $input: UpdateStudyGroupCardInput!
+    $condition: ModelStudyGroupCardConditionInput
+  ) {
+    updateStudyGroupCard(input: $input, condition: $condition) {
+      id
+      groupName
+      numMembers
+      className
+      acceptingMembers
+      description
+      groupOwner
+      image
+      memberList
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteStudyGroupCard = /* GraphQL */ `
+  mutation DeleteStudyGroupCard(
+    $input: DeleteStudyGroupCardInput!
+    $condition: ModelStudyGroupCardConditionInput
+  ) {
+    deleteStudyGroupCard(input: $input, condition: $condition) {
+      id
+      groupName
+      numMembers
+      className
+      acceptingMembers
+      description
+      groupOwner
+      image
+      memberList
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const createMemberCard = /* GraphQL */ `
   mutation CreateMemberCard(
     $input: CreateMemberCardInput!
@@ -9,10 +72,7 @@ export const createMemberCard = /* GraphQL */ `
     createMemberCard(input: $input, condition: $condition) {
       id
       username
-      StudyGroupCards {
-        nextToken
-        __typename
-      }
+      studyGroupId
       createdAt
       updatedAt
       __typename
@@ -27,10 +87,7 @@ export const updateMemberCard = /* GraphQL */ `
     updateMemberCard(input: $input, condition: $condition) {
       id
       username
-      StudyGroupCards {
-        nextToken
-        __typename
-      }
+      studyGroupId
       createdAt
       updatedAt
       __typename
@@ -45,10 +102,7 @@ export const deleteMemberCard = /* GraphQL */ `
     deleteMemberCard(input: $input, condition: $condition) {
       id
       username
-      StudyGroupCards {
-        nextToken
-        __typename
-      }
+      studyGroupId
       createdAt
       updatedAt
       __typename
@@ -171,7 +225,6 @@ export const createAnnouncement = /* GraphQL */ `
     createAnnouncement(input: $input, condition: $condition) {
       id
       title
-      studygroupcardID
       username
       date
       announcement
@@ -193,7 +246,6 @@ export const updateAnnouncement = /* GraphQL */ `
     updateAnnouncement(input: $input, condition: $condition) {
       id
       title
-      studygroupcardID
       username
       date
       announcement
@@ -215,207 +267,11 @@ export const deleteAnnouncement = /* GraphQL */ `
     deleteAnnouncement(input: $input, condition: $condition) {
       id
       title
-      studygroupcardID
       username
       date
       announcement
       Comments {
         nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const createStudyGroupCard = /* GraphQL */ `
-  mutation CreateStudyGroupCard(
-    $input: CreateStudyGroupCardInput!
-    $condition: ModelStudyGroupCardConditionInput
-  ) {
-    createStudyGroupCard(input: $input, condition: $condition) {
-      id
-      groupName
-      numMembers
-      className
-      description
-      acceptingMembers
-      groupOwner
-      image
-      Announcements {
-        nextToken
-        __typename
-      }
-      memberList
-      membercards {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const updateStudyGroupCard = /* GraphQL */ `
-  mutation UpdateStudyGroupCard(
-    $input: UpdateStudyGroupCardInput!
-    $condition: ModelStudyGroupCardConditionInput
-  ) {
-    updateStudyGroupCard(input: $input, condition: $condition) {
-      id
-      groupName
-      numMembers
-      className
-      description
-      acceptingMembers
-      groupOwner
-      image
-      Announcements {
-        nextToken
-        __typename
-      }
-      memberList
-      membercards {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteStudyGroupCard = /* GraphQL */ `
-  mutation DeleteStudyGroupCard(
-    $input: DeleteStudyGroupCardInput!
-    $condition: ModelStudyGroupCardConditionInput
-  ) {
-    deleteStudyGroupCard(input: $input, condition: $condition) {
-      id
-      groupName
-      numMembers
-      className
-      description
-      acceptingMembers
-      groupOwner
-      image
-      Announcements {
-        nextToken
-        __typename
-      }
-      memberList
-      membercards {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const createMemberCardStudyGroupCard = /* GraphQL */ `
-  mutation CreateMemberCardStudyGroupCard(
-    $input: CreateMemberCardStudyGroupCardInput!
-    $condition: ModelMemberCardStudyGroupCardConditionInput
-  ) {
-    createMemberCardStudyGroupCard(input: $input, condition: $condition) {
-      id
-      memberCardId
-      studyGroupCardId
-      memberCard {
-        id
-        username
-        createdAt
-        updatedAt
-        __typename
-      }
-      studyGroupCard {
-        id
-        groupName
-        numMembers
-        className
-        description
-        acceptingMembers
-        groupOwner
-        image
-        memberList
-        createdAt
-        updatedAt
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const updateMemberCardStudyGroupCard = /* GraphQL */ `
-  mutation UpdateMemberCardStudyGroupCard(
-    $input: UpdateMemberCardStudyGroupCardInput!
-    $condition: ModelMemberCardStudyGroupCardConditionInput
-  ) {
-    updateMemberCardStudyGroupCard(input: $input, condition: $condition) {
-      id
-      memberCardId
-      studyGroupCardId
-      memberCard {
-        id
-        username
-        createdAt
-        updatedAt
-        __typename
-      }
-      studyGroupCard {
-        id
-        groupName
-        numMembers
-        className
-        description
-        acceptingMembers
-        groupOwner
-        image
-        memberList
-        createdAt
-        updatedAt
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteMemberCardStudyGroupCard = /* GraphQL */ `
-  mutation DeleteMemberCardStudyGroupCard(
-    $input: DeleteMemberCardStudyGroupCardInput!
-    $condition: ModelMemberCardStudyGroupCardConditionInput
-  ) {
-    deleteMemberCardStudyGroupCard(input: $input, condition: $condition) {
-      id
-      memberCardId
-      studyGroupCardId
-      memberCard {
-        id
-        username
-        createdAt
-        updatedAt
-        __typename
-      }
-      studyGroupCard {
-        id
-        groupName
-        numMembers
-        className
-        description
-        acceptingMembers
-        groupOwner
-        image
-        memberList
-        createdAt
-        updatedAt
         __typename
       }
       createdAt

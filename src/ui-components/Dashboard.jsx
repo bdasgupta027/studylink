@@ -11,14 +11,14 @@ import SLNavBarHeader2 from "./SLNavBarHeader2";
 import SLNavBarHeader from "./SLNavBarHeader";
 import { DataStore } from 'aws-amplify';
 import { useState, useEffect } from "react";
-import StudyGroupCardCollection from "./StudyGroupCardCollection";
+import StandardCardCollection from "./StandardCardCollection";
 
 function Dashboard() {
 
   return (
     <div>
       <SLNavBarHeader></SLNavBarHeader>
-      <StudyGroupCardCollection />
+      <StandardCardCollection />
     </div>
   );
 }

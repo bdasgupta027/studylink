@@ -7,28 +7,19 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps, useNavigateAction } from "./utils";
-import { Flex, Image, Text } from "@aws-amplify/ui-react";
+import { Flex, Image, SwitchField, Text } from "@aws-amplify/ui-react";
 export default function StandardCard(props) {
-  const {
-    openGroup = "accepting ",
-    studyGroupCard,
-    overrides,
-    ...rest
-  } = props;
+  const { studyGroupCard, openGroup, group, overrides, ...rest } = props;
   const standardCardOnClick = useNavigateAction({
     type: "url",
     url: studyGroupCard?.id,
-  });
-  const viewGroupOnClick = useNavigateAction({
-    type: "url",
-    url: `${"/studygroup/"}${studyGroupCard?.id}`,
   });
   return (
     <Flex
       gap="0"
       direction="column"
-      width="320px"
-      height="339px"
+      width="336px"
+      height="329px"
       justifyContent="center"
       alignItems="flex-start"
       position="relative"
@@ -42,7 +33,7 @@ export default function StandardCard(props) {
     >
       <Image
         width="unset"
-        height="160px"
+        height="196px"
         display="block"
         gap="unset"
         alignItems="unset"
@@ -56,14 +47,13 @@ export default function StandardCard(props) {
         {...getOverrideProps(overrides, "image")}
       ></Image>
       <Flex
-        gap="16px"
+        gap="0"
         direction="column"
-        width="unset"
-        height="179px"
+        width="336px"
+        height="169px"
         justifyContent="flex-start"
         alignItems="flex-start"
         shrink="0"
-        alignSelf="stretch"
         position="relative"
         padding="16px 16px 16px 16px"
         {...getOverrideProps(overrides, "Card Area")}
@@ -72,7 +62,7 @@ export default function StandardCard(props) {
           gap="8px"
           direction="column"
           width="unset"
-          height="unset"
+          height="132px"
           justifyContent="flex-start"
           alignItems="flex-start"
           shrink="0"
@@ -101,7 +91,7 @@ export default function StandardCard(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children={studyGroupCard?.groupName}
-            {...getOverrideProps(overrides, "$99 USD")}
+            {...getOverrideProps(overrides, "Pooja\u2019s Group")}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -124,7 +114,7 @@ export default function StandardCard(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children={studyGroupCard?.className}
-            {...getOverrideProps(overrides, "4bds 3 ba 2,530 sqft - Active")}
+            {...getOverrideProps(overrides, "CSE 103")}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -146,62 +136,81 @@ export default function StandardCard(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children={studyGroupCard?.groupOwner}
-            {...getOverrideProps(
-              overrides,
-              "832 34th Ave, Seattle, WA 9812229766790"
-            )}
+            {...getOverrideProps(overrides, "p@ucsc.edu")}
           ></Text>
-          <Text
-            fontFamily="Inter"
-            fontSize="14px"
-            fontWeight="400"
-            color="rgba(48,64,80,1)"
-            lineHeight="24px"
-            textAlign="left"
-            display="block"
-            direction="column"
-            justifyContent="unset"
+          <Flex
+            gap="16px"
+            direction="row"
             width="unset"
             height="unset"
-            gap="unset"
-            alignItems="unset"
+            justifyContent="center"
+            alignItems="center"
             shrink="0"
             alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children={`${openGroup}${""}${""}`}
-            {...getOverrideProps(
-              overrides,
-              "832 34th Ave, Seattle, WA 981223895462"
-            )}
-          ></Text>
+            {...getOverrideProps(overrides, "Frame")}
+          >
+            <Text
+              fontFamily="Inter"
+              fontSize="16px"
+              fontWeight="400"
+              color="rgba(13,26,38,1)"
+              lineHeight="16px"
+              textAlign="left"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="174px"
+              height="18px"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children="Accepting Members"
+              {...getOverrideProps(overrides, "Accepting Members")}
+            ></Text>
+            <Text
+              fontFamily="Inter"
+              fontSize="16px"
+              fontWeight="400"
+              color="rgba(92,102,112,1)"
+              lineHeight="16px"
+              textAlign="left"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              grow="1"
+              shrink="1"
+              basis="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children=" "
+              {...getOverrideProps(overrides, "Text")}
+            ></Text>
+            <SwitchField
+              width="unset"
+              height="unset"
+              shrink="0"
+              label="On"
+              size="default"
+              defaultChecked={true}
+              isDisabled={false}
+              labelPosition="start"
+              openGroup={
+                studyGroupCard?.acceptingMembers == "True" ? openGroup : group
+              }
+              {...getOverrideProps(overrides, "SwitchField")}
+            ></SwitchField>
+          </Flex>
         </Flex>
-        <Text
-          fontFamily="Inter"
-          fontSize="16px"
-          fontWeight="400"
-          color="rgba(13,26,38,1)"
-          lineHeight="22px"
-          textAlign="left"
-          display="block"
-          direction="column"
-          justifyContent="unset"
-          textDecoration="underline"
-          width="unset"
-          height="unset"
-          gap="unset"
-          alignItems="unset"
-          shrink="0"
-          position="relative"
-          padding="0px 0px 0px 0px"
-          whiteSpace="pre-wrap"
-          children="View Group"
-          onClick={() => {
-            viewGroupOnClick();
-          }}
-          {...getOverrideProps(overrides, "View Group")}
-        ></Text>
       </Flex>
     </Flex>
   );

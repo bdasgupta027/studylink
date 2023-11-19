@@ -7,7 +7,7 @@
 /* eslint-disable */
 import * as React from "react";
 import { listStudyGroupCards } from "../graphql/queries";
-import StudyGroupCard from "./StandardCard";
+import StudyGroupCard from "./StudyGroupCard";
 import { getOverrideProps } from "./utils";
 import { Collection, Pagination, Placeholder } from "@aws-amplify/ui-react";
 import { API } from "aws-amplify";

@@ -23,14 +23,17 @@ export declare type ValidationResponse = {
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type MemberCardUpdateFormInputValues = {
     username?: string;
+    studyGroupId?: string;
 };
 export declare type MemberCardUpdateFormValidationValues = {
     username?: ValidationFunction<string>;
+    studyGroupId?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type MemberCardUpdateFormOverridesProps = {
     MemberCardUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     username?: PrimitiveOverrideProps<TextFieldProps>;
+    studyGroupId?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type MemberCardUpdateFormProps = React.PropsWithChildren<{
     overrides?: MemberCardUpdateFormOverridesProps | undefined | null;

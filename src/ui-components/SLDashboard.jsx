@@ -16,12 +16,15 @@ function Dashboard() {
 
   // useEffect(() => {
   //   async function queryStudygroups() {
+
   //     const groups = await DataStore.query(StudyGroupCard)
+  //     console.log(groups);
   //     setStudygroups(groups);
   //   }
   //   queryStudygroups();
   // }, [])
-
+  // queryStudygroups();
+  // console.log("hello?");
   return (
     <div>
       <SLNavBarHeader></SLNavBarHeader>

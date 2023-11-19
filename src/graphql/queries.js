@@ -1,15 +1,56 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getStudyGroupCard = /* GraphQL */ `
+  query GetStudyGroupCard($id: ID!) {
+    getStudyGroupCard(id: $id) {
+      id
+      groupName
+      numMembers
+      className
+      acceptingMembers
+      description
+      groupOwner
+      image
+      memberList
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listStudyGroupCards = /* GraphQL */ `
+  query ListStudyGroupCards(
+    $filter: ModelStudyGroupCardFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listStudyGroupCards(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        groupName
+        numMembers
+        className
+        acceptingMembers
+        description
+        groupOwner
+        image
+        memberList
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const getMemberCard = /* GraphQL */ `
   query GetMemberCard($id: ID!) {
     getMemberCard(id: $id) {
       id
       username
-      StudyGroupCards {
-        nextToken
-        __typename
-      }
+      studyGroupId
       createdAt
       updatedAt
       __typename
@@ -26,6 +67,7 @@ export const listMemberCards = /* GraphQL */ `
       items {
         id
         username
+        studyGroupId
         createdAt
         updatedAt
         __typename
@@ -146,7 +188,6 @@ export const getAnnouncement = /* GraphQL */ `
     getAnnouncement(id: $id) {
       id
       title
-      studygroupcardID
       username
       date
       announcement
@@ -170,206 +211,9 @@ export const listAnnouncements = /* GraphQL */ `
       items {
         id
         title
-        studygroupcardID
         username
         date
         announcement
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const announcementsByStudygroupcardID = /* GraphQL */ `
-  query AnnouncementsByStudygroupcardID(
-    $studygroupcardID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelAnnouncementFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    announcementsByStudygroupcardID(
-      studygroupcardID: $studygroupcardID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        title
-        studygroupcardID
-        username
-        date
-        announcement
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const getStudyGroupCard = /* GraphQL */ `
-  query GetStudyGroupCard($id: ID!) {
-    getStudyGroupCard(id: $id) {
-      id
-      groupName
-      numMembers
-      className
-      description
-      acceptingMembers
-      groupOwner
-      image
-      Announcements {
-        nextToken
-        __typename
-      }
-      memberList
-      membercards {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listStudyGroupCards = /* GraphQL */ `
-  query ListStudyGroupCards(
-    $filter: ModelStudyGroupCardFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listStudyGroupCards(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        groupName
-        numMembers
-        className
-        description
-        acceptingMembers
-        groupOwner
-        image
-        memberList
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const getMemberCardStudyGroupCard = /* GraphQL */ `
-  query GetMemberCardStudyGroupCard($id: ID!) {
-    getMemberCardStudyGroupCard(id: $id) {
-      id
-      memberCardId
-      studyGroupCardId
-      memberCard {
-        id
-        username
-        createdAt
-        updatedAt
-        __typename
-      }
-      studyGroupCard {
-        id
-        groupName
-        numMembers
-        className
-        description
-        acceptingMembers
-        groupOwner
-        image
-        memberList
-        createdAt
-        updatedAt
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listMemberCardStudyGroupCards = /* GraphQL */ `
-  query ListMemberCardStudyGroupCards(
-    $filter: ModelMemberCardStudyGroupCardFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listMemberCardStudyGroupCards(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        memberCardId
-        studyGroupCardId
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const memberCardStudyGroupCardsByMemberCardId = /* GraphQL */ `
-  query MemberCardStudyGroupCardsByMemberCardId(
-    $memberCardId: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelMemberCardStudyGroupCardFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    memberCardStudyGroupCardsByMemberCardId(
-      memberCardId: $memberCardId
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        memberCardId
-        studyGroupCardId
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const memberCardStudyGroupCardsByStudyGroupCardId = /* GraphQL */ `
-  query MemberCardStudyGroupCardsByStudyGroupCardId(
-    $studyGroupCardId: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelMemberCardStudyGroupCardFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    memberCardStudyGroupCardsByStudyGroupCardId(
-      studyGroupCardId: $studyGroupCardId
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        memberCardId
-        studyGroupCardId
         createdAt
         updatedAt
         __typename
