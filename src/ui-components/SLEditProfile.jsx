@@ -8,11 +8,13 @@
 import * as React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { API } from "aws-amplify";
+import { API, Storage } from "aws-amplify";
 import { updateProfileCard } from "../graphql/mutations";
 import { getOverrideProps } from "./utils";
 import MyIcon from "./MyIcon";
 import { Button, Flex, Image, Text, TextField } from "@aws-amplify/ui-react";
+import axios from 'axios';
+
 export default function EditProfile(props) {
   const { profileCard, overrides, ...rest } = props;
   const [
@@ -46,27 +48,32 @@ export default function EditProfile(props) {
     });
   };
 
-  // Define a state variable to hold the profile image URL
-  const [profileImage, setProfileImage] = useState("https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png");
+  // Initialize the profileImage state with the default image only if it's falsy
+  const [profileImage, setProfileImage] = useState("https://th.bing.com/th/id/OIP.ncOCV5LVCL8j70Edjgyn6QHaGy?rs=1&pid=ImgDetMain"
+  );
 
   const handleImageUpload = async (event) => {
     if (event.target && event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0]; // Get the uploaded file
-
+      const file = event.target.files[0];
+      console.log("whattttttttt");
       try {
-        // Code to upload the image and obtain the URL after upload completion
-        const uploadResult = await Storage.put('profile.jpg', file, {
-          contentType: 'image/jpeg', // Set the appropriate content type
+        const uploadResult = await Storage.put(file.name, file, {
+          contentType: 'image/jpeg',
         });
-      
-        const imageUrl = uploadResult.key; // Retrieve the URL of the uploaded file
-      
-        setProfileImage(imageUrl + `?timestamp=${Date.now()}`); // Add a timestamp query parameter
+
+        const imageUrl = await Storage.get(uploadResult.key);
+        console.log(imageUrl);
+        const imageUrlWithoutParams = imageUrl.split('?')[0];
+        
+        console.log(imageUrlWithoutParams);
+        setProfileImage(imageUrlWithoutParams + `?timestamp=${Date.now()}`);
+
       } catch (error) {
         console.error('Error uploading image:', error);
       }
     }
   };
+  
 
   return (
     <Flex
@@ -160,32 +167,32 @@ export default function EditProfile(props) {
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "Profile")}
         >
-<Image
-  width="45px"
-  height="45px"
-  display="block"
-  gap="unset"
-  alignItems="unset"
-  justifyContent="unset"
-  shrink="0"
-  position="relative"
-  borderRadius="160px"
-  padding="0px 0px 0px 0px"
-  objectFit="cover"
-  src={`${profileImage}?${new Date().getTime()}`} // Add a random query parameter
-  alt="profile image"
-  key={profileImage} // Maintain the key to trigger re-render
-  {...getOverrideProps(overrides, "image")}
-></Image>
+          <Image
+            width="45px"
+            height="45px"
+            display="block"
+            gap="unset"
+            alignItems="unset"
+            justifyContent="unset"
+            shrink="0"
+            position="relative"
+            borderRadius="160px"
+            padding="0px 0px 0px 0px"
+            objectFit="cover"
+            src={`${profileImage}?${new Date().getTime()}`}
+            alt="profile image"
+            key={profileImage}
+            {...getOverrideProps(overrides, "image")}
+          />
           <input
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
-            style={{ display: 'none' }} // Hides the input visually
+            style={{ display: "none" }}
             id="imageInput"
           />
           <label htmlFor="imageInput">
-            <text
+            <span
               fontFamily="Inter"
               fontSize="16px"
               fontWeight="400"
@@ -207,7 +214,7 @@ export default function EditProfile(props) {
               children="Upload New Image"
               onClick={handleImageUpload}
               {...getOverrideProps(overrides, "Upload New Image")}
-            ></text>
+            ></span>
           </label>
         </Flex>
         <Flex

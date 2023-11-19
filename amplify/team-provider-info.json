@@ -27,6 +27,9 @@
           "deploymentBucketName": "amplify-studylink-staging-163143-deployment",
           "s3Key": "amplify-builds/S3Triggera0c6feac-5a696d4b6c51424b3974-build.zip"
         }
+      },
+      "api": {
+        "studylink": {}
       }
     }
   }

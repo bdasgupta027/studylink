@@ -9,10 +9,19 @@ import * as React from "react";
 import { getOverrideProps, useNavigateAction } from "./utils";
 import { Flex, Image, SwitchField, Text } from "@aws-amplify/ui-react";
 export default function StandardCard(props) {
-  const { studyGroupCard, openGroup, group, overrides, ...rest } = props;
+  const {
+    openGroup = "accepting ",
+    studyGroupCard,
+    overrides,
+    ...rest
+  } = props;
   const standardCardOnClick = useNavigateAction({
     type: "url",
     url: studyGroupCard?.id,
+  });
+  const viewGroupOnClick = useNavigateAction({
+    type: "url",
+    url: `${"/studygroup/"}${studyGroupCard?.id}`,
   });
   return (
     <Flex

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { getOverrideProps } from "./utils";
 import { Button, Flex, Image, Text } from "@aws-amplify/ui-react";
 export default function ProfilePageDetails(props) {
-  const { profileCard, overrides, ...rest } = props;
+  const { profileCard, overrides, profileImage, ...rest } = props;
   return (
     <Flex
       gap="10px"

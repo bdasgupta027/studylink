@@ -31,9 +31,8 @@ export declare type StandardCardOverridesProps = {
     SwitchField?: PrimitiveOverrideProps<SwitchFieldProps>;
 } & EscapeHatchProps;
 export declare type StandardCardProps = React.PropsWithChildren<Partial<FlexProps> & {
-    studyGroupCard?: any;
     openGroup?: String;
-    group?: String;
+    studyGroupCard?: any;
 } & {
     overrides?: StandardCardOverridesProps | undefined | null;
 }>;

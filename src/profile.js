@@ -6,7 +6,9 @@ import StandardCardCollection from "./ui-components/StandardCardCollection"
 
 
 
+
 function Profile() {
+    
     return (
         <div className="Profile">
             <SLNavBarHeader></SLNavBarHeader>
