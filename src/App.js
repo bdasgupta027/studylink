@@ -7,6 +7,7 @@ import EditProfile from './ui-components/SLEditProfile';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { API, DataStore, Amplify, Hub } from 'aws-amplify'
 import { useEffect } from 'react';
+import Notes from "./notes";
 
 
 const CreateProfileCardMutation = `
@@ -24,6 +25,7 @@ function App() {
     const removeListener = Hub.listen('auth', async (data) => {
       if (data.payload.event === 'signIn') {
         const userInfo = data.payload.data.attributes;
+        console.log(JSON.stringify(userInfo,null,2))
         const newUser = {
           id: userInfo.sub,
           firstName: userInfo.name,
@@ -49,6 +51,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/Edit-Profile" element={<EditProfile />} />
+          <Route path="/notes" element={<Notes />} />
           {/* <Route path="/studygroup/:id" element={<StudyGroup />} /> */}
         </Routes>
       </Router>
