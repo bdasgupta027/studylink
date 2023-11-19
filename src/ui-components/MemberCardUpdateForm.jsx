@@ -25,14 +25,19 @@ export default function MemberCardUpdateForm(props) {
   } = props;
   const initialValues = {
     username: "",
+    studyGroupId: "",
   };
   const [username, setUsername] = React.useState(initialValues.username);
+  const [studyGroupId, setStudyGroupId] = React.useState(
+    initialValues.studyGroupId
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = memberCardRecord
       ? { ...initialValues, ...memberCardRecord }
       : initialValues;
     setUsername(cleanValues.username);
+    setStudyGroupId(cleanValues.studyGroupId);
     setErrors({});
   };
   const [memberCardRecord, setMemberCardRecord] =
@@ -54,6 +59,7 @@ export default function MemberCardUpdateForm(props) {
   React.useEffect(resetStateValues, [memberCardRecord]);
   const validations = {
     username: [{ type: "Email" }],
+    studyGroupId: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -82,6 +88,7 @@ export default function MemberCardUpdateForm(props) {
         event.preventDefault();
         let modelFields = {
           username: username ?? null,
+          studyGroupId: studyGroupId ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -143,6 +150,7 @@ export default function MemberCardUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               username: value,
+              studyGroupId,
             };
             const result = onChange(modelFields);
             value = result?.username ?? value;
@@ -156,6 +164,31 @@ export default function MemberCardUpdateForm(props) {
         errorMessage={errors.username?.errorMessage}
         hasError={errors.username?.hasError}
         {...getOverrideProps(overrides, "username")}
+      ></TextField>
+      <TextField
+        label="Study group id"
+        isRequired={false}
+        isReadOnly={false}
+        value={studyGroupId}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              username,
+              studyGroupId: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.studyGroupId ?? value;
+          }
+          if (errors.studyGroupId?.hasError) {
+            runValidationTasks("studyGroupId", value);
+          }
+          setStudyGroupId(value);
+        }}
+        onBlur={() => runValidationTasks("studyGroupId", studyGroupId)}
+        errorMessage={errors.studyGroupId?.errorMessage}
+        hasError={errors.studyGroupId?.hasError}
+        {...getOverrideProps(overrides, "studyGroupId")}
       ></TextField>
       <Flex
         justifyContent="space-between"

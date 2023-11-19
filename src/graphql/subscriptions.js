@@ -1,6 +1,66 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateStudyGroupCard = /* GraphQL */ `
+  subscription OnCreateStudyGroupCard(
+    $filter: ModelSubscriptionStudyGroupCardFilterInput
+  ) {
+    onCreateStudyGroupCard(filter: $filter) {
+      id
+      groupName
+      numMembers
+      className
+      acceptingMembers
+      description
+      groupOwner
+      image
+      memberList
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateStudyGroupCard = /* GraphQL */ `
+  subscription OnUpdateStudyGroupCard(
+    $filter: ModelSubscriptionStudyGroupCardFilterInput
+  ) {
+    onUpdateStudyGroupCard(filter: $filter) {
+      id
+      groupName
+      numMembers
+      className
+      acceptingMembers
+      description
+      groupOwner
+      image
+      memberList
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteStudyGroupCard = /* GraphQL */ `
+  subscription OnDeleteStudyGroupCard(
+    $filter: ModelSubscriptionStudyGroupCardFilterInput
+  ) {
+    onDeleteStudyGroupCard(filter: $filter) {
+      id
+      groupName
+      numMembers
+      className
+      acceptingMembers
+      description
+      groupOwner
+      image
+      memberList
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const onCreateMemberCard = /* GraphQL */ `
   subscription OnCreateMemberCard(
     $filter: ModelSubscriptionMemberCardFilterInput
@@ -8,10 +68,7 @@ export const onCreateMemberCard = /* GraphQL */ `
     onCreateMemberCard(filter: $filter) {
       id
       username
-      StudyGroupCards {
-        nextToken
-        __typename
-      }
+      studyGroupId
       createdAt
       updatedAt
       __typename
@@ -25,10 +82,7 @@ export const onUpdateMemberCard = /* GraphQL */ `
     onUpdateMemberCard(filter: $filter) {
       id
       username
-      StudyGroupCards {
-        nextToken
-        __typename
-      }
+      studyGroupId
       createdAt
       updatedAt
       __typename
@@ -42,10 +96,7 @@ export const onDeleteMemberCard = /* GraphQL */ `
     onDeleteMemberCard(filter: $filter) {
       id
       username
-      StudyGroupCards {
-        nextToken
-        __typename
-      }
+      studyGroupId
       createdAt
       updatedAt
       __typename
@@ -155,7 +206,6 @@ export const onCreateAnnouncement = /* GraphQL */ `
     onCreateAnnouncement(filter: $filter) {
       id
       title
-      studygroupcardID
       username
       date
       announcement
@@ -176,7 +226,6 @@ export const onUpdateAnnouncement = /* GraphQL */ `
     onUpdateAnnouncement(filter: $filter) {
       id
       title
-      studygroupcardID
       username
       date
       announcement
@@ -197,201 +246,11 @@ export const onDeleteAnnouncement = /* GraphQL */ `
     onDeleteAnnouncement(filter: $filter) {
       id
       title
-      studygroupcardID
       username
       date
       announcement
       Comments {
         nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onCreateStudyGroupCard = /* GraphQL */ `
-  subscription OnCreateStudyGroupCard(
-    $filter: ModelSubscriptionStudyGroupCardFilterInput
-  ) {
-    onCreateStudyGroupCard(filter: $filter) {
-      id
-      groupName
-      numMembers
-      className
-      description
-      acceptingMembers
-      groupOwner
-      image
-      Announcements {
-        nextToken
-        __typename
-      }
-      memberList
-      membercards {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onUpdateStudyGroupCard = /* GraphQL */ `
-  subscription OnUpdateStudyGroupCard(
-    $filter: ModelSubscriptionStudyGroupCardFilterInput
-  ) {
-    onUpdateStudyGroupCard(filter: $filter) {
-      id
-      groupName
-      numMembers
-      className
-      description
-      acceptingMembers
-      groupOwner
-      image
-      Announcements {
-        nextToken
-        __typename
-      }
-      memberList
-      membercards {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onDeleteStudyGroupCard = /* GraphQL */ `
-  subscription OnDeleteStudyGroupCard(
-    $filter: ModelSubscriptionStudyGroupCardFilterInput
-  ) {
-    onDeleteStudyGroupCard(filter: $filter) {
-      id
-      groupName
-      numMembers
-      className
-      description
-      acceptingMembers
-      groupOwner
-      image
-      Announcements {
-        nextToken
-        __typename
-      }
-      memberList
-      membercards {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onCreateMemberCardStudyGroupCard = /* GraphQL */ `
-  subscription OnCreateMemberCardStudyGroupCard(
-    $filter: ModelSubscriptionMemberCardStudyGroupCardFilterInput
-  ) {
-    onCreateMemberCardStudyGroupCard(filter: $filter) {
-      id
-      memberCardId
-      studyGroupCardId
-      memberCard {
-        id
-        username
-        createdAt
-        updatedAt
-        __typename
-      }
-      studyGroupCard {
-        id
-        groupName
-        numMembers
-        className
-        description
-        acceptingMembers
-        groupOwner
-        image
-        memberList
-        createdAt
-        updatedAt
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onUpdateMemberCardStudyGroupCard = /* GraphQL */ `
-  subscription OnUpdateMemberCardStudyGroupCard(
-    $filter: ModelSubscriptionMemberCardStudyGroupCardFilterInput
-  ) {
-    onUpdateMemberCardStudyGroupCard(filter: $filter) {
-      id
-      memberCardId
-      studyGroupCardId
-      memberCard {
-        id
-        username
-        createdAt
-        updatedAt
-        __typename
-      }
-      studyGroupCard {
-        id
-        groupName
-        numMembers
-        className
-        description
-        acceptingMembers
-        groupOwner
-        image
-        memberList
-        createdAt
-        updatedAt
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onDeleteMemberCardStudyGroupCard = /* GraphQL */ `
-  subscription OnDeleteMemberCardStudyGroupCard(
-    $filter: ModelSubscriptionMemberCardStudyGroupCardFilterInput
-  ) {
-    onDeleteMemberCardStudyGroupCard(filter: $filter) {
-      id
-      memberCardId
-      studyGroupCardId
-      memberCard {
-        id
-        username
-        createdAt
-        updatedAt
-        __typename
-      }
-      studyGroupCard {
-        id
-        groupName
-        numMembers
-        className
-        description
-        acceptingMembers
-        groupOwner
-        image
-        memberList
-        createdAt
-        updatedAt
         __typename
       }
       createdAt
