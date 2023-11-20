@@ -49,8 +49,9 @@ export const getMemberCard = /* GraphQL */ `
   query GetMemberCard($id: ID!) {
     getMemberCard(id: $id) {
       id
-      username
+      userId
       studyGroupId
+      username
       createdAt
       updatedAt
       __typename
@@ -66,8 +67,9 @@ export const listMemberCards = /* GraphQL */ `
     listMemberCards(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        username
+        userId
         studyGroupId
+        username
         createdAt
         updatedAt
         __typename

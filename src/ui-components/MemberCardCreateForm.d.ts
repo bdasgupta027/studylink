@@ -22,18 +22,21 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type MemberCardCreateFormInputValues = {
-    username?: string;
+    userId?: string;
     studyGroupId?: string;
+    username?: string;
 };
 export declare type MemberCardCreateFormValidationValues = {
-    username?: ValidationFunction<string>;
+    userId?: ValidationFunction<string>;
     studyGroupId?: ValidationFunction<string>;
+    username?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type MemberCardCreateFormOverridesProps = {
     MemberCardCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    username?: PrimitiveOverrideProps<TextFieldProps>;
+    userId?: PrimitiveOverrideProps<TextFieldProps>;
     studyGroupId?: PrimitiveOverrideProps<TextFieldProps>;
+    username?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type MemberCardCreateFormProps = React.PropsWithChildren<{
     overrides?: MemberCardCreateFormOverridesProps | undefined | null;

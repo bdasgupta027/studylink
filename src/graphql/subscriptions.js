@@ -67,8 +67,9 @@ export const onCreateMemberCard = /* GraphQL */ `
   ) {
     onCreateMemberCard(filter: $filter) {
       id
-      username
+      userId
       studyGroupId
+      username
       createdAt
       updatedAt
       __typename
@@ -81,8 +82,9 @@ export const onUpdateMemberCard = /* GraphQL */ `
   ) {
     onUpdateMemberCard(filter: $filter) {
       id
-      username
+      userId
       studyGroupId
+      username
       createdAt
       updatedAt
       __typename
@@ -95,8 +97,9 @@ export const onDeleteMemberCard = /* GraphQL */ `
   ) {
     onDeleteMemberCard(filter: $filter) {
       id
-      username
+      userId
       studyGroupId
+      username
       createdAt
       updatedAt
       __typename

@@ -71,8 +71,9 @@ export const createMemberCard = /* GraphQL */ `
   ) {
     createMemberCard(input: $input, condition: $condition) {
       id
-      username
+      userId
       studyGroupId
+      username
       createdAt
       updatedAt
       __typename
@@ -86,8 +87,9 @@ export const updateMemberCard = /* GraphQL */ `
   ) {
     updateMemberCard(input: $input, condition: $condition) {
       id
-      username
+      userId
       studyGroupId
+      username
       createdAt
       updatedAt
       __typename
@@ -101,8 +103,9 @@ export const deleteMemberCard = /* GraphQL */ `
   ) {
     deleteMemberCard(input: $input, condition: $condition) {
       id
-      username
+      userId
       studyGroupId
+      username
       createdAt
       updatedAt
       __typename

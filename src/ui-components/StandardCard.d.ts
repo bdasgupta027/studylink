@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { FlexProps, ImageProps, SwitchFieldProps, TextProps } from "@aws-amplify/ui-react";
+import { FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -23,16 +23,14 @@ export declare type StandardCardOverridesProps = {
     "Card Area"?: PrimitiveOverrideProps<FlexProps>;
     "Text Group"?: PrimitiveOverrideProps<FlexProps>;
     "Pooja\u2019s Group"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 437"?: PrimitiveOverrideProps<FlexProps>;
+    "bdasgupt@ucsc.edu"?: PrimitiveOverrideProps<TextProps>;
     "CSE 103"?: PrimitiveOverrideProps<TextProps>;
-    "p@ucsc.edu"?: PrimitiveOverrideProps<TextProps>;
-    Frame?: PrimitiveOverrideProps<FlexProps>;
-    "Accepting Members"?: PrimitiveOverrideProps<TextProps>;
-    Text?: PrimitiveOverrideProps<TextProps>;
-    SwitchField?: PrimitiveOverrideProps<SwitchFieldProps>;
 } & EscapeHatchProps;
 export declare type StandardCardProps = React.PropsWithChildren<Partial<FlexProps> & {
-    openGroup?: String;
     studyGroupCard?: any;
+    openGroup?: String;
+    group?: String;
 } & {
     overrides?: StandardCardOverridesProps | undefined | null;
 }>;

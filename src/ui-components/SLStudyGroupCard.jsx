@@ -8,18 +8,19 @@
 import * as React from "react";
 import { getOverrideProps } from "./utils";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
-export default function StudyGroupCard(props) {
+export default function SLStudyGroupCard(props) {
   const { studyGroupCard, overrides, ...rest } = props;
   return (
     <Flex
       gap="0"
       direction="row"
-      width="1042px"
-      height="321px"
+      width="100%"
+      height="250px"
       justifyContent="flex-start"
       alignItems="flex-start"
       position="relative"
-      border="100px SOLID rgba(0,0,0,1)"
+      // border="1px SOLID rgba(0,0,0,1)"
+      borderBottom="1px solid rgba(0,0,0,1)"
       padding="0px 0px 0px 0px"
       {...getOverrideProps(overrides, "StudyGroupCard")}
       {...rest}
@@ -43,7 +44,7 @@ export default function StudyGroupCard(props) {
         gap="5px"
         direction="column"
         width="unset"
-        height="319px"
+        height="250px"
         justifyContent="flex-start"
         alignItems="flex-start"
         grow="1"
@@ -52,6 +53,8 @@ export default function StudyGroupCard(props) {
         position="relative"
         padding="32px 32px 32px 32px"
         backgroundColor="rgba(255,255,255,1)"
+        // border="1px SOLID rgba(0,0,0,1)"
+        borderBottom="100px solid rgba(0,0,0,1)"
         {...getOverrideProps(overrides, "Card Area")}
       >
         <Text
@@ -119,9 +122,11 @@ export default function StudyGroupCard(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children={`${"Group Owner: "}${studyGroupCard?.groupOwner}`}
+          // children={`<b>${"Group Owner: "}</b>${studyGroupCard?.groupOwner}`}
           {...getOverrideProps(overrides, "Group Owner: hjha@ucsc.edu")}
-        ></Text>
+        >
+          {<span dangerouslySetInnerHTML={{ __html: `<b>${"Group Owner: "}</b>${studyGroupCard?.groupOwner}` }} />}
+        </Text>
         <Text
           fontFamily="Inter"
           fontSize="16px"
@@ -142,9 +147,11 @@ export default function StudyGroupCard(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children={`${"Number of Members: "}${studyGroupCard?.numMembers}`}
+          // children={`${"Number of Members: "}${studyGroupCard?.numMembers}`}
           {...getOverrideProps(overrides, "Number of Members: 20")}
-        ></Text>
+        >
+          {<span dangerouslySetInnerHTML={{ __html: `<b>${"Number of Members: "}</b>${studyGroupCard?.numMembers}` }} />}
+        </Text>
         <Text
           fontFamily="Inter"
           fontSize="16px"
@@ -165,12 +172,14 @@ export default function StudyGroupCard(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children={`${"Description: "}${studyGroupCard?.description}`}
+          // children={`${"Description: "}${studyGroupCard?.description}`}
           {...getOverrideProps(
             overrides,
             "Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi scelerisque eu ultrices vitae auctor eu. Urna id volutpat lacus laoreet non curabitur gravida arcu. Morbi non arcu risus quis varius quam quisque id diam. Mi proin sed libero enim sed faucibus. Ultricies tristique nulla aliquet enim tortor at auctor urna."
           )}
-        ></Text>
+        >
+          {<span dangerouslySetInnerHTML={{ __html: `<b>${"Description: "}</b>${studyGroupCard?.description}` }} />}
+        </Text>
         <Text
           fontFamily="Inter"
           fontSize="16px"
@@ -191,13 +200,23 @@ export default function StudyGroupCard(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children={
-            studyGroupCard?.acceptingMembers == 1
-              ? "Accepting Members: True"
-              : "Accepting Members: False"
-          }
+          // children={
+          //   studyGroupCard?.acceptingMembers == 1
+          //     ? "Accepting Members: True"
+          //     : "Accepting Members: False"
+          // }
           {...getOverrideProps(overrides, "Accepting Members: True")}
-        ></Text>
+        >
+          {studyGroupCard?.acceptingMembers === 1 ? (
+    <>
+      <span><b>Accepting Members: </b></span>True
+        </>
+      ) : (
+        <>
+          <span><b>Accepting Members: </b></span>False
+        </>
+      )}
+        </Text>
       </Flex>
     </Flex>
   );

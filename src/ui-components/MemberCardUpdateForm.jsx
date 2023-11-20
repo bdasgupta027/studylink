@@ -24,20 +24,23 @@ export default function MemberCardUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    username: "",
+    userId: "",
     studyGroupId: "",
+    username: "",
   };
-  const [username, setUsername] = React.useState(initialValues.username);
+  const [userId, setUserId] = React.useState(initialValues.userId);
   const [studyGroupId, setStudyGroupId] = React.useState(
     initialValues.studyGroupId
   );
+  const [username, setUsername] = React.useState(initialValues.username);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = memberCardRecord
       ? { ...initialValues, ...memberCardRecord }
       : initialValues;
-    setUsername(cleanValues.username);
+    setUserId(cleanValues.userId);
     setStudyGroupId(cleanValues.studyGroupId);
+    setUsername(cleanValues.username);
     setErrors({});
   };
   const [memberCardRecord, setMemberCardRecord] =
@@ -58,8 +61,9 @@ export default function MemberCardUpdateForm(props) {
   }, [idProp, memberCardModelProp]);
   React.useEffect(resetStateValues, [memberCardRecord]);
   const validations = {
-    username: [{ type: "Email" }],
+    userId: [],
     studyGroupId: [],
+    username: [{ type: "Email" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -87,8 +91,9 @@ export default function MemberCardUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          username: username ?? null,
+          userId: userId ?? null,
           studyGroupId: studyGroupId ?? null,
+          username: username ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -141,29 +146,30 @@ export default function MemberCardUpdateForm(props) {
       {...rest}
     >
       <TextField
-        label="Username"
+        label="User id"
         isRequired={false}
         isReadOnly={false}
-        value={username}
+        value={userId}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              username: value,
+              userId: value,
               studyGroupId,
+              username,
             };
             const result = onChange(modelFields);
-            value = result?.username ?? value;
+            value = result?.userId ?? value;
           }
-          if (errors.username?.hasError) {
-            runValidationTasks("username", value);
+          if (errors.userId?.hasError) {
+            runValidationTasks("userId", value);
           }
-          setUsername(value);
+          setUserId(value);
         }}
-        onBlur={() => runValidationTasks("username", username)}
-        errorMessage={errors.username?.errorMessage}
-        hasError={errors.username?.hasError}
-        {...getOverrideProps(overrides, "username")}
+        onBlur={() => runValidationTasks("userId", userId)}
+        errorMessage={errors.userId?.errorMessage}
+        hasError={errors.userId?.hasError}
+        {...getOverrideProps(overrides, "userId")}
       ></TextField>
       <TextField
         label="Study group id"
@@ -174,8 +180,9 @@ export default function MemberCardUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              username,
+              userId,
               studyGroupId: value,
+              username,
             };
             const result = onChange(modelFields);
             value = result?.studyGroupId ?? value;
@@ -189,6 +196,32 @@ export default function MemberCardUpdateForm(props) {
         errorMessage={errors.studyGroupId?.errorMessage}
         hasError={errors.studyGroupId?.hasError}
         {...getOverrideProps(overrides, "studyGroupId")}
+      ></TextField>
+      <TextField
+        label="Username"
+        isRequired={false}
+        isReadOnly={false}
+        value={username}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              userId,
+              studyGroupId,
+              username: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.username ?? value;
+          }
+          if (errors.username?.hasError) {
+            runValidationTasks("username", value);
+          }
+          setUsername(value);
+        }}
+        onBlur={() => runValidationTasks("username", username)}
+        errorMessage={errors.username?.errorMessage}
+        hasError={errors.username?.hasError}
+        {...getOverrideProps(overrides, "username")}
       ></TextField>
       <Flex
         justifyContent="space-between"

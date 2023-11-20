@@ -12,8 +12,9 @@ type StudyGroupCard @model @auth(rules: [{allow: public}]) {
 
 type MemberCard @model @auth(rules: [{allow: public}]) {
   id: ID!
-  username: AWSEmail
+  userId: String
   studyGroupId: String
+  username: AWSEmail
 }
 
 type ProfileCard @model @auth(rules: [{allow: public}]) {

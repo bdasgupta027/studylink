@@ -7,28 +7,19 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps, useNavigateAction } from "./utils";
-import { Flex, Image, SwitchField, Text } from "@aws-amplify/ui-react";
+import { Flex, Image, Text } from "@aws-amplify/ui-react";
 export default function StandardCard(props) {
-  const {
-    openGroup = "accepting ",
-    studyGroupCard,
-    overrides,
-    ...rest
-  } = props;
+  const { studyGroupCard, openGroup, group, overrides, ...rest } = props;
   const standardCardOnClick = useNavigateAction({
     type: "url",
     url: studyGroupCard?.id,
-  });
-  const viewGroupOnClick = useNavigateAction({
-    type: "url",
-    url: `${"/studygroup/"}${studyGroupCard?.id}`,
   });
   return (
     <Flex
       gap="0"
       direction="column"
-      width="336px"
-      height="329px"
+      width="325px"
+      height="333px"
       justifyContent="center"
       alignItems="flex-start"
       position="relative"
@@ -42,7 +33,7 @@ export default function StandardCard(props) {
     >
       <Image
         width="unset"
-        height="196px"
+        height="225px"
         display="block"
         gap="unset"
         alignItems="unset"
@@ -58,8 +49,8 @@ export default function StandardCard(props) {
       <Flex
         gap="0"
         direction="column"
-        width="336px"
-        height="169px"
+        width="332px"
+        height="111px"
         justifyContent="flex-start"
         alignItems="flex-start"
         shrink="0"
@@ -68,10 +59,10 @@ export default function StandardCard(props) {
         {...getOverrideProps(overrides, "Card Area")}
       >
         <Flex
-          gap="8px"
+          gap="0"
           direction="column"
           width="unset"
-          height="132px"
+          height="156px"
           justifyContent="flex-start"
           alignItems="flex-start"
           shrink="0"
@@ -102,6 +93,39 @@ export default function StandardCard(props) {
             children={studyGroupCard?.groupName}
             {...getOverrideProps(overrides, "Pooja\u2019s Group")}
           ></Text>
+          <Flex
+            gap="10px"
+            direction="column"
+            width="unset"
+            height="unset"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            {...getOverrideProps(overrides, "Frame 437")}
+          ></Flex>
+          <Text
+            fontFamily="Inter"
+            fontSize="14px"
+            fontWeight="400"
+            color="rgba(48,64,80,1)"
+            lineHeight="24px"
+            textAlign="left"
+            display="block"
+            direction="column"
+            justifyContent="unset"
+            width="136px"
+            height="23px"
+            gap="unset"
+            alignItems="unset"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            whiteSpace="pre-wrap"
+            children={studyGroupCard?.groupOwner}
+            {...getOverrideProps(overrides, "bdasgupt@ucsc.edu")}
+          ></Text>
           <Text
             fontFamily="Inter"
             fontSize="16px"
@@ -113,112 +137,17 @@ export default function StandardCard(props) {
             direction="column"
             justifyContent="unset"
             letterSpacing="0.01px"
-            width="unset"
+            width="300px"
             height="unset"
             gap="unset"
             alignItems="unset"
             shrink="0"
-            alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children={studyGroupCard?.className}
             {...getOverrideProps(overrides, "CSE 103")}
           ></Text>
-          <Text
-            fontFamily="Inter"
-            fontSize="14px"
-            fontWeight="400"
-            color="rgba(48,64,80,1)"
-            lineHeight="24px"
-            textAlign="left"
-            display="block"
-            direction="column"
-            justifyContent="unset"
-            width="unset"
-            height="unset"
-            gap="unset"
-            alignItems="unset"
-            shrink="0"
-            alignSelf="stretch"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children={studyGroupCard?.groupOwner}
-            {...getOverrideProps(overrides, "p@ucsc.edu")}
-          ></Text>
-          <Flex
-            gap="16px"
-            direction="row"
-            width="unset"
-            height="unset"
-            justifyContent="center"
-            alignItems="center"
-            shrink="0"
-            alignSelf="stretch"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame")}
-          >
-            <Text
-              fontFamily="Inter"
-              fontSize="16px"
-              fontWeight="400"
-              color="rgba(13,26,38,1)"
-              lineHeight="16px"
-              textAlign="left"
-              display="block"
-              direction="column"
-              justifyContent="unset"
-              width="174px"
-              height="18px"
-              gap="unset"
-              alignItems="unset"
-              shrink="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children="Accepting Members"
-              {...getOverrideProps(overrides, "Accepting Members")}
-            ></Text>
-            <Text
-              fontFamily="Inter"
-              fontSize="16px"
-              fontWeight="400"
-              color="rgba(92,102,112,1)"
-              lineHeight="16px"
-              textAlign="left"
-              display="block"
-              direction="column"
-              justifyContent="unset"
-              width="unset"
-              height="unset"
-              gap="unset"
-              alignItems="unset"
-              grow="1"
-              shrink="1"
-              basis="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children=" "
-              {...getOverrideProps(overrides, "Text")}
-            ></Text>
-            <SwitchField
-              width="unset"
-              height="unset"
-              shrink="0"
-              label="On"
-              size="default"
-              defaultChecked={true}
-              isDisabled={false}
-              labelPosition="start"
-              openGroup={
-                studyGroupCard?.acceptingMembers == "True" ? openGroup : group
-              }
-              {...getOverrideProps(overrides, "SwitchField")}
-            ></SwitchField>
-          </Flex>
         </Flex>
       </Flex>
     </Flex>
