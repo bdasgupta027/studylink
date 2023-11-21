@@ -51,7 +51,7 @@ export { default as SocialPost } from "./SocialPost";
 export { default as StandardCard } from "./StandardCard";
 export { default as StandardCardCollection } from "./StandardCardCollection";
 export { default as Stat } from "./Stat";
-export { default as StudyGroupCard } from "./StudygroupCard";
+export { default as StudyGroupCard } from "./StudyGroupCard";
 export { default as StudyGroupCardCollection } from "./StudyGroupCardCollection";
 export { default as StudyGroupCardCreateForm } from "./StudyGroupCardCreateForm";
 export { default as StudyGroupCardUpdateForm } from "./StudyGroupCardUpdateForm";
