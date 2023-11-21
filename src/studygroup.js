@@ -2,12 +2,13 @@ import './App.css';
 import SLNavBarHeader from "./ui-components/SLNavBarHeader"
 import ProfilePageDetails from "./ui-components/ProfilePageDetails"
 import StudyGroupCardCollection from "./ui-components/StudyGroupCardCollection"
-import { SLStudyGroupCard } from './ui-components';
+import { SLStudyGroupCard } from './ui-components/SLStudyGroupCard';
 import { API, Auth } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import { listMemberCards, getStudyGroupCard } from './graphql/queries';
 import { useParams } from 'react-router-dom';
 // import SLNavBarHeader from './ui-components/SLNavBarHeader';
+import MemCardCollection from './ui-components/MemCardCollection';
 
 function StudyGroup() {
     const CreateMemberCardMutation = `
@@ -175,9 +176,10 @@ function StudyGroup() {
     return (
         <div className="studyGroupPage">
             <SLNavBarHeader />
+            <MemCardCollection />
             <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
                 {studyGroupCard && <SLStudyGroupCard studyGroupCard={studyGroupCard} style={{ marginTop: '20px' }} />}
-                <div>
+                <div className="sidebar" style={{ backgroundColor: '#666464', height: '100%'}}>
                     {!isJoined ? (
                         <button
                             style={{

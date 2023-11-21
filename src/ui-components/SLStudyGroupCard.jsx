@@ -8,7 +8,7 @@
 import * as React from "react";
 import { getOverrideProps } from "./utils";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
-export default function SLStudyGroupCard(props) {
+export function SLStudyGroupCard(props) {
   const { studyGroupCard, overrides, ...rest } = props;
   return (
     <Flex

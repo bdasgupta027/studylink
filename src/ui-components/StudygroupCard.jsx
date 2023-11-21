@@ -19,7 +19,7 @@ export default function StudyGroupCard(props) {
       justifyContent="flex-start"
       alignItems="flex-start"
       position="relative"
-      border="100px SOLID rgba(0,0,0,1)"
+      border="1px SOLID rgba(0,0,0,1)"
       padding="0px 0px 0px 0px"
       {...getOverrideProps(overrides, "StudyGroupCard")}
       {...rest}

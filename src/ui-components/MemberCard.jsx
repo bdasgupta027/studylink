@@ -9,7 +9,7 @@ import * as React from "react";
 import { getOverrideProps } from "./utils";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 export default function MemberCard(props) {
-  const { profileCard, overrides, ...rest } = props;
+  const { memberCard, overrides, ...rest } = props;
   return (
     <Flex
       gap="16px"
@@ -69,7 +69,7 @@ export default function MemberCard(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children={profileCard?.firstName}
+          children={`${memberCard?.username}${""}`}
           {...getOverrideProps(overrides, "Rene Brandel")}
         ></Text>
       </Flex>
