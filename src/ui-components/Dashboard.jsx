@@ -19,8 +19,8 @@ function Dashboard() {
 
   return (
     <div>
-      <SLNavBarHeader></SLNavBarHeader>
-      <StandardCardCollection />
+      <SLNavBarHeader marginBottom="10vh"/>
+      <StandardCardCollection  marginLeft="5%"/>
     </div>
   );
 }
