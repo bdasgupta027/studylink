@@ -30,6 +30,7 @@ export default function ProfileCardUpdateForm(props) {
     major: "",
     image: "",
     classesEnrolled: "",
+    userId: "",
   };
   const [firstName, setFirstName] = React.useState(initialValues.firstName);
   const [lastName, setLastName] = React.useState(initialValues.lastName);
@@ -39,6 +40,7 @@ export default function ProfileCardUpdateForm(props) {
   const [classesEnrolled, setClassesEnrolled] = React.useState(
     initialValues.classesEnrolled
   );
+  const [userId, setUserId] = React.useState(initialValues.userId);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = profileCardRecord
@@ -50,6 +52,7 @@ export default function ProfileCardUpdateForm(props) {
     setMajor(cleanValues.major);
     setImage(cleanValues.image);
     setClassesEnrolled(cleanValues.classesEnrolled);
+    setUserId(cleanValues.userId);
     setErrors({});
   };
   const [profileCardRecord, setProfileCardRecord] =
@@ -76,6 +79,7 @@ export default function ProfileCardUpdateForm(props) {
     major: [],
     image: [{ type: "URL" }],
     classesEnrolled: [],
+    userId: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -109,6 +113,7 @@ export default function ProfileCardUpdateForm(props) {
           major: major ?? null,
           image: image ?? null,
           classesEnrolled: classesEnrolled ?? null,
+          userId: userId ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -175,6 +180,7 @@ export default function ProfileCardUpdateForm(props) {
               major,
               image,
               classesEnrolled,
+              userId,
             };
             const result = onChange(modelFields);
             value = result?.firstName ?? value;
@@ -204,6 +210,7 @@ export default function ProfileCardUpdateForm(props) {
               major,
               image,
               classesEnrolled,
+              userId,
             };
             const result = onChange(modelFields);
             value = result?.lastName ?? value;
@@ -233,6 +240,7 @@ export default function ProfileCardUpdateForm(props) {
               major,
               image,
               classesEnrolled,
+              userId,
             };
             const result = onChange(modelFields);
             value = result?.email ?? value;
@@ -262,6 +270,7 @@ export default function ProfileCardUpdateForm(props) {
               major: value,
               image,
               classesEnrolled,
+              userId,
             };
             const result = onChange(modelFields);
             value = result?.major ?? value;
@@ -291,6 +300,7 @@ export default function ProfileCardUpdateForm(props) {
               major,
               image: value,
               classesEnrolled,
+              userId,
             };
             const result = onChange(modelFields);
             value = result?.image ?? value;
@@ -320,6 +330,7 @@ export default function ProfileCardUpdateForm(props) {
               major,
               image,
               classesEnrolled: value,
+              userId,
             };
             const result = onChange(modelFields);
             value = result?.classesEnrolled ?? value;
@@ -333,6 +344,36 @@ export default function ProfileCardUpdateForm(props) {
         errorMessage={errors.classesEnrolled?.errorMessage}
         hasError={errors.classesEnrolled?.hasError}
         {...getOverrideProps(overrides, "classesEnrolled")}
+      ></TextField>
+      <TextField
+        label="User id"
+        isRequired={false}
+        isReadOnly={false}
+        value={userId}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              firstName,
+              lastName,
+              email,
+              major,
+              image,
+              classesEnrolled,
+              userId: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.userId ?? value;
+          }
+          if (errors.userId?.hasError) {
+            runValidationTasks("userId", value);
+          }
+          setUserId(value);
+        }}
+        onBlur={() => runValidationTasks("userId", userId)}
+        errorMessage={errors.userId?.errorMessage}
+        hasError={errors.userId?.hasError}
+        {...getOverrideProps(overrides, "userId")}
       ></TextField>
       <Flex
         justifyContent="space-between"

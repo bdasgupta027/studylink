@@ -13,6 +13,11 @@ import { Link } from "react-router-dom";
 import { Auth } from "aws-amplify";
 
 export default function SLNavBarHeader(props) {
+  const { profileCard, profileImage, overrides, ...rest } = props;
+
+  const updateProfileImage = (newImage) => {
+    setProfileImage(newImage);
+  };
   const dashboardOnClick = useNavigateAction({
     type: "url",
     url: "/dashboard",
@@ -22,7 +27,7 @@ export default function SLNavBarHeader(props) {
     url: "",
   });
   const contactOnClick = useNavigateAction({ type: "url", url: "/contact" });
-  const { overrides, ...rest } = props;
+  // const { overrides, ...rest } = props;
 
   const logoutOnClick = async () => {
     try {
@@ -141,8 +146,9 @@ export default function SLNavBarHeader(props) {
           borderRadius="160px"
           padding="0px 0px 0px 0px"
           objectFit="cover"
-          src="https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png" // Replace this with the actual source of your image
+          src={`${profileImage}?${new Date().getTime()}`} 
           alt="profile image"
+          key={profileImage}
           {...getOverrideProps(overrides, "image")}
         />
         </Link>

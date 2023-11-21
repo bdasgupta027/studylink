@@ -28,6 +28,7 @@ export declare type ProfileCardCreateFormInputValues = {
     major?: string;
     image?: string;
     classesEnrolled?: string;
+    userId?: string;
 };
 export declare type ProfileCardCreateFormValidationValues = {
     firstName?: ValidationFunction<string>;
@@ -36,6 +37,7 @@ export declare type ProfileCardCreateFormValidationValues = {
     major?: ValidationFunction<string>;
     image?: ValidationFunction<string>;
     classesEnrolled?: ValidationFunction<string>;
+    userId?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type ProfileCardCreateFormOverridesProps = {
@@ -46,6 +48,7 @@ export declare type ProfileCardCreateFormOverridesProps = {
     major?: PrimitiveOverrideProps<TextFieldProps>;
     image?: PrimitiveOverrideProps<TextFieldProps>;
     classesEnrolled?: PrimitiveOverrideProps<TextFieldProps>;
+    userId?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type ProfileCardCreateFormProps = React.PropsWithChildren<{
     overrides?: ProfileCardCreateFormOverridesProps | undefined | null;

@@ -7,34 +7,44 @@ import EditProfile from './ui-components/SLEditProfile';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { API, DataStore, Amplify, Auth, Hub } from 'aws-amplify'
 import { useEffect } from 'react';
+import { getProfileCard } from './graphql/queries';
+import { createProfileCard } from './graphql/mutations';
 // import StudyGroupCard from './ui-components/StudyroupCard';
 
-const CreateProfileCardMutation = `
-mutation createProfileCard($input: CreateProfileCardInput!) {
-  createProfileCard(input: $input) {
-    id
-    firstName
-    email
-  }
-}
-`
+// const CreateProfileCardMutation = `
+// mutation createProfileCard($input: CreateProfileCardInput!) {
+//   createProfileCard(input: $input) {
+//     id
+//     firstName
+//     email
+//   }
+// }
+// `
 
 function App() {
+
+  const uuid = require('uuid');
+
   useEffect(() => {
     const removeListener = Hub.listen('auth', async (data) => {
       if (data.payload.event === 'signIn') {
+        console.log(data.payload.data.attributes);
         const userInfo = data.payload.data.attributes;
         const newUser = {
-          id: userInfo.sub,
+          id: uuid.v4(),
+          userId: userInfo.sub,
           firstName: userInfo.name,
           email: userInfo.email,
+          major: "",
+          image: "https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png" ,
+          classesEnrolled: "",
         }
-        // console.log(userInfo.name);
+        console.log(userInfo.name);
         await API.graphql({
-          query: CreateProfileCardMutation, 
-          variables: { input: newUser } 
+          query: createProfileCard, 
+          variables: { input: newUser, condition: null } 
         });
-        
+        console.log("made it here");        
       }
     });
     return () => {

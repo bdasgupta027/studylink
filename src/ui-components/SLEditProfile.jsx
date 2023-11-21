@@ -8,12 +8,13 @@
 import * as React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { API, Storage } from "aws-amplify";
+import { API, Storage, Auth } from "aws-amplify";
 import { updateProfileCard } from "../graphql/mutations";
 import { getOverrideProps } from "./utils";
 import MyIcon from "./MyIcon";
 import { Button, Flex, Image, Text, TextField } from "@aws-amplify/ui-react";
 import axios from 'axios';
+import { getProfileCard } from "../graphql/queries";
 
 export default function EditProfile(props) {
   const { profileCard, overrides, ...rest } = props;
@@ -33,29 +34,15 @@ export default function EditProfile(props) {
     textFieldThreeEightFiveZeroSixTwoEightValue,
     setTextFieldThreeEightFiveZeroSixTwoEightValue,
   ] = useState("");
-  const buttonOnClick = async () => {
-    await API.graphql({
-      query: updateProfileCard.replaceAll("__typename", ""),
-      variables: {
-        input: {
-          firstName: textFieldTwoNineSevenSixSixNineTwoTwoValue,
-          lastName: textFieldTwoNineSevenSixSixNineTwoThreeValue,
-          email: textFieldTwoNineSevenSixSixNineTwoFourValue,
-          major: textFieldThreeEightFiveZeroSixTwoEightValue,
-          id: profileCard?.id,
-        },
-      },
-    });
-  };
+
 
   // Initialize the profileImage state with the default image only if it's falsy
   const [profileImage, setProfileImage] = useState("https://th.bing.com/th/id/OIP.ncOCV5LVCL8j70Edjgyn6QHaGy?rs=1&pid=ImgDetMain"
   );
-
+  const [forceUpdate, setForceUpdate] = useState(false);
   const handleImageUpload = async (event) => {
     if (event.target && event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
-      console.log("whattttttttt");
       try {
         const uploadResult = await Storage.put(file.name, file, {
           contentType: 'image/jpeg',
@@ -66,13 +53,46 @@ export default function EditProfile(props) {
         const imageUrlWithoutParams = imageUrl.split('?')[0];
         
         console.log(imageUrlWithoutParams);
+        console.log("before profile imae:", profileImage);
         setProfileImage(imageUrlWithoutParams + `?timestamp=${Date.now()}`);
-
+        console.log("after profile image:", profileImage);
+        console.log("url is", imageUrlWithoutParams + `?timestamp=${Date.now()}`);
+        // props.updateProfileImage(imageUrlWithoutParams + `?timestamp=${Date.now()}`);
       } catch (error) {
         console.error('Error uploading image:', error);
       }
     }
   };
+
+  const buttonOnClick = async () => {
+    const user = await Auth.currentAuthenticatedUser();
+    const response = await API.graphql({
+      query: getProfileCard,
+      variables: { id: user.attributes.sub }
+    });
+    console.log(response);
+    const fetchedProfileCard = response.data.getProfileCard;
+    const updatedProfileImage = profileImage;
+    console.log("updated profile image is", updatedProfileImage);
+    await API.graphql({
+      query: updateProfileCard.replaceAll("__typename", ""),
+      variables: {
+        input: {
+          firstName: textFieldTwoNineSevenSixSixNineTwoTwoValue,
+          lastName: textFieldTwoNineSevenSixSixNineTwoThreeValue,
+          email: textFieldTwoNineSevenSixSixNineTwoFourValue,
+          major: textFieldThreeEightFiveZeroSixTwoEightValue,
+          userId: user.attributes.sub,
+          id: response.data.getProfileCard.id,
+          image: updatedProfileImage,
+        },
+      },
+    });
+    setForceUpdate(prevState => !prevState);
+
+  };
+
+  
   
 
   return (

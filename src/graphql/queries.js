@@ -89,6 +89,7 @@ export const getProfileCard = /* GraphQL */ `
       major
       image
       classesEnrolled
+      userId
       createdAt
       updatedAt
       __typename
@@ -110,6 +111,7 @@ export const listProfileCards = /* GraphQL */ `
         major
         image
         classesEnrolled
+        userId
         createdAt
         updatedAt
         __typename

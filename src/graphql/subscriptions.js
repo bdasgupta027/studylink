@@ -118,6 +118,7 @@ export const onCreateProfileCard = /* GraphQL */ `
       major
       image
       classesEnrolled
+      userId
       createdAt
       updatedAt
       __typename
@@ -136,6 +137,7 @@ export const onUpdateProfileCard = /* GraphQL */ `
       major
       image
       classesEnrolled
+      userId
       createdAt
       updatedAt
       __typename
@@ -154,6 +156,7 @@ export const onDeleteProfileCard = /* GraphQL */ `
       major
       image
       classesEnrolled
+      userId
       createdAt
       updatedAt
       __typename

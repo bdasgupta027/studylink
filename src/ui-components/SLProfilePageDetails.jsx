@@ -8,9 +8,15 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { getOverrideProps } from "./utils";
+import EditProfile from "./SLEditProfile";
 import { Button, Flex, Image, Text } from "@aws-amplify/ui-react";
 export default function ProfilePageDetails(props) {
-  const { profileCard, overrides, profileImage, ...rest } = props;
+  const { profileCard, profileImage, overrides, ...rest } = props;
+
+  const updateProfileImage = (newImage) => {
+    setProfileImage(newImage);
+  };
+
   return (
     <Flex
       gap="10px"
@@ -51,7 +57,10 @@ export default function ProfilePageDetails(props) {
           borderRadius="160px"
           padding="0px 0px 0px 0px"
           objectFit="cover"
-          src="https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png" 
+          src={`${profileImage}?${new Date().getTime()}`} // Use the updated profileImage prop
+          alt="profile image"
+          key={profileImage}
+        {...getOverrideProps(overrides, "image")}
           {...getOverrideProps(overrides, "image")}
         ></Image>
         <Link to="/Edit-Profile">
@@ -67,6 +76,7 @@ export default function ProfilePageDetails(props) {
           {...getOverrideProps(overrides, "Button")}
         ></Button>
         </Link>
+        <EditProfile updateProfileImage={updateProfileImage} />
       </Flex>
       <Flex
         gap="16px"
