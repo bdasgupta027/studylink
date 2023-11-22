@@ -49,8 +49,8 @@ function Dashboard() {
   };
   return (
     <div>
-      <SLNavBarHeader profileImage={profileImage} setProfileImage={setProfileImage} />
-      <StandardCardCollection />
+      <SLNavBarHeader profileImage={profileImage} setProfileImage={setProfileImage} marginBottom="10vh" />
+      <StandardCardCollection marginLeft="5%"/>
     </div>
   );
 }
