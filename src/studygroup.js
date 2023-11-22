@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { listMemberCards, getStudyGroupCard } from './graphql/queries';
 import { useParams } from 'react-router-dom';
 // import SLNavBarHeader from './ui-components/SLNavBarHeader';
-import MemCardCollection from './ui-components/MemCardCollection';
+import MemCardCollection from './ui-components/SLMemCardCollection';
 import { getProfileCard } from './graphql/queries';
 
 function StudyGroup() {

@@ -8,8 +8,39 @@
 import * as React from "react";
 import { getOverrideProps } from "./utils";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
+import { useState, useEffect } from "react";
+import { API, Auth } from 'aws-amplify';
+import { getProfileCard } from "../graphql/queries";
+import ProfilePageDetails from "./SLProfilePageDetails";
 export default function MemberCard(props) {
   const { memberCard, overrides, ...rest } = props;
+  const [profileCard, setProfileCard] = useState(null);
+    const [profileImage, setProfileImage] = useState("");
+
+    const createProfileCardDetails = async () => {
+        const user = await Auth.currentAuthenticatedUser();
+        try {
+            const response = await API.graphql({
+                query: getProfileCard,
+                variables: { id: user.attributes.sub }
+            });
+            const fetchedProfileCard = response.data.getProfileCard;
+            setProfileCard(fetchedProfileCard);
+            setProfileImage(fetchedProfileCard.image);
+            console.log("FINAL PROFILE", fetchedProfileCard);
+        } catch (err) {
+            console.log(err);
+            return false;
+        }
+    };
+
+    useEffect(() => {
+        createProfileCardDetails();
+      }, []); 
+
+      const updateProfileImage = (newImage) => {
+        setProfileImage(newImage);
+      };
   return (
     <Flex
       gap="16px"
@@ -48,6 +79,7 @@ export default function MemberCard(props) {
           borderRadius="32.5px"
           padding="0px 0px 0px 0px"
           objectFit="cover"
+          src={profileImage}
           {...getOverrideProps(overrides, "image")}
         ></Image>
         <Text

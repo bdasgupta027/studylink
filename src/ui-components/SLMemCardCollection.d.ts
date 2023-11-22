@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { MemberCardProps } from "./MemberCard";
+import { MemberCardProps } from "./SLMemberCard";
 import { CollectionProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;

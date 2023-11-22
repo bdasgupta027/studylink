@@ -7,7 +7,7 @@
 /* eslint-disable */
 import * as React from "react";
 import { listMemberCards } from "../graphql/queries";
-import MemberCard from "./MemberCard";
+import MemberCard from "./SLMemberCard";
 import { getOverrideProps } from "./utils";
 import { Collection, Pagination, Placeholder } from "@aws-amplify/ui-react";
 import { API } from "aws-amplify";
