@@ -15,6 +15,10 @@ export const onCreateStudyGroupCard = /* GraphQL */ `
       groupOwner
       image
       memberList
+      Announcements {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -35,6 +39,10 @@ export const onUpdateStudyGroupCard = /* GraphQL */ `
       groupOwner
       image
       memberList
+      Announcements {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -55,6 +63,10 @@ export const onDeleteStudyGroupCard = /* GraphQL */ `
       groupOwner
       image
       memberList
+      Announcements {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -219,6 +231,7 @@ export const onCreateAnnouncement = /* GraphQL */ `
         nextToken
         __typename
       }
+      studygroupcardID
       createdAt
       updatedAt
       __typename
@@ -239,6 +252,7 @@ export const onUpdateAnnouncement = /* GraphQL */ `
         nextToken
         __typename
       }
+      studygroupcardID
       createdAt
       updatedAt
       __typename
@@ -259,6 +273,7 @@ export const onDeleteAnnouncement = /* GraphQL */ `
         nextToken
         __typename
       }
+      studygroupcardID
       createdAt
       updatedAt
       __typename

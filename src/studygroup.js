@@ -9,8 +9,36 @@ import { listMemberCards, getStudyGroupCard } from './graphql/queries';
 import { useParams } from 'react-router-dom';
 // import SLNavBarHeader from './ui-components/SLNavBarHeader';
 import MemCardCollection from './ui-components/MemCardCollection';
+import { getProfileCard } from './graphql/queries';
 
 function StudyGroup() {
+    const [profileCard, setProfileCard] = useState(null);
+    const [profileImage, setProfileImage] = useState("");
+
+    const createProfileCardDetails = async () => {
+        const user = await Auth.currentAuthenticatedUser();
+        try {
+            const response = await API.graphql({
+                query: getProfileCard,
+                variables: { id: user.attributes.sub }
+            });
+            const fetchedProfileCard = response.data.getProfileCard;
+            setProfileCard(fetchedProfileCard);
+            setProfileImage(fetchedProfileCard.image);
+            console.log("FINAL PROFILE", fetchedProfileCard);
+        } catch (err) {
+            console.log(err);
+            return false;
+        }
+    };
+
+    useEffect(() => {
+        createProfileCardDetails();
+      }, []); 
+
+      const updateProfileImage = (newImage) => {
+        setProfileImage(newImage);
+      };
     const CreateMemberCardMutation = `
       mutation createMemberCard($input: CreateMemberCardInput!) {
         createMemberCard(input: $input) {
@@ -175,8 +203,8 @@ function StudyGroup() {
 
     return (
         <div className="studyGroupPage">
-            <SLNavBarHeader />
-            <MemCardCollection />
+            <SLNavBarHeader profileImage={profileImage} setProfileImage={setProfileImage} />
+            <MemCardCollection studyGroupId={ id } />
             <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
                 {studyGroupCard && <SLStudyGroupCard studyGroupCard={studyGroupCard} style={{ marginTop: '20px' }} />}
                 <div className="sidebar" style={{ backgroundColor: '#666464', height: '100%'}}>

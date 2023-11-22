@@ -40,7 +40,8 @@ export default function MemCardCollection(props) {
   const jumpToPage = (pageNum) => {
     setPageIndex(pageNum);
   };
-  const loadPage = async (page) => {
+  const loadPage = async (page, studyGroupId) => {
+    console.log("group is is:", studyGroupId);
     const cacheUntil = page * pageSize + 1;
     const newCache = apiCache[instanceKey].slice();
     let newNext = nextToken[instanceKey];
@@ -48,6 +49,7 @@ export default function MemCardCollection(props) {
       setLoading(true);
       const variables = {
         limit: pageSize,
+        filter: { studyGroupId: { eq: studyGroupId } },
       };
       if (newNext) {
         variables["nextToken"] = newNext;
@@ -71,8 +73,9 @@ export default function MemCardCollection(props) {
     nextToken[instanceKey] = newNext;
   };
   React.useEffect(() => {
-    loadPage(pageIndex);
-  }, [pageIndex]);
+    loadPage(pageIndex, props.studyGroupId); // Pass studyGroupId prop
+  }, [pageIndex, props.studyGroupId]);
+  
   React.useEffect(() => {
     setMaxViewed(Math.max(maxViewed, pageIndex));
   }, [pageIndex, maxViewed, setMaxViewed]);

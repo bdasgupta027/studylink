@@ -13,6 +13,10 @@ export const getStudyGroupCard = /* GraphQL */ `
       groupOwner
       image
       memberList
+      Announcements {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -199,6 +203,7 @@ export const getAnnouncement = /* GraphQL */ `
         nextToken
         __typename
       }
+      studygroupcardID
       createdAt
       updatedAt
       __typename
@@ -218,6 +223,38 @@ export const listAnnouncements = /* GraphQL */ `
         username
         date
         announcement
+        studygroupcardID
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const announcementsByStudygroupcardID = /* GraphQL */ `
+  query AnnouncementsByStudygroupcardID(
+    $studygroupcardID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelAnnouncementFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    announcementsByStudygroupcardID(
+      studygroupcardID: $studygroupcardID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        username
+        date
+        announcement
+        studygroupcardID
         createdAt
         updatedAt
         __typename
