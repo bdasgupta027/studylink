@@ -62,6 +62,20 @@ export const getMemberCard = /* GraphQL */ `
     }
   }
 `;
+
+export const getProfileCardByEmail =  `
+query GetMemberCardByEmail($username: String!) {
+  getMemberCardByEmail(username: $username) {
+    id
+    userId
+    studyGroupId
+    username
+    createdAt
+    updatedAt
+    __typename
+  }
+}`;
+
 export const listMemberCards = /* GraphQL */ `
   query ListMemberCards(
     $filter: ModelMemberCardFilterInput
@@ -161,6 +175,22 @@ export const listComments = /* GraphQL */ `
     }
   }
 `;
+
+export const getMemberCardByUsername = /* GraphQL */ `
+  query GetMemberCardByUsername($username: String!) {
+    getMemberCardByUsername(username: $username) {
+      id
+      userId
+      studyGroupId
+      username
+      createdAt
+      updatedAt
+      image  # Include the image field in your query
+      __typename
+    }
+  }
+`;
+
 export const commentsByAnnouncementID = /* GraphQL */ `
   query CommentsByAnnouncementID(
     $announcementID: ID!

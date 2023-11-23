@@ -12,29 +12,40 @@ import { useState, useEffect } from "react";
 import { API, Auth } from 'aws-amplify';
 import { getProfileCard } from "../graphql/queries";
 import ProfilePageDetails from "./SLProfilePageDetails";
+import { getProfileCardByEmail } from "../graphql/queries";
+import { listMemberCards } from "../graphql/queries";
+import { getMemberCardByUsername } from "../graphql/queries";
 export default function MemberCard(props) {
   const { memberCard, overrides, ...rest } = props;
   const [profileCard, setProfileCard] = useState(null);
     const [profileImage, setProfileImage] = useState("");
 
-    const createProfileCardDetails = async () => {
-        const user = await Auth.currentAuthenticatedUser();
-        try {
-            const response = await API.graphql({
-                query: getProfileCard,
-                variables: { id: user.attributes.sub }
-            });
-            const fetchedProfileCard = response.data.getProfileCard;
-            setProfileCard(fetchedProfileCard);
+  
+  const createProfileCardDetails = async () => {
+      // const user = await Auth.currentAuthenticatedUser();
+      try {
+          const response = await API.graphql({
+              query: getProfileCard,
+              variables: { id: memberCard?.userId }
+          });
+          const fetchedProfileCard = response.data.getProfileCard;
+          console.log("PROFILE:", fetchedProfileCard);
+          setProfileCard(fetchedProfileCard);
+          if (fetchedProfileCard.image === null) {
+            setProfileImage("https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png");
+          } else {
             setProfileImage(fetchedProfileCard.image);
-            console.log("FINAL PROFILE", fetchedProfileCard);
-        } catch (err) {
-            console.log(err);
-            return false;
-        }
-    };
-
+          }
+          // setProfileImage(fetchedProfileCard.image);
+          console.log("FINAL PROFILE", fetchedProfileCard);
+      } catch (err) {
+        setProfileImage("https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png");
+          console.log(err);
+          return false;
+      }
+  };
     useEffect(() => {
+      // fetchMembers();
         createProfileCardDetails();
       }, []); 
 

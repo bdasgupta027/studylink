@@ -18,6 +18,9 @@ type MemberCard @model @auth(rules: [{allow: public}]) {
   username: AWSEmail
 }
 
+
+
+
 type ProfileCard @model @auth(rules: [{allow: public}]) {
   id: ID!
   firstName: String!
