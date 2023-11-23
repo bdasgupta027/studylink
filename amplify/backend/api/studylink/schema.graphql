@@ -1,3 +1,11 @@
+type Chat @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  text: String
+  userId: String
+  email: String
+  studyGroupId: String
+}
+
 type StudyGroupCard @model @auth(rules: [{allow: public}]) {
   id: ID!
   groupName: String!
@@ -17,9 +25,6 @@ type MemberCard @model @auth(rules: [{allow: public}]) {
   studyGroupId: String
   username: AWSEmail
 }
-
-
-
 
 type ProfileCard @model @auth(rules: [{allow: public}]) {
   id: ID!

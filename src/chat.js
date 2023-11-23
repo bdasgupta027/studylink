@@ -1,27 +1,85 @@
-import './App.css';
+import "./App.css"
 import SLNavBarHeader from "./ui-components/SLNavBarHeader"
 import ProfilePageDetails from "./ui-components/SLProfilePageDetails"
 import StudyGroupCardCollection from "./ui-components/StudyGroupCardCollection"
 import StandardCardCollection from "./ui-components/StandardCardCollection"
-import { API, Auth } from 'aws-amplify';
+import { API, Auth, graphqlOperation } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import { getProfileCard } from './graphql/queries';
 import EditProfile from './ui-components/SLEditProfile';
-// import { API } from "aws-amplify";
 import * as mutations from "./graphql/mutations";
+import * as queries from "./graphql/queries";
+import * as subscriptions from "./graphql/subscriptions";
+import intlFormatDistance from "date-fns/intlFormatDistance";
 
 
-function Chat({ user, signOut }) {
+function Chat() {
     const [chats, setChats] = React.useState([]);
+    const [user, setUser] = React.useState();
+    const getUserDetails = async () => {
+        const user = await Auth.currentAuthenticatedUser();
+        setUser(user);
+    }
+    getUserDetails();
+    // const userInfo = getUserDetails();
+    // console.log("userInfo is", userInfo);
+
+    React.useEffect(() => {
+        const sub = API.graphql(
+          graphqlOperation(subscriptions.onCreateChat)
+        ).subscribe({
+          next: ({ provider, value }) =>
+            setChats((prev) => [...prev, value.data.onCreateChat]),
+          error: (err) => console.log(err),
+        });
+        return () => sub.unsubscribe();
+      }, []);
+
+    React.useEffect(() => {
+        async function fetchChats() {
+          const allChats = await API.graphql({
+            query: queries.listChats,
+          });
+          console.log(allChats.data.listChats.items);
+          setChats(allChats.data.listChats.items);
+        }
+        fetchChats();
+      }, []);
     // console.log(user);
     return (
       <div>
-        <div className="flex justify-end px-4 py-2">
-
-        </div>
         <div className="flex justify-center items-center h-screen w-full">
           <div className={`w-3/4 flex flex-col`}>
-            {chats}
+            
+          {chats
+            .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
+            .map((chat) => (
+              <div
+                key={chat.id}
+                className={`flex-auto rounded-md p-3 ring-1 ring-inset ring-gray-200 w-3/4 my-2 ${
+                  chat.email === user.attributes.email && "self-end bg-gray-200"
+                }`}
+              >
+                <div>
+                  <div className="flex justify-between gap-x-4">
+                    <div className="py-0.5 text-xs leading-5 text-gray-500">
+                      <span className="font-medium text-gray-900">
+                        {chat.email.split("@")[0]}
+                      </span>{" "}
+                    </div>
+                    <time
+                      dateTime="2023-01-23T15:56"
+                      className="flex-none py-0.5 text-xs leading-5 text-gray-500"
+                    >
+                      {intlFormatDistance(new Date(chat.createdAt), new Date())}
+                    </time>
+                  </div>
+                  <p className="text-sm leading-6 text-gray-500">{chat.text}</p>
+                </div>
+              </div>
+            ))}
+
+          <div>
             <div>
               <div className="relative mt-2 flex items-center">
                 <input
@@ -31,12 +89,17 @@ function Chat({ user, signOut }) {
                   onKeyUp={async (e) => {
                     if (e.key === "Enter") {
                     //   setChats([...chats, e.target.value]);
+                    
+                    const user = await Auth.currentAuthenticatedUser();
+                    console.log(user);
                     await API.graphql({
                         query: mutations.createChat,
                         variables: {
                           input: {
                             text: e.target.value,
                             email: user.attributes.email,
+                            userId: user.attributes.sub,
+                            studyGroupId: "a1d13dce-ba38-44b2-8c65-7cc6c3199d2d",
                           },
                         },
                       });
@@ -54,6 +117,7 @@ function Chat({ user, signOut }) {
             </div>
           </div>
         </div>
+      </div>
       </div>
     );
   }
