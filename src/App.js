@@ -28,7 +28,6 @@ function App() {
   useEffect(() => {
     const removeListener = Hub.listen('auth', async (data) => {
       if (data.payload.event === 'signIn') {
-        console.log(data.payload.data.attributes);
         const userInfo = data.payload.data.attributes;
         const newUser = {
           id: uuid.v4(),

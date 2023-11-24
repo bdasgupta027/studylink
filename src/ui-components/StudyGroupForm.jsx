@@ -11,6 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { API } from 'aws-amplify'
 import { createStudyGroupCard } from '../graphql/mutations';
 import { Auth } from "aws-amplify";
+import { BrowserRouter as Router, Routes, Route, Link, Outlet, useNavigate } from 'react-router-dom';
 
 const CreateStudyGroupCardMutation = `
   mutation CreateStudyGroupCard(
@@ -40,6 +41,8 @@ const StudyGroupForm = ({ open, toggleForm }) => {
   const [switchValue, setSwitchValue] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
+  const [studyGroupID, setStudyGroupID] = useState('');
+
   const handleNameChange = (e) => {
     setNameInput(e.target.value);
   };
@@ -51,6 +54,8 @@ const StudyGroupForm = ({ open, toggleForm }) => {
   const handleSwitchChange = (e) => {
     setSwitchValue(e.target.checked);
   };
+
+  const navigate = useNavigate();
 
   const handleUploadClick = () => {
     document.getElementById('contained-button-file').click();
@@ -80,12 +85,14 @@ const StudyGroupForm = ({ open, toggleForm }) => {
         groupOwner: user.attributes.email,
     }
     toggleForm();
-    await API.graphql({
+    const response = await API.graphql({
       query: CreateStudyGroupCardMutation, 
       variables: { input: newStudyGroup },
       query: createStudyGroupCard, 
       variables: { input: newStudyGroup, condition: null },
     });
+    const createdStudyGroupID = response.data.createStudyGroupCard.id;
+    navigate(`/${createdStudyGroupID}`);
   };
 
   return (
