@@ -1,3 +1,20 @@
+type Replies @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Reply: String
+  Likes: Int
+  Username: AWSEmail
+  Postedat: AWSDateTime
+  announcementID: ID! @index(name: "byAnnouncement")
+}
+
+type Chat @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  text: String
+  userId: String
+  email: String
+  studyGroupId: String
+}
+
 type StudyGroupCard @model @auth(rules: [{allow: public}]) {
   id: ID!
   groupName: String!
@@ -17,9 +34,6 @@ type MemberCard @model @auth(rules: [{allow: public}]) {
   studyGroupId: String
   username: AWSEmail
 }
-
-
-
 
 type ProfileCard @model @auth(rules: [{allow: public}]) {
   id: ID!
@@ -48,5 +62,6 @@ type Announcement @model @auth(rules: [{allow: public}]) {
   announcement: String!
   Comments: [Comment] @hasMany(indexName: "byAnnouncement", fields: ["id"])
   studygroupcardID: ID! @index(name: "byStudyGroupCard")
+  Replies: [Replies] @hasMany(indexName: "byAnnouncement", fields: ["id"])
 }
  

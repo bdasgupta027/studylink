@@ -13,7 +13,7 @@ import { Collection, Pagination, Placeholder } from "@aws-amplify/ui-react";
 import { API } from "aws-amplify";
 const nextToken = {};
 const apiCache = {};
-export default function MemberCardCollection(props) {
+export default function MemCardCollection(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
   const [pageIndex, setPageIndex] = React.useState(1);
   const [hasMorePages, setHasMorePages] = React.useState(true);
@@ -23,7 +23,7 @@ export default function MemberCardCollection(props) {
   const [loading, setLoading] = React.useState(true);
   const [maxViewed, setMaxViewed] = React.useState(1);
   const pageSize = 6;
-  const isPaginated = false;
+  const isPaginated = true;
   React.useEffect(() => {
     nextToken[instanceKey] = "";
     apiCache[instanceKey] = [];
@@ -88,7 +88,7 @@ export default function MemberCardCollection(props) {
         itemsPerPage={pageSize}
         isPaginated={!isApiPagination && isPaginated}
         items={itemsProp || (loading ? new Array(pageSize).fill({}) : items)}
-        {...getOverrideProps(overrides, "MemberCardCollection")}
+        {...getOverrideProps(overrides, "MemCardCollection")}
         {...rest}
       >
         {(item, index) => {
@@ -97,6 +97,7 @@ export default function MemberCardCollection(props) {
           }
           return (
             <MemberCard
+              memberCard={item}
               key={item.id}
               {...(overrideItems && overrideItems({ item, index }))}
             ></MemberCard>

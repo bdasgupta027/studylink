@@ -1,14 +1,124 @@
 import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-amplify/datastore";
 // @ts-ignore
-import { LazyLoading, LazyLoadingDisabled, AsyncCollection, AsyncItem } from "@aws-amplify/datastore";
+import { LazyLoading, LazyLoadingDisabled, AsyncCollection } from "@aws-amplify/datastore";
 
-export enum Priority {
-  LOW = "LOW",
-  NORMAL = "NORMAL",
-  HIGH = "HIGH"
+
+
+
+
+type EagerReplies = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Replies, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly Reply?: string | null;
+  readonly Likes?: number | null;
+  readonly Username?: string | null;
+  readonly Postedat?: string | null;
+  readonly announcementID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
 }
 
+type LazyReplies = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Replies, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly Reply?: string | null;
+  readonly Likes?: number | null;
+  readonly Username?: string | null;
+  readonly Postedat?: string | null;
+  readonly announcementID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
 
+export declare type Replies = LazyLoading extends LazyLoadingDisabled ? EagerReplies : LazyReplies
+
+export declare const Replies: (new (init: ModelInit<Replies>) => Replies) & {
+  copyOf(source: Replies, mutator: (draft: MutableModel<Replies>) => MutableModel<Replies> | void): Replies;
+}
+
+type EagerChat = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Chat, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly text?: string | null;
+  readonly userId?: string | null;
+  readonly email?: string | null;
+  readonly studyGroupId?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyChat = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Chat, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly text?: string | null;
+  readonly userId?: string | null;
+  readonly email?: string | null;
+  readonly studyGroupId?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Chat = LazyLoading extends LazyLoadingDisabled ? EagerChat : LazyChat
+
+export declare const Chat: (new (init: ModelInit<Chat>) => Chat) & {
+  copyOf(source: Chat, mutator: (draft: MutableModel<Chat>) => MutableModel<Chat> | void): Chat;
+}
+
+type EagerStudyGroupCard = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<StudyGroupCard, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly groupName: string;
+  readonly numMembers: number;
+  readonly className: string;
+  readonly acceptingMembers: boolean;
+  readonly description: string;
+  readonly groupOwner: string;
+  readonly image?: string | null;
+  readonly memberList?: string[] | null;
+  readonly Announcements?: (Announcement | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyStudyGroupCard = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<StudyGroupCard, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly groupName: string;
+  readonly numMembers: number;
+  readonly className: string;
+  readonly acceptingMembers: boolean;
+  readonly description: string;
+  readonly groupOwner: string;
+  readonly image?: string | null;
+  readonly memberList?: string[] | null;
+  readonly Announcements: AsyncCollection<Announcement>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type StudyGroupCard = LazyLoading extends LazyLoadingDisabled ? EagerStudyGroupCard : LazyStudyGroupCard
+
+export declare const StudyGroupCard: (new (init: ModelInit<StudyGroupCard>) => StudyGroupCard) & {
+  copyOf(source: StudyGroupCard, mutator: (draft: MutableModel<StudyGroupCard>) => MutableModel<StudyGroupCard> | void): StudyGroupCard;
+}
 
 type EagerMemberCard = {
   readonly [__modelMeta__]: {
@@ -16,8 +126,9 @@ type EagerMemberCard = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly userId?: string | null;
+  readonly studyGroupId?: string | null;
   readonly username?: string | null;
-  readonly StudyGroupCards?: (MemberCardStudyGroupCard | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -28,8 +139,9 @@ type LazyMemberCard = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly userId?: string | null;
+  readonly studyGroupId?: string | null;
   readonly username?: string | null;
-  readonly StudyGroupCards: AsyncCollection<MemberCardStudyGroupCard>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -38,38 +150,6 @@ export declare type MemberCard = LazyLoading extends LazyLoadingDisabled ? Eager
 
 export declare const MemberCard: (new (init: ModelInit<MemberCard>) => MemberCard) & {
   copyOf(source: MemberCard, mutator: (draft: MutableModel<MemberCard>) => MutableModel<MemberCard> | void): MemberCard;
-}
-
-type EagerTodo = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Todo, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly name: string;
-  readonly priority?: Priority | keyof typeof Priority | null;
-  readonly description?: string | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazyTodo = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Todo, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly name: string;
-  readonly priority?: Priority | keyof typeof Priority | null;
-  readonly description?: string | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type Todo = LazyLoading extends LazyLoadingDisabled ? EagerTodo : LazyTodo
-
-export declare const Todo: (new (init: ModelInit<Todo>) => Todo) & {
-  copyOf(source: Todo, mutator: (draft: MutableModel<Todo>) => MutableModel<Todo> | void): Todo;
 }
 
 type EagerProfileCard = {
@@ -84,6 +164,7 @@ type EagerProfileCard = {
   readonly major?: string | null;
   readonly image?: string | null;
   readonly classesEnrolled?: string | null;
+  readonly userId?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -100,6 +181,7 @@ type LazyProfileCard = {
   readonly major?: string | null;
   readonly image?: string | null;
   readonly classesEnrolled?: string | null;
+  readonly userId?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -151,11 +233,12 @@ type EagerAnnouncement = {
   };
   readonly id: string;
   readonly title: string;
-  readonly studygroupcardID: string;
   readonly username: string;
   readonly date: string;
   readonly announcement: string;
   readonly Comments?: (Comment | null)[] | null;
+  readonly studygroupcardID: string;
+  readonly Replies?: (Replies | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -167,11 +250,12 @@ type LazyAnnouncement = {
   };
   readonly id: string;
   readonly title: string;
-  readonly studygroupcardID: string;
   readonly username: string;
   readonly date: string;
   readonly announcement: string;
   readonly Comments: AsyncCollection<Comment>;
+  readonly studygroupcardID: string;
+  readonly Replies: AsyncCollection<Replies>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -180,86 +264,4 @@ export declare type Announcement = LazyLoading extends LazyLoadingDisabled ? Eag
 
 export declare const Announcement: (new (init: ModelInit<Announcement>) => Announcement) & {
   copyOf(source: Announcement, mutator: (draft: MutableModel<Announcement>) => MutableModel<Announcement> | void): Announcement;
-}
-
-type EagerStudyGroupCard = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<StudyGroupCard, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly groupName: string;
-  readonly numMembers: number;
-  readonly className: string;
-  readonly description?: string | null;
-  readonly acceptingMembers: boolean;
-  readonly groupOwner: string;
-  readonly image?: string | null;
-  readonly Announcements?: (Announcement | null)[] | null;
-  readonly memberList?: (string | null)[] | null;
-  readonly membercards?: (MemberCardStudyGroupCard | null)[] | null;
-  readonly accepting: boolean;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazyStudyGroupCard = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<StudyGroupCard, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly groupName: string;
-  readonly numMembers: number;
-  readonly className: string;
-  readonly description?: string | null;
-  readonly acceptingMembers: boolean;
-  readonly groupOwner: string;
-  readonly image?: string | null;
-  readonly Announcements: AsyncCollection<Announcement>;
-  readonly memberList?: (string | null)[] | null;
-  readonly membercards: AsyncCollection<MemberCardStudyGroupCard>;
-  readonly accepting: boolean;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type StudyGroupCard = LazyLoading extends LazyLoadingDisabled ? EagerStudyGroupCard : LazyStudyGroupCard
-
-export declare const StudyGroupCard: (new (init: ModelInit<StudyGroupCard>) => StudyGroupCard) & {
-  copyOf(source: StudyGroupCard, mutator: (draft: MutableModel<StudyGroupCard>) => MutableModel<StudyGroupCard> | void): StudyGroupCard;
-}
-
-type EagerMemberCardStudyGroupCard = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<MemberCardStudyGroupCard, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly memberCardId?: string | null;
-  readonly studyGroupCardId?: string | null;
-  readonly memberCard: MemberCard;
-  readonly studyGroupCard: StudyGroupCard;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazyMemberCardStudyGroupCard = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<MemberCardStudyGroupCard, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly memberCardId?: string | null;
-  readonly studyGroupCardId?: string | null;
-  readonly memberCard: AsyncItem<MemberCard>;
-  readonly studyGroupCard: AsyncItem<StudyGroupCard>;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type MemberCardStudyGroupCard = LazyLoading extends LazyLoadingDisabled ? EagerMemberCardStudyGroupCard : LazyMemberCardStudyGroupCard
-
-export declare const MemberCardStudyGroupCard: (new (init: ModelInit<MemberCardStudyGroupCard>) => MemberCardStudyGroupCard) & {
-  copyOf(source: MemberCardStudyGroupCard, mutator: (draft: MutableModel<MemberCardStudyGroupCard>) => MutableModel<MemberCardStudyGroupCard> | void): MemberCardStudyGroupCard;
 }
