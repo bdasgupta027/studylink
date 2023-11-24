@@ -52,7 +52,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/Edit-Profile" element={<EditProfile />} />
           <Route path="/:id" element={<StudyGroup />} />
-          <Route path="/chat" element={<Chat />} />
+          <Route path="/chat/:id" element={<Chat />} />
         </Routes>
       </Router>
     </div>

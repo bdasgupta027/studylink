@@ -4,9 +4,11 @@ import ProfilePageDetails from "./ui-components/ProfilePageDetails"
 import StudyGroupCardCollection from "./ui-components/StudyGroupCardCollection"
 import { SLStudyGroupCard } from './ui-components/SLStudyGroupCard';
 import { API, Auth } from 'aws-amplify';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useHistory } from 'react';
 import { listMemberCards, getStudyGroupCard } from './graphql/queries';
+import { useNavigateAction } from './ui-components/utils';
 import { useParams } from 'react-router-dom';
+// import { useNavigateAction } from "./utils";
 // import SLNavBarHeader from './ui-components/SLNavBarHeader';
 import MemCardCollection from './ui-components/SLMemCardCollection';
 import { getProfileCard } from './graphql/queries';
@@ -14,6 +16,22 @@ import { getProfileCard } from './graphql/queries';
 function StudyGroup() {
     const [profileCard, setProfileCard] = useState(null);
     const [profileImage, setProfileImage] = useState("");
+    const { id } = useParams();
+    const [members, setMembers] = useState([]);
+    const [studyGroupCard, setStudyGroupCard] = useState(null);
+    const uuid = require('uuid');
+
+
+    // const history = useHistory();
+    const handleChatButtonClick = useNavigateAction({
+        type: "url",
+        url: `/chat/${id}`
+    });
+
+    // const handleChatButtonClick = () => {
+    //     // Navigate to the '/chat' route when the button is clicked
+    //     history.push('/chat');
+    // };
 
     const createProfileCardDetails = async () => {
         const user = await Auth.currentAuthenticatedUser();
@@ -49,11 +67,6 @@ function StudyGroup() {
         }
       }
     `;
-
-    const { id } = useParams();
-    const [members, setMembers] = useState([]);
-    const [studyGroupCard, setStudyGroupCard] = useState(null);
-    const uuid = require('uuid');
 
     // Function to determine the initial value for isJoined
     const determineInitialIsJoined = async () => {
@@ -209,6 +222,7 @@ function StudyGroup() {
                 {studyGroupCard && <SLStudyGroupCard studyGroupCard={studyGroupCard} style={{ marginTop: '20px' }} />}
                 <div className="sidebar" style={{ backgroundColor: '#666464', height: '100%'}}>
                     {!isJoined ? (
+                        <>
                         <button
                             style={{
                                 marginTop: '20px',
@@ -230,13 +244,17 @@ function StudyGroup() {
                         >
                             Join Group
                         </button>
+                        {/* <button onClick={handleChatButtonClick}>Chat</button> */}
+                        </>
                     ) : (
+                        <>
                         <button
                             style={{
                                 marginTop: '20px',
+                                marginBottom: '30px',
                                 display: 'inline-block',
                                 padding: '5px 10px',
-                                width: '150px',
+                                width: '200px',
                                 fontSize: '24px',
                                 cursor: 'pointer',
                                 textAlign: 'center',
@@ -248,6 +266,26 @@ function StudyGroup() {
                                 borderRadius: '15px',
                                 boxShadow: '0 9px #999',
                             }} disabled>Joined</button>
+                            <button 
+                            style={{
+                                marginTop: '20px',
+                                marginBottom: '30px',
+                                display: 'inline-block',
+                                padding: '5px 10px',
+                                width: '200px',
+                                fontSize: '24px',
+                                cursor: 'pointer',
+                                textAlign: 'center',
+                                textDecoration: 'none',
+                                outline: 'none',
+                                color: '#fff',
+                                backgroundColor: '#047D95',
+                                border: 'none',
+                                borderRadius: '15px',
+                                boxShadow: '0 9px #999',
+                            }}
+                            onClick={handleChatButtonClick}>Chat</button>
+                            </>
                     )}
                     <h1>Member Usernames</h1>
                     <ul>
