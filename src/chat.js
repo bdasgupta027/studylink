@@ -11,11 +11,13 @@ import * as mutations from "./graphql/mutations";
 import * as queries from "./graphql/queries";
 import * as subscriptions from "./graphql/subscriptions";
 import intlFormatDistance from "date-fns/intlFormatDistance";
+import { useParams } from 'react-router-dom';
 
 
 function Chat() {
     const [chats, setChats] = React.useState([]);
     const [user, setUser] = React.useState();
+    const { id } = useParams();
     const getUserDetails = async () => {
         const user = await Auth.currentAuthenticatedUser();
         setUser(user);
@@ -25,26 +27,49 @@ function Chat() {
     // console.log("userInfo is", userInfo);
 
     React.useEffect(() => {
-        const sub = API.graphql(
-          graphqlOperation(subscriptions.onCreateChat)
-        ).subscribe({
-          next: ({ provider, value }) =>
-            setChats((prev) => [...prev, value.data.onCreateChat]),
-          error: (err) => console.log(err),
-        });
-        return () => sub.unsubscribe();
-      }, []);
+      const sub = API.graphql(
+        graphqlOperation(subscriptions.onCreateChat)
+      ).subscribe({
+        next: async ({ value }) => {
+          console.log("Subscription Payload:", value); // Log the entire payload
+          const newChat = value.data.onCreateChat;
+          
+          // Log the studyGroupId of the new chat
+          console.log("New Chat Study Group ID:", newChat.studyGroupId);
+    
+          // Ensure that the new chat belongs to the current study group
+          if (newChat.studyGroupId === id) {
+            console.log("Updating state with new chat:", newChat);
+            setChats((prev) => [...prev, newChat]);
+          }
+        },
+        error: (err) => console.log(err),
+      });
+    
+      return () => sub.unsubscribe();
+    }, [id]);
+    
+    
+    
+    
 
-    React.useEffect(() => {
+      React.useEffect(() => {
         async function fetchChats() {
-          const allChats = await API.graphql({
-            query: queries.listChats,
-          });
-          console.log(allChats.data.listChats.items);
-          setChats(allChats.data.listChats.items);
+          try {
+            const allChats = await API.graphql({
+              query: queries.listChats,
+              variables: {
+                studyGroupId: id,
+              },
+            });
+            console.log(allChats.data.listChats.items);
+            setChats(allChats.data.listChats.items);
+          } catch (error) {
+            console.error("Error fetching chats:", error);
+          }
         }
         fetchChats();
-      }, []);
+      }, [id]);
     // console.log(user);
     return (
       <div>
@@ -92,6 +117,7 @@ function Chat() {
                     
                     const user = await Auth.currentAuthenticatedUser();
                     console.log(user);
+
                     await API.graphql({
                         query: mutations.createChat,
                         variables: {
@@ -99,7 +125,7 @@ function Chat() {
                             text: e.target.value,
                             email: user.attributes.email,
                             userId: user.attributes.sub,
-                            studyGroupId: "a1d13dce-ba38-44b2-8c65-7cc6c3199d2d",
+                            studyGroupId: id,
                           },
                         },
                       });
