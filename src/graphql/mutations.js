@@ -1,6 +1,62 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+
+export const createReplies = /* GraphQL */ `
+  mutation CreateReplies(
+    $input: CreateRepliesInput!
+    $condition: ModelRepliesConditionInput
+  ) {
+    createReplies(input: $input, condition: $condition) {
+      id
+      Reply
+      Likes
+      Username
+      Postedat
+      announcementID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateReplies = /* GraphQL */ `
+  mutation UpdateReplies(
+    $input: UpdateRepliesInput!
+    $condition: ModelRepliesConditionInput
+  ) {
+    updateReplies(input: $input, condition: $condition) {
+      id
+      Reply
+      Likes
+      Username
+      Postedat
+      announcementID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteReplies = /* GraphQL */ `
+  mutation DeleteReplies(
+    $input: DeleteRepliesInput!
+    $condition: ModelRepliesConditionInput
+  ) {
+    deleteReplies(input: $input, condition: $condition) {
+      id
+      Reply
+      Likes
+      Username
+      Postedat
+      announcementID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+
 export const createChat = /* GraphQL */ `
   mutation CreateChat(
     $input: CreateChatInput!
@@ -302,6 +358,10 @@ export const createAnnouncement = /* GraphQL */ `
         __typename
       }
       studygroupcardID
+      Replies {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -324,6 +384,10 @@ export const updateAnnouncement = /* GraphQL */ `
         __typename
       }
       studygroupcardID
+      Replies {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -346,6 +410,10 @@ export const deleteAnnouncement = /* GraphQL */ `
         __typename
       }
       studygroupcardID
+      Replies {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename

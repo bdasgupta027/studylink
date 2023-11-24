@@ -1,6 +1,53 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+
+export const onCreateReplies = /* GraphQL */ `
+  subscription OnCreateReplies($filter: ModelSubscriptionRepliesFilterInput) {
+    onCreateReplies(filter: $filter) {
+      id
+      Reply
+      Likes
+      Username
+      Postedat
+      announcementID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateReplies = /* GraphQL */ `
+  subscription OnUpdateReplies($filter: ModelSubscriptionRepliesFilterInput) {
+    onUpdateReplies(filter: $filter) {
+      id
+      Reply
+      Likes
+      Username
+      Postedat
+      announcementID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteReplies = /* GraphQL */ `
+  subscription OnDeleteReplies($filter: ModelSubscriptionRepliesFilterInput) {
+    onDeleteReplies(filter: $filter) {
+      id
+      Reply
+      Likes
+      Username
+      Postedat
+      announcementID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+
 export const onCreateChat = /* GraphQL */ `
   subscription OnCreateChat($filter: ModelSubscriptionChatFilterInput) {
     onCreateChat(filter: $filter) {
@@ -274,6 +321,10 @@ export const onCreateAnnouncement = /* GraphQL */ `
         __typename
       }
       studygroupcardID
+      Replies {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -295,6 +346,10 @@ export const onUpdateAnnouncement = /* GraphQL */ `
         __typename
       }
       studygroupcardID
+      Replies {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -316,6 +371,10 @@ export const onDeleteAnnouncement = /* GraphQL */ `
         __typename
       }
       studygroupcardID
+      Replies {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
