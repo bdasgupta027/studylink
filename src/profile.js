@@ -1,5 +1,3 @@
-import '../dist/output.css';
-{/* <link href="/dist/output.css" rel="stylesheet"></link> */}
 import SLNavBarHeader from "./ui-components/SLNavBarHeader"
 import ProfilePageDetails from "./ui-components/SLProfilePageDetails"
 import StudyGroupCardCollection from "./ui-components/StudyGroupCardCollection"

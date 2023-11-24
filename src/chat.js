@@ -1,4 +1,4 @@
-import "./App.css"
+import "./chat.css"
 import SLNavBarHeader from "./ui-components/SLNavBarHeader"
 import ProfilePageDetails from "./ui-components/SLProfilePageDetails"
 import StudyGroupCardCollection from "./ui-components/StudyGroupCardCollection"
@@ -48,28 +48,28 @@ function Chat() {
     // console.log(user);
     return (
       <div>
-        <div className="flex justify-center items-center h-screen w-full">
-          <div className={`w-3/4 flex flex-col`}>
+        <div className="fullchat">
+          <div className={`class2`}>
             
           {chats
             .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
             .map((chat) => (
               <div
                 key={chat.id}
-                className={`flex-auto rounded-md p-3 ring-1 ring-inset ring-gray-200 w-3/4 my-2 ${
+                className={`flex-auto rounded-md p-3 ring-1 ring-inset ring-gray-200 width34 my-2 ${
                   chat.email === user.attributes.email && "self-end bg-gray-200"
                 }`}
               >
                 <div>
                   <div className="flex justify-between gap-x-4">
-                    <div className="py-0.5 text-xs leading-5 text-gray-500">
+                    <div className="py05 text-xs leading-5 text-gray-500">
                       <span className="font-medium text-gray-900">
                         {chat.email.split("@")[0]}
                       </span>{" "}
                     </div>
                     <time
                       dateTime="2023-01-23T15:56"
-                      className="flex-none py-0.5 text-xs leading-5 text-gray-500"
+                      className="flex-none py05 text-xs leading-5 text-gray-500"
                     >
                       {intlFormatDistance(new Date(chat.createdAt), new Date())}
                     </time>
@@ -106,9 +106,9 @@ function Chat() {
                       e.target.value = "";
                     }
                   }}
-                  className="block w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py15 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-                <div className="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
+                <div className="absolute inset-y-0 right-0 flex py15 pr15">
                   <kbd className="inline-flex items-center rounded border border-gray-200 px-1 font-sans text-xs text-gray-400">
                     Enter
                   </kbd>
