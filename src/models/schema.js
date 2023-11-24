@@ -1,5 +1,78 @@
 export const schema = {
     "models": {
+        "Invite": {
+            "name": "Invite",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "sender": {
+                    "name": "sender",
+                    "isArray": false,
+                    "type": "AWSEmail",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "receiver": {
+                    "name": "receiver",
+                    "isArray": false,
+                    "type": "AWSEmail",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "studygroupid": {
+                    "name": "studygroupid",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Invites",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Replies": {
             "name": "Replies",
             "fields": {
@@ -588,13 +661,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "date": {
-                    "name": "date",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "announcement": {
                     "name": "announcement",
                     "isArray": false,
@@ -696,5 +762,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "e15ea53af0db89e03bd54f87559ec561"
+    "version": "19b8354ad5ad26dbc3ed939c48e2b9bd"
 };

@@ -19,6 +19,7 @@ import CreateAnnouncementForm from './ui-components/CreateAnnouncementForm';
 import PostCommentForm from './ui-components/PostCommentForm';
 // import { AnnouncementCollection } from './ui-components';
 import AnnouncementCollection from './ui-components/AnnouncementCollection';
+import CreateInvite from './ui-components/CreateInvite';
 
 // imports for notes uploading and display
 import { Storage } from 'aws-amplify';
@@ -69,6 +70,7 @@ function StudyGroup() {
     const { id } = useParams();
     const [members, setMembers] = useState([]);
     const [studyGroupCard, setStudyGroupCard] = useState(null);
+    const [openCreateInvite, setOpenCreateInvite] = useState(false);
     const uuid = require('uuid');
     // for notes
     // const toolbarPluginInstance = toolbarPlugin();
@@ -93,6 +95,14 @@ function StudyGroup() {
     //     // Navigate to the '/chat' route when the button is clicked
     //     history.push('/chat');
     // };
+
+    const handleClickOpenCreateInvite = () => {
+        setOpenCreateInvite(true);
+      };
+    
+      const toggleCreateInvite= () => {
+        setOpenCreateInvite(!openCreateInvite);
+      };
 
     const createProfileCardDetails = async () => {
         const user = await Auth.currentAuthenticatedUser();
@@ -293,6 +303,12 @@ function StudyGroup() {
             <CreateAnnouncementForm open={announcementFormOpen} handleClose={handleAnnouncementFormClose} studyGroupId={id}/>
 
             <PostCommentForm open={commentFormOpen} handleClose={handleCommentFormClose} />
+            {isJoined && (<Button onClick={handleClickOpenCreateInvite} style={buttonStyle}>
+                Invite Member
+            </Button>)}
+            {openCreateInvite && (
+            <CreateInvite open={openCreateInvite} toggleForm={toggleCreateInvite} studygroupid={id}/>
+            )}
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between"}}>
                 <div style={{ display: 'flex', flexDirection: 'column' }}> 
                     {studyGroupCard && <SLStudyGroupCard studyGroupCard={studyGroupCard} marginTop='10px' />}
