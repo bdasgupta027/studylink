@@ -1,6 +1,7 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+
 export const getReplies = /* GraphQL */ `
   query GetReplies($id: ID!) {
     getReplies(id: $id) {
@@ -70,6 +71,7 @@ export const repliesByAnnouncementID = /* GraphQL */ `
     }
   }
 `;
+
 export const getChat = /* GraphQL */ `
   query GetChat($id: ID!) {
     getChat(id: $id) {

@@ -1,6 +1,7 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+
 export const onCreateReplies = /* GraphQL */ `
   subscription OnCreateReplies($filter: ModelSubscriptionRepliesFilterInput) {
     onCreateReplies(filter: $filter) {
@@ -46,6 +47,7 @@ export const onDeleteReplies = /* GraphQL */ `
     }
   }
 `;
+
 export const onCreateChat = /* GraphQL */ `
   subscription OnCreateChat($filter: ModelSubscriptionChatFilterInput) {
     onCreateChat(filter: $filter) {

@@ -1,4 +1,3 @@
-import './App.css';
 import SLNavBarHeader from "./ui-components/SLNavBarHeader"
 import ProfilePageDetails from "./ui-components/SLProfilePageDetails"
 import StudyGroupCardCollection from "./ui-components/StudyGroupCardCollection"
