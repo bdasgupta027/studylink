@@ -1,4 +1,5 @@
 import './App.css';
+import Notes from "./notes"
 import Landing from './landing';
 import Profile from './profile';
 import StudyGroup from './studygroup';
@@ -51,7 +52,7 @@ function App() {
       removeListener();
     };
   }, []);
- 
+
 
   return (
     <div className="App">
@@ -61,6 +62,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/Edit-Profile" element={<EditProfile />} />
+          <Route path="/notes" element={<Notes />} />
           <Route path="/:id" element={<StudyGroup />} />
         </Routes>
       </Router>

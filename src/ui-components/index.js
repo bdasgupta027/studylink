@@ -10,7 +10,6 @@ export { default as AnnouncementCard } from "./AnnouncementCard";
 export { default as AnnouncementCardCollection } from "./AnnouncementCardCollection";
 export { default as AnnouncementCollection } from "./AnnouncementCollection";
 export { default as AnnouncementCreateForm } from "./AnnouncementCreateForm";
-export { default as AnnouncementUpdateForm } from "./AnnouncementUpdateForm";
 export { default as CTASection } from "./CTASection";
 export { default as CheckoutPayment } from "./CheckoutPayment";
 export { default as CommentCard } from "./CommentCard";
