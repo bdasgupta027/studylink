@@ -3,6 +3,7 @@ import Notes from "./notes"
 import Landing from './landing';
 import Profile from './profile';
 import StudyGroup from './studygroup';
+import Chat from './chat';
 import Dashboard from './ui-components/Dashboard';
 import EditProfile from './ui-components/SLEditProfile';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
@@ -10,17 +11,6 @@ import { API, DataStore, Amplify, Auth, Hub } from 'aws-amplify'
 import { useEffect } from 'react';
 import { getProfileCard } from './graphql/queries';
 import { createProfileCard } from './graphql/mutations';
-// import StudyGroupCard from './ui-components/StudyroupCard';
-
-// const CreateProfileCardMutation = `
-// mutation createProfileCard($input: CreateProfileCardInput!) {
-//   createProfileCard(input: $input) {
-//     id
-//     firstName
-//     email
-//   }
-// }
-// `
 
 function App() {
 
@@ -29,7 +19,6 @@ function App() {
   useEffect(() => {
     const removeListener = Hub.listen('auth', async (data) => {
       if (data.payload.event === 'signIn') {
-        console.log(data.payload.data.attributes);
         const userInfo = data.payload.data.attributes;
         const newUser = {
           id: uuid.v4(),
@@ -64,6 +53,7 @@ function App() {
           <Route path="/Edit-Profile" element={<EditProfile />} />
           <Route path="/notes" element={<Notes />} />
           <Route path="/:id" element={<StudyGroup />} />
+          <Route path="/chat/:id" element={<Chat />} />
         </Routes>
       </Router>
     </div>

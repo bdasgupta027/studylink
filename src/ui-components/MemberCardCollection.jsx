@@ -6,7 +6,7 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { listProfileCards } from "../graphql/queries";
+import { listMemberCards } from "../graphql/queries";
 import MemberCard from "./MemberCard";
 import { getOverrideProps } from "./utils";
 import { Collection, Pagination, Placeholder } from "@aws-amplify/ui-react";
@@ -48,16 +48,17 @@ export default function MemberCardCollection(props) {
       setLoading(true);
       const variables = {
         limit: pageSize,
+        filter: { studyGroupId: { eq: "test" } },
       };
       if (newNext) {
         variables["nextToken"] = newNext;
       }
       const result = (
         await API.graphql({
-          query: listProfileCards.replaceAll("__typename", ""),
+          query: listMemberCards.replaceAll("__typename", ""),
           variables,
         })
-      ).data.listProfileCards;
+      ).data.listMemberCards;
       newCache.push(...result.items);
       newNext = result.nextToken;
     }

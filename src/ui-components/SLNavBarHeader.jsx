@@ -11,9 +11,20 @@ import { Flex, Image, Text, Button } from "@aws-amplify/ui-react";
 import MyIcon from "./MyIcon";
 import { Link } from "react-router-dom";
 import { Auth } from "aws-amplify";
+import { useState, useEffect } from "react";
+import StudyGroupForm from "./StudyGroupForm";
 
 export default function SLNavBarHeader(props) {
   const { profileCard, profileImage, overrides, ...rest } = props;
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const toggleForm = () => {
+    setOpen(!open);
+  };
 
   const updateProfileImage = (newImage) => {
     setProfileImage(newImage);
@@ -85,12 +96,13 @@ export default function SLNavBarHeader(props) {
           shrink="0"
           size="default"
           isDisabled={false}
-          variation="link"
-          children="Create a New Study Group"
-          onClick={() => {
-            createaNewStudyGroupOnClick();
-          }}
+          variation="primary"
+          children="Create Study Group"
+          onClick={handleClickOpen}
         ></Button>
+          {open && (
+            <StudyGroupForm open={open} toggleForm={toggleForm} />
+          )}
         <Button
           width="unset"
           height="unset"

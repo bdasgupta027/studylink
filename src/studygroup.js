@@ -4,13 +4,96 @@ import ProfilePageDetails from "./ui-components/ProfilePageDetails"
 import StudyGroupCardCollection from "./ui-components/StudyGroupCardCollection"
 import { SLStudyGroupCard } from './ui-components/SLStudyGroupCard';
 import { API, Auth } from 'aws-amplify';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useHistory } from 'react';
+import {Button, View } from "@aws-amplify/ui-react";
 import { listMemberCards, getStudyGroupCard } from './graphql/queries';
+import { useNavigateAction } from './ui-components/utils';
 import { useParams } from 'react-router-dom';
+// import { useNavigateAction } from "./utils";
 // import SLNavBarHeader from './ui-components/SLNavBarHeader';
-import MemCardCollection from './ui-components/MemCardCollection';
+import MemCardCollection from './ui-components/SLMemCardCollection';
+import { getProfileCard } from './graphql/queries';
+
+// imports for notes uploading and display
+import { Storage } from 'aws-amplify';
+
+// import for the notes preview
+import ImageSlider from "./ImageSlider"
+
+const buttonStyle = {
+    marginTop: '20px',
+    display: 'inline-block',
+    padding: '5px 10px',
+    width: '200px',
+    fontSize: '24px',
+    cursor: 'pointer',
+    textAlign: 'center',
+    textDecoration: 'none',
+    outline: 'none',
+    color: '#fff',
+    backgroundColor: '#047D95',
+    border: 'none',
+    borderRadius: '5px',
+    fontWeight: "bold",
+    margin: "10px 20px"
+}
+
 
 function StudyGroup() {
+    const [profileCard, setProfileCard] = useState(null);
+    const [profileImage, setProfileImage] = useState("");
+    const { id } = useParams();
+    const [members, setMembers] = useState([]);
+    const [studyGroupCard, setStudyGroupCard] = useState(null);
+    const uuid = require('uuid');
+    // for notes
+    // const toolbarPluginInstance = toolbarPlugin();
+    // const { Toolbar } = toolbarPluginInstance;
+    const [fileData, setFileData] = useState(null);
+    const [fileStatus, setFileStatus] = useState(false);
+    
+    const uploadFile = async () => {
+        let n = id + "/" + fileData.name
+        console.log(n);
+        const result = await Storage.put(n, fileData);
+        setFileStatus(true);
+    };
+
+    // const history = useHistory();
+    const handleChatButtonClick = useNavigateAction({
+        type: "url",
+        url: `/chat/${id}`
+    });
+
+    // const handleChatButtonClick = () => {
+    //     // Navigate to the '/chat' route when the button is clicked
+    //     history.push('/chat');
+    // };
+
+    const createProfileCardDetails = async () => {
+        const user = await Auth.currentAuthenticatedUser();
+        try {
+            const response = await API.graphql({
+                query: getProfileCard,
+                variables: { id: user.attributes.sub }
+            });
+            const fetchedProfileCard = response.data.getProfileCard;
+            setProfileCard(fetchedProfileCard);
+            setProfileImage(fetchedProfileCard.image);
+            console.log("FINAL PROFILE", fetchedProfileCard);
+        } catch (err) {
+            console.log(err);
+            return false;
+        }
+    };
+
+    useEffect(() => {
+        createProfileCardDetails();
+    }, []); 
+
+    const updateProfileImage = (newImage) => {
+        setProfileImage(newImage);
+    };
     const CreateMemberCardMutation = `
       mutation createMemberCard($input: CreateMemberCardInput!) {
         createMemberCard(input: $input) {
@@ -21,11 +104,6 @@ function StudyGroup() {
         }
       }
     `;
-
-    const { id } = useParams();
-    const [members, setMembers] = useState([]);
-    const [studyGroupCard, setStudyGroupCard] = useState(null);
-    const uuid = require('uuid');
 
     // Function to determine the initial value for isJoined
     const determineInitialIsJoined = async () => {
@@ -175,58 +253,36 @@ function StudyGroup() {
 
     return (
         <div className="studyGroupPage">
-            <SLNavBarHeader />
-            <MemCardCollection />
-            <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
-                {studyGroupCard && <SLStudyGroupCard studyGroupCard={studyGroupCard} style={{ marginTop: '20px' }} />}
-                <div className="sidebar" style={{ backgroundColor: '#666464', height: '100%'}}>
+            <SLNavBarHeader profileImage={profileImage} setProfileImage={setProfileImage} />
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between"}}>
+                <div style={{ display: 'flex', flexDirection: 'column' }}> 
+                    {studyGroupCard && <SLStudyGroupCard studyGroupCard={studyGroupCard} marginTop='10px' />}
+                    <View display="flex" direction="column" justifyContent="center" alignItems="center" marginTop="10px">
+                        <ImageSlider id={id} />
+                        <input type="file" onChange={(e) => setFileData(e.target.files[0])} />
+                        <Button onClick={uploadFile} style={buttonStyle}>
+                            Upload Files
+                        </Button>
+                        {fileStatus && (
+                            <div >
+                                <p marginBottom>File Uploaded Successfully</p>
+                            </div>
+                        )}
+                    </View>
+                </div>
+                <div className="sidebar" style={{ height: '100%'}}>
                     {!isJoined ? (
-                        <button
-                            style={{
-                                marginTop: '20px',
-                                display: 'inline-block',
-                                padding: '5px 10px',
-                                width: '200px',
-                                fontSize: '24px',
-                                cursor: 'pointer',
-                                textAlign: 'center',
-                                textDecoration: 'none',
-                                outline: 'none',
-                                color: '#fff',
-                                backgroundColor: '#047D95',
-                                border: 'none',
-                                borderRadius: '15px',
-                                boxShadow: '0 9px #999',
-                            }}
-                            onClick={addMember}
-                        >
-                            Join Group
-                        </button>
+                        <>
+                        <button style={buttonStyle} onClick={addMember}>Join Group</button>
+                        </>
                     ) : (
-                        <button
-                            style={{
-                                marginTop: '20px',
-                                display: 'inline-block',
-                                padding: '5px 10px',
-                                width: '150px',
-                                fontSize: '24px',
-                                cursor: 'pointer',
-                                textAlign: 'center',
-                                textDecoration: 'none',
-                                outline: 'none',
-                                color: '#fff',
-                                backgroundColor: '#047D95',
-                                border: 'none',
-                                borderRadius: '15px',
-                                boxShadow: '0 9px #999',
-                            }} disabled>Joined</button>
+                        <>
+                        <button disabled style={buttonStyle} >Joined</button>
+                        <button style={buttonStyle} onClick={handleChatButtonClick}>Chat</button>
+                        </>
                     )}
-                    <h1>Member Usernames</h1>
-                    <ul>
-                        {members.map((member) => (
-                            <li key={member.id}>{member.username}</li>
-                        ))}
-                    </ul>
+                    <h1 style={{ color: '#047D95' }}>Member Usernames</h1>
+                    <MemCardCollection studyGroupId={id}/>
                 </div>
             </div>
         </div>

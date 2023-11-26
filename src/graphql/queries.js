@@ -1,6 +1,111 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getReplies = /* GraphQL */ `
+  query GetReplies($id: ID!) {
+    getReplies(id: $id) {
+      id
+      Reply
+      Likes
+      Username
+      Postedat
+      announcementID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listReplies = /* GraphQL */ `
+  query ListReplies(
+    $filter: ModelRepliesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listReplies(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        Reply
+        Likes
+        Username
+        Postedat
+        announcementID
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const repliesByAnnouncementID = /* GraphQL */ `
+  query RepliesByAnnouncementID(
+    $announcementID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelRepliesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    repliesByAnnouncementID(
+      announcementID: $announcementID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        Reply
+        Likes
+        Username
+        Postedat
+        announcementID
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getChat = /* GraphQL */ `
+  query GetChat($id: ID!) {
+    getChat(id: $id) {
+      id
+      text
+      userId
+      email
+      studyGroupId
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listChats = /* GraphQL */ `
+  query ListChats(
+    $filter: ModelChatFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listChats(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        text
+        userId
+        email
+        studyGroupId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const getStudyGroupCard = /* GraphQL */ `
   query GetStudyGroupCard($id: ID!) {
     getStudyGroupCard(id: $id) {
@@ -204,6 +309,10 @@ export const getAnnouncement = /* GraphQL */ `
         __typename
       }
       studygroupcardID
+      Replies {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename

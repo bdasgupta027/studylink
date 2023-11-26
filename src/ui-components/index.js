@@ -11,6 +11,8 @@ export { default as AnnouncementCardCollection } from "./AnnouncementCardCollect
 export { default as AnnouncementCollection } from "./AnnouncementCollection";
 export { default as AnnouncementCreateForm } from "./AnnouncementCreateForm";
 export { default as CTASection } from "./CTASection";
+export { default as ChatCreateForm } from "./ChatCreateForm";
+export { default as ChatUpdateForm } from "./ChatUpdateForm";
 export { default as CheckoutPayment } from "./CheckoutPayment";
 export { default as CommentCard } from "./CommentCard";
 export { default as ContactUs } from "./ContactUs";

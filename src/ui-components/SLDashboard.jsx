@@ -12,6 +12,16 @@ import { DataStore } from 'aws-amplify';
 import { useState, useEffect } from "react";
 
 function Dashboard() {
+  const [profileCard, setProfileCard] = useState(null);
+  const [profileImage, setProfileImage] = useState("");
+
+  useEffect(() => {
+    createProfileCardDetails();
+  }, []); 
+
+  const updateProfileImage = (newImage) => {
+    setProfileImage(newImage);
+  };
   // const [studygroups, setStudygroups] = useState(null);
 
   // useEffect(() => {
@@ -27,7 +37,7 @@ function Dashboard() {
   // console.log("hello?");
   return (
     <div>
-      <SLNavBarHeader></SLNavBarHeader>
+      <SLNavBarHeader profileImage={profileImage} setProfileImage={setProfileImage} />
     </div>
   );
 }

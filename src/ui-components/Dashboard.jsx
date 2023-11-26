@@ -9,18 +9,48 @@ import * as React from "react";
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import SLNavBarHeader2 from "./SLNavBarHeader2";
 import SLNavBarHeader from "./SLNavBarHeader";
-import { DataStore } from 'aws-amplify';
+import { DataStore, Auth, API } from 'aws-amplify';
 import { useState, useEffect } from "react";
+// import ProfilePageDetails from "./ui-components/SLProfilePageDetails";
+import ProfilePageDetails from "./SLProfilePageDetails";
+import { getProfileCard } from "../graphql/queries";
+// import { getProfileCard } from './graphql/queries';
 
 import StandardCardCollection from "./StandardCardCollection";
 
 
 function Dashboard() {
+  const [profileCard, setProfileCard] = useState(null);
+  const [profileImage, setProfileImage] = useState("");
 
+  const createProfileCardDetails = async () => {
+    const user = await Auth.currentAuthenticatedUser();
+    try {
+        const response = await API.graphql({
+            query: getProfileCard,
+            variables: { id: user.attributes.sub }
+        });
+        const fetchedProfileCard = response.data.getProfileCard;
+        setProfileCard(fetchedProfileCard);
+        setProfileImage(fetchedProfileCard.image);
+        console.log("FINAL PROFILE", fetchedProfileCard);
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+};
+
+  useEffect(() => {
+    createProfileCardDetails();
+  }, []); 
+
+  const updateProfileImage = (newImage) => {
+    setProfileImage(newImage);
+  };
   return (
     <div>
-      <SLNavBarHeader marginBottom="10vh"/>
-      <StandardCardCollection  marginLeft="5%"/>
+      <SLNavBarHeader profileImage={profileImage} setProfileImage={setProfileImage} marginBottom="10vh" />
+      <StandardCardCollection marginLeft="5%"/>
     </div>
   );
 }
