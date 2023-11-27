@@ -24,13 +24,11 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type AnnouncementCreateFormInputValues = {
     title?: string;
     username?: string;
-    date?: string;
     announcement?: string;
 };
 export declare type AnnouncementCreateFormValidationValues = {
     title?: ValidationFunction<string>;
     username?: ValidationFunction<string>;
-    date?: ValidationFunction<string>;
     announcement?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
@@ -38,7 +36,6 @@ export declare type AnnouncementCreateFormOverridesProps = {
     AnnouncementCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     title?: PrimitiveOverrideProps<TextFieldProps>;
     username?: PrimitiveOverrideProps<TextFieldProps>;
-    date?: PrimitiveOverrideProps<TextFieldProps>;
     announcement?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type AnnouncementCreateFormProps = React.PropsWithChildren<{

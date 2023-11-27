@@ -1,6 +1,45 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateInvite = /* GraphQL */ `
+  subscription OnCreateInvite($filter: ModelSubscriptionInviteFilterInput) {
+    onCreateInvite(filter: $filter) {
+      id
+      sender
+      receiver
+      studygroupid
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateInvite = /* GraphQL */ `
+  subscription OnUpdateInvite($filter: ModelSubscriptionInviteFilterInput) {
+    onUpdateInvite(filter: $filter) {
+      id
+      sender
+      receiver
+      studygroupid
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteInvite = /* GraphQL */ `
+  subscription OnDeleteInvite($filter: ModelSubscriptionInviteFilterInput) {
+    onDeleteInvite(filter: $filter) {
+      id
+      sender
+      receiver
+      studygroupid
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const onCreateReplies = /* GraphQL */ `
   subscription OnCreateReplies($filter: ModelSubscriptionRepliesFilterInput) {
     onCreateReplies(filter: $filter) {
@@ -312,7 +351,6 @@ export const onCreateAnnouncement = /* GraphQL */ `
       id
       title
       username
-      date
       announcement
       Comments {
         nextToken
@@ -337,7 +375,6 @@ export const onUpdateAnnouncement = /* GraphQL */ `
       id
       title
       username
-      date
       announcement
       Comments {
         nextToken
@@ -362,7 +399,6 @@ export const onDeleteAnnouncement = /* GraphQL */ `
       id
       title
       username
-      date
       announcement
       Comments {
         nextToken

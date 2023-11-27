@@ -7,7 +7,7 @@
 /* eslint-disable */
 import * as React from "react";
 import { listStudyGroupCards } from "../graphql/queries";
-import StudyGroupCard from "./StudygroupCard";
+import StudyGroupCard from "./StudyGroupCard";
 import { getOverrideProps } from "./utils";
 import { Collection, Pagination, Placeholder } from "@aws-amplify/ui-react";
 import { API } from "aws-amplify";
@@ -40,7 +40,7 @@ export default function StudyGroupCardCollection(props) {
   const jumpToPage = (pageNum) => {
     setPageIndex(pageNum);
   };
-  const loadPage = async (page) => {
+  const loadPage = async (page, studyGroupId) => {
     const cacheUntil = page * pageSize + 1;
     const newCache = apiCache[instanceKey].slice();
     let newNext = nextToken[instanceKey];
@@ -48,6 +48,7 @@ export default function StudyGroupCardCollection(props) {
       setLoading(true);
       const variables = {
         limit: pageSize,
+        filter: { studygroupcardID: { eq: studyGroupId } },
       };
       if (newNext) {
         variables["nextToken"] = newNext;

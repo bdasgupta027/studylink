@@ -22,6 +22,8 @@ export { default as Features2 } from "./Features2";
 export { default as Features2x2 } from "./Features2x2";
 export { default as Filters } from "./Filters";
 export { default as FormCheckout } from "./FormCheckout";
+export { default as InviteCreateForm } from "./InviteCreateForm";
+export { default as InviteUpdateForm } from "./InviteUpdateForm";
 export { default as LandingPage1 } from "./LandingPage1";
 export { default as LandingPage2 } from "./LandingPage2";
 export { default as LandingPage3 } from "./LandingPage3";

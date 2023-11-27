@@ -1,3 +1,10 @@
+type Invite @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  sender: AWSEmail
+  receiver: AWSEmail
+  studygroupid: ID
+}
+
 type Replies @model @auth(rules: [{allow: public}]) {
   id: ID!
   Reply: String
@@ -58,7 +65,6 @@ type Announcement @model @auth(rules: [{allow: public}]) {
   id: ID!
   title: String!
   username: AWSEmail!
-  date: AWSDateTime!
   announcement: String!
   Comments: [Comment] @hasMany(indexName: "byAnnouncement", fields: ["id"])
   studygroupcardID: ID! @index(name: "byStudyGroupCard")

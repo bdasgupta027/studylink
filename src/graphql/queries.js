@@ -1,6 +1,40 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getInvite = /* GraphQL */ `
+  query GetInvite($id: ID!) {
+    getInvite(id: $id) {
+      id
+      sender
+      receiver
+      studygroupid
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listInvites = /* GraphQL */ `
+  query ListInvites(
+    $filter: ModelInviteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listInvites(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        sender
+        receiver
+        studygroupid
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const getReplies = /* GraphQL */ `
   query GetReplies($id: ID!) {
     getReplies(id: $id) {
@@ -302,7 +336,6 @@ export const getAnnouncement = /* GraphQL */ `
       id
       title
       username
-      date
       announcement
       Comments {
         nextToken
@@ -330,7 +363,6 @@ export const listAnnouncements = /* GraphQL */ `
         id
         title
         username
-        date
         announcement
         studygroupcardID
         createdAt
@@ -361,7 +393,6 @@ export const announcementsByStudygroupcardID = /* GraphQL */ `
         id
         title
         username
-        date
         announcement
         studygroupcardID
         createdAt
