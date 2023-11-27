@@ -25,7 +25,7 @@ const MemberDetailsPopup = ({ isOpen, onClose, member }) => {
       try {
         const response = await API.graphql({
           query: getProfileCard,
-          variables: { id: member.userId }, // Use member.userId directly
+          variables: { id: member.userId },
         });
         const fetchedMemberDetails = response.data.getProfileCard;
         setMemberDetails(fetchedMemberDetails);
@@ -44,15 +44,15 @@ const MemberDetailsPopup = ({ isOpen, onClose, member }) => {
     onClose();
   };
 
-  if (!isOpen || !member) {
-    return null;
+  if (!isOpen || !member || memberDetails === null) {
+    return null; // You can return a loading state or nothing if the required data is not available
   }
 
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
-      style={customStyles} // Apply the custom styles
+      style={customStyles}
       contentLabel="Member Details"
     >
       <Flex direction="column" gap="16px" padding="16px">
