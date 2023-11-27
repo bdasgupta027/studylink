@@ -6,7 +6,7 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { API, Storage, Auth } from "aws-amplify";
 import { updateProfileCard } from "../graphql/mutations";
@@ -41,6 +41,29 @@ export default function EditProfile(props) {
   const [profileImage, setProfileImage] = useState("https://th.bing.com/th/id/OIP.ncOCV5LVCL8j70Edjgyn6QHaGy?rs=1&pid=ImgDetMain"
   );
   const [forceUpdate, setForceUpdate] = useState(false);
+
+  useEffect(() => {
+    const fetchProfileImage = async () => {
+      try {
+        const user = await Auth.currentAuthenticatedUser();
+        const response = await API.graphql({
+          query: getProfileCard,
+          variables: { id: user.attributes.sub }
+        });
+  
+        const fetchedProfileCard = response.data.getProfileCard;
+        // Check if the user already has a profile image
+        if (fetchedProfileCard.image) {
+          setProfileImage(fetchedProfileCard.image);
+        }
+      } catch (error) {
+        console.error('Error fetching profile image:', error);
+      }
+    };
+  
+    fetchProfileImage();
+  }, []); // Empty dependency array to run the effect only once on component mount
+  
   const handleImageUpload = async (event) => {
     if (event.target && event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -67,35 +90,48 @@ export default function EditProfile(props) {
 
   const buttonOnClick = async () => {
     const user = await Auth.currentAuthenticatedUser();
+  
+    // Fetch the existing profile card
     const response = await API.graphql({
       query: getProfileCard,
       variables: { id: user.attributes.sub }
     });
-    console.log(response);
+  
     const fetchedProfileCard = response.data.getProfileCard;
-    const updatedProfileImage = profileImage;
-    console.log("updated profile image is", updatedProfileImage);
-    await API.graphql({
-      query: updateProfileCard.replaceAll("__typename", ""),
-      variables: {
-        input: {
-          firstName: textFieldTwoNineSevenSixSixNineTwoTwoValue,
-          lastName: textFieldTwoNineSevenSixSixNineTwoThreeValue,
-          email: textFieldTwoNineSevenSixSixNineTwoFourValue,
-          major: textFieldThreeEightFiveZeroSixTwoEightValue,
-          userId: user.attributes.sub,
-          id: response.data.getProfileCard.id,
-          image: updatedProfileImage,
+  
+    // Prepare the updated input
+    const updatedProfile = {
+      userId: user.attributes.sub,
+      id: fetchedProfileCard.id,
+      firstName: textFieldTwoNineSevenSixSixNineTwoTwoValue || fetchedProfileCard.firstName,
+      lastName: textFieldTwoNineSevenSixSixNineTwoThreeValue || fetchedProfileCard.lastName,
+      email: textFieldTwoNineSevenSixSixNineTwoFourValue || fetchedProfileCard.email,
+      major: textFieldThreeEightFiveZeroSixTwoEightValue || fetchedProfileCard.major,
+    };
+  
+    // Check if there's an uploaded image
+    if (profileImage) {
+      updatedProfile.image = profileImage;
+    }
+  
+    try {
+      // Update the profile card
+      await API.graphql({
+        query: updateProfileCard.replaceAll("__typename", ""),
+        variables: {
+          input: updatedProfile,
         },
-      },
-    });
-    setForceUpdate(prevState => !prevState);
-
+      });
+  
+      // Update the state to force a re-render
+      setForceUpdate(prevState => !prevState);
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      // Handle the error, e.g., display an error message to the user
+    }
   };
-
   
   
-
   return (
     <Flex
       gap="16px"
