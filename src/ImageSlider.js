@@ -82,22 +82,22 @@ function ImageSlider({ id }) {
       alignItems="center"     // Vertically center the content
       justifyContent="center" // Horizontally center the content
       >
-      <AutoPlaySwipeableViews index={activeStep} onChangeIndex={handleStepChange}>
+      <AutoPlaySwipeableViews index={activeStep} onChangeIndex={handleStepChange} >
         {
           signedUrl.map((url, index) => (
             <div key={index}
               style={{
                 border: '1px solid rgba(0, 0, 0, 0.3)',
-                width: "25vw",
-                // objectFit: "cover",
-                height: "40vh",
+                objectFit: "cover",
+                height: "40vh", // Set a fixed height
+                width: "100px",  // Set a fixed width
                 margin: "auto",
                 cursor: "pointer"
               }}
             >
               <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
                 <div onClick={() => handleClickOpen(url)}>
-                  <Viewer fileUrl={url} />
+                  <Viewer fileUrl={url}/>
                 </div>
               </Worker>
               <Dialog
