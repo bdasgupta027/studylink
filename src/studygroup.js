@@ -13,6 +13,12 @@ import { useParams } from 'react-router-dom';
 // import SLNavBarHeader from './ui-components/SLNavBarHeader';
 import MemCardCollection from './ui-components/SLMemCardCollection';
 import { getProfileCard } from './graphql/queries';
+// import { CreateAnnouncementForm } from './ui-components';
+// import { PostCommentForm } from './ui-components';
+import CreateAnnouncementForm from './ui-components/CreateAnnouncementForm';
+import PostCommentForm from './ui-components/PostCommentForm';
+// import { AnnouncementCollection } from './ui-components';
+import AnnouncementCollection from './ui-components/AnnouncementCollection';
 
 // imports for notes uploading and display
 import { Storage } from 'aws-amplify';
@@ -40,6 +46,24 @@ const buttonStyle = {
 
 
 function StudyGroup() {
+    const [announcementFormOpen, setAnnouncementFormOpen] = useState(false);
+    const [commentFormOpen, setCommentFormOpen] = useState(false);
+  
+    const handleAnnouncementFormOpen = () => {
+      setAnnouncementFormOpen(true);
+    };
+  
+    const handleAnnouncementFormClose = () => {
+      setAnnouncementFormOpen(false);
+    };
+  
+    const handleCommentFormOpen = () => {
+      setCommentFormOpen(true);
+    };
+  
+    const handleCommentFormClose = () => {
+      setCommentFormOpen(false);
+    };
     const [profileCard, setProfileCard] = useState(null);
     const [profileImage, setProfileImage] = useState("");
     const { id } = useParams();
@@ -159,6 +183,7 @@ function StudyGroup() {
         }
     };
 
+    
     useEffect(() => {
         determineInitialIsJoined().then((result) => {
             setIsJoined(result);
@@ -251,9 +276,22 @@ function StudyGroup() {
         return <div>Loading...</div>;
     }
 
+
     return (
         <div className="studyGroupPage">
             <SLNavBarHeader profileImage={profileImage} setProfileImage={setProfileImage} />
+            
+            <Button variant="contained" color="primary" onClick={handleAnnouncementFormOpen} style={{ marginBottom: '20px' }}>
+                Create an Announcement
+            </Button>
+
+            <Button variant="contained" color="secondary" onClick={handleCommentFormOpen} style={{ marginBottom: '20px' }}>
+                Post a Comment
+            </Button>
+
+            <CreateAnnouncementForm open={announcementFormOpen} handleClose={handleAnnouncementFormClose} studyGroupId={id}/>
+
+            <PostCommentForm open={commentFormOpen} handleClose={handleCommentFormClose} />
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between"}}>
                 <div style={{ display: 'flex', flexDirection: 'column' }}> 
                     {studyGroupCard && <SLStudyGroupCard studyGroupCard={studyGroupCard} marginTop='10px' />}
@@ -284,7 +322,9 @@ function StudyGroup() {
                     <h1 style={{ color: '#047D95' }}>Member Usernames</h1>
                     <MemCardCollection studyGroupId={id}/>
                 </div>
+            <div style={{ border: '1px dotted #000', width: '100%', margin: '10px 0' }}></div>
             </div>
+            <AnnouncementCollection studyGroupId={id}/>
         </div>
     );
 

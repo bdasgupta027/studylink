@@ -56,10 +56,11 @@ function Chat() {
       React.useEffect(() => {
         async function fetchChats() {
           try {
+            console.log("fetching chats for", id);
             const allChats = await API.graphql({
               query: queries.listChats,
               variables: {
-                studyGroupId: id,
+                filter: { studyGroupId: { eq: id } },
               },
             });
             console.log(allChats.data.listChats.items);

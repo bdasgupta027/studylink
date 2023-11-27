@@ -151,7 +151,7 @@ export default function ProfilePageDetails(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children={profileCard?.firstName}
+                children={`${profileCard?.firstName} ${profileCard?.lastName}`}
                 {...getOverrideProps(overrides, "Harsh Jha")}
               ></Text>
               <Flex

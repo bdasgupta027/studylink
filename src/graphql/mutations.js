@@ -1,6 +1,54 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createInvite = /* GraphQL */ `
+  mutation CreateInvite(
+    $input: CreateInviteInput!
+    $condition: ModelInviteConditionInput
+  ) {
+    createInvite(input: $input, condition: $condition) {
+      id
+      sender
+      receiver
+      studygroupid
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateInvite = /* GraphQL */ `
+  mutation UpdateInvite(
+    $input: UpdateInviteInput!
+    $condition: ModelInviteConditionInput
+  ) {
+    updateInvite(input: $input, condition: $condition) {
+      id
+      sender
+      receiver
+      studygroupid
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteInvite = /* GraphQL */ `
+  mutation DeleteInvite(
+    $input: DeleteInviteInput!
+    $condition: ModelInviteConditionInput
+  ) {
+    deleteInvite(input: $input, condition: $condition) {
+      id
+      sender
+      receiver
+      studygroupid
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const createReplies = /* GraphQL */ `
   mutation CreateReplies(
     $input: CreateRepliesInput!
@@ -349,7 +397,6 @@ export const createAnnouncement = /* GraphQL */ `
       id
       title
       username
-      date
       announcement
       Comments {
         nextToken
@@ -375,7 +422,6 @@ export const updateAnnouncement = /* GraphQL */ `
       id
       title
       username
-      date
       announcement
       Comments {
         nextToken
@@ -401,7 +447,6 @@ export const deleteAnnouncement = /* GraphQL */ `
       id
       title
       username
-      date
       announcement
       Comments {
         nextToken

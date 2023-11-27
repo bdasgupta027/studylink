@@ -1,0 +1,15 @@
+.uploadButton {
+    cursor: pointer;
+    color: #007BFF; /* Set the color you prefer for the button text */
+    text-decoration: none;
+    border: 1px solid #007BFF; /* Set the color you prefer for the button border */
+    padding: 8px 12px;
+    border-radius: 4px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  }
+  
+  .uploadButton:hover {
+    background-color: #007BFF; /* Set the color you prefer for the button background on hover */
+    color: #fff; /* Set the color you prefer for the button text on hover */
+  }

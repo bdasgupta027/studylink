@@ -9,10 +9,12 @@ import * as React from "react";
 import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { API } from "aws-amplify";
-import { createAnnouncement } from "../graphql/mutations";
-export default function AnnouncementCreateForm(props) {
+import { getInvite } from "../graphql/queries";
+import { updateInvite } from "../graphql/mutations";
+export default function InviteUpdateForm(props) {
   const {
-    clearOnSuccess = true,
+    id: idProp,
+    invite: inviteModelProp,
     onSuccess,
     onError,
     onSubmit,
@@ -22,26 +24,45 @@ export default function AnnouncementCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    title: "",
-    username: "",
-    announcement: "",
+    sender: "",
+    receiver: "",
+    studygroupid: "",
   };
-  const [title, setTitle] = React.useState(initialValues.title);
-  const [username, setUsername] = React.useState(initialValues.username);
-  const [announcement, setAnnouncement] = React.useState(
-    initialValues.announcement
+  const [sender, setSender] = React.useState(initialValues.sender);
+  const [receiver, setReceiver] = React.useState(initialValues.receiver);
+  const [studygroupid, setStudygroupid] = React.useState(
+    initialValues.studygroupid
   );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setTitle(initialValues.title);
-    setUsername(initialValues.username);
-    setAnnouncement(initialValues.announcement);
+    const cleanValues = inviteRecord
+      ? { ...initialValues, ...inviteRecord }
+      : initialValues;
+    setSender(cleanValues.sender);
+    setReceiver(cleanValues.receiver);
+    setStudygroupid(cleanValues.studygroupid);
     setErrors({});
   };
+  const [inviteRecord, setInviteRecord] = React.useState(inviteModelProp);
+  React.useEffect(() => {
+    const queryData = async () => {
+      const record = idProp
+        ? (
+            await API.graphql({
+              query: getInvite.replaceAll("__typename", ""),
+              variables: { id: idProp },
+            })
+          )?.data?.getInvite
+        : inviteModelProp;
+      setInviteRecord(record);
+    };
+    queryData();
+  }, [idProp, inviteModelProp]);
+  React.useEffect(resetStateValues, [inviteRecord]);
   const validations = {
-    title: [{ type: "Required" }],
-    username: [{ type: "Required" }, { type: "Email" }],
-    announcement: [{ type: "Required" }],
+    sender: [{ type: "Email" }],
+    receiver: [{ type: "Email" }],
+    studygroupid: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -69,9 +90,9 @@ export default function AnnouncementCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          title,
-          username,
-          announcement,
+          sender: sender ?? null,
+          receiver: receiver ?? null,
+          studygroupid: studygroupid ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -102,18 +123,16 @@ export default function AnnouncementCreateForm(props) {
             }
           });
           await API.graphql({
-            query: createAnnouncement.replaceAll("__typename", ""),
+            query: updateInvite.replaceAll("__typename", ""),
             variables: {
               input: {
+                id: inviteRecord.id,
                 ...modelFields,
               },
             },
           });
           if (onSuccess) {
             onSuccess(modelFields);
-          }
-          if (clearOnSuccess) {
-            resetStateValues();
           }
         } catch (err) {
           if (onError) {
@@ -122,99 +141,100 @@ export default function AnnouncementCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "AnnouncementCreateForm")}
+      {...getOverrideProps(overrides, "InviteUpdateForm")}
       {...rest}
     >
       <TextField
-        label="Title"
-        isRequired={true}
+        label="Sender"
+        isRequired={false}
         isReadOnly={false}
-        value={title}
+        value={sender}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              title: value,
-              username,
-              announcement,
+              sender: value,
+              receiver,
+              studygroupid,
             };
             const result = onChange(modelFields);
-            value = result?.title ?? value;
+            value = result?.sender ?? value;
           }
-          if (errors.title?.hasError) {
-            runValidationTasks("title", value);
+          if (errors.sender?.hasError) {
+            runValidationTasks("sender", value);
           }
-          setTitle(value);
+          setSender(value);
         }}
-        onBlur={() => runValidationTasks("title", title)}
-        errorMessage={errors.title?.errorMessage}
-        hasError={errors.title?.hasError}
-        {...getOverrideProps(overrides, "title")}
+        onBlur={() => runValidationTasks("sender", sender)}
+        errorMessage={errors.sender?.errorMessage}
+        hasError={errors.sender?.hasError}
+        {...getOverrideProps(overrides, "sender")}
       ></TextField>
       <TextField
-        label="Username"
-        isRequired={true}
+        label="Receiver"
+        isRequired={false}
         isReadOnly={false}
-        value={username}
+        value={receiver}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              title,
-              username: value,
-              announcement,
+              sender,
+              receiver: value,
+              studygroupid,
             };
             const result = onChange(modelFields);
-            value = result?.username ?? value;
+            value = result?.receiver ?? value;
           }
-          if (errors.username?.hasError) {
-            runValidationTasks("username", value);
+          if (errors.receiver?.hasError) {
+            runValidationTasks("receiver", value);
           }
-          setUsername(value);
+          setReceiver(value);
         }}
-        onBlur={() => runValidationTasks("username", username)}
-        errorMessage={errors.username?.errorMessage}
-        hasError={errors.username?.hasError}
-        {...getOverrideProps(overrides, "username")}
+        onBlur={() => runValidationTasks("receiver", receiver)}
+        errorMessage={errors.receiver?.errorMessage}
+        hasError={errors.receiver?.hasError}
+        {...getOverrideProps(overrides, "receiver")}
       ></TextField>
       <TextField
-        label="Announcement"
-        isRequired={true}
+        label="Studygroupid"
+        isRequired={false}
         isReadOnly={false}
-        value={announcement}
+        value={studygroupid}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              title,
-              username,
-              announcement: value,
+              sender,
+              receiver,
+              studygroupid: value,
             };
             const result = onChange(modelFields);
-            value = result?.announcement ?? value;
+            value = result?.studygroupid ?? value;
           }
-          if (errors.announcement?.hasError) {
-            runValidationTasks("announcement", value);
+          if (errors.studygroupid?.hasError) {
+            runValidationTasks("studygroupid", value);
           }
-          setAnnouncement(value);
+          setStudygroupid(value);
         }}
-        onBlur={() => runValidationTasks("announcement", announcement)}
-        errorMessage={errors.announcement?.errorMessage}
-        hasError={errors.announcement?.hasError}
-        {...getOverrideProps(overrides, "announcement")}
+        onBlur={() => runValidationTasks("studygroupid", studygroupid)}
+        errorMessage={errors.studygroupid?.errorMessage}
+        hasError={errors.studygroupid?.hasError}
+        {...getOverrideProps(overrides, "studygroupid")}
       ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
       >
         <Button
-          children="Clear"
+          children="Reset"
           type="reset"
           onClick={(event) => {
             event.preventDefault();
             resetStateValues();
           }}
-          {...getOverrideProps(overrides, "ClearButton")}
+          isDisabled={!(idProp || inviteModelProp)}
+          {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
           gap="15px"
@@ -224,7 +244,10 @@ export default function AnnouncementCreateForm(props) {
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={Object.values(errors).some((e) => e?.hasError)}
+            isDisabled={
+              !(idProp || inviteModelProp) ||
+              Object.values(errors).some((e) => e?.hasError)
+            }
             {...getOverrideProps(overrides, "SubmitButton")}
           ></Button>
         </Flex>
