@@ -42,10 +42,13 @@ export default function EditProfile(props) {
   );
   const [forceUpdate, setForceUpdate] = useState(false);
 
+  const [currentUser, setCurrentUser] = useState(null); // Add this line to declare the user variable
+
   useEffect(() => {
     const fetchProfileImage = async () => {
       try {
         const user = await Auth.currentAuthenticatedUser();
+        setCurrentUser(user);
         const response = await API.graphql({
           query: getProfileCard,
           variables: { id: user.attributes.sub }
@@ -328,11 +331,11 @@ export default function EditProfile(props) {
             width="unset"
             height="unset"
             label="Email"
-            placeholder="john.doe@awsamplify.com"
+            placeholder={currentUser ? currentUser.attributes.email : "Loading..."}
             shrink="0"
             alignSelf="stretch"
             size="default"
-            isDisabled={false}
+            isDisabled={true}
             labelHidden={false}
             variation="default"
             value={textFieldTwoNineSevenSixSixNineTwoFourValue}
