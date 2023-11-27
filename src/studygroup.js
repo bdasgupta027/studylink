@@ -322,8 +322,8 @@ function StudyGroup() {
                     <h1 style={{ color: '#047D95' }}>Member Usernames</h1>
                     <MemCardCollection studyGroupId={id}/>
                 </div>
-            <div style={{ border: '1px dotted #000', width: '100%', margin: '10px 0' }}></div>
             </div>
+            <hr style={{ border: '10px dotted black', width: '100%' }} />
             <AnnouncementCollection studyGroupId={id}/>
         </div>
     );
