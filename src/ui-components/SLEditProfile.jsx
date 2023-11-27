@@ -15,6 +15,7 @@ import MyIcon from "./MyIcon";
 import { Button, Flex, Image, Text, TextField } from "@aws-amplify/ui-react";
 import axios from 'axios';
 import { getProfileCard } from "../graphql/queries";
+import SLEditProfile from "./SLEditProfile.css"
 
 export default function EditProfile(props) {
   const { profileCard, overrides, ...rest } = props;
@@ -233,6 +234,7 @@ export default function EditProfile(props) {
               whiteSpace="pre-wrap"
               children="Upload New Image"
               onClick={handleImageUpload}
+              class="uploadButton"
               {...getOverrideProps(overrides, "Upload New Image")}
             ></span>
           </label>
@@ -325,6 +327,7 @@ export default function EditProfile(props) {
             {...getOverrideProps(overrides, "TextField3850628")}
           ></TextField>
         </Flex>
+        <Link to="/Profile">
         <Button
           width="unset"
           height="unset"
@@ -338,6 +341,7 @@ export default function EditProfile(props) {
           }}
           {...getOverrideProps(overrides, "Button")}
         ></Button>
+        </Link>
       </Flex>
     </Flex>
   );

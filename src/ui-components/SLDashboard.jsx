@@ -7,7 +7,7 @@
 /* eslint-disable */
 import * as React from "react";
 import { withAuthenticator } from '@aws-amplify/ui-react';
-import SLNavBarHeader2 from "./SLNavBarHeader2";
+import SLNavBarHeader from "./ui-components/SLNavBarHeader"
 import { DataStore } from 'aws-amplify';
 import { useState, useEffect } from "react";
 
@@ -35,6 +35,7 @@ function Dashboard() {
   // }, [])
   // queryStudygroups();
   // console.log("hello?");
+  
   return (
     <div>
       <SLNavBarHeader profileImage={profileImage} setProfileImage={setProfileImage} />
