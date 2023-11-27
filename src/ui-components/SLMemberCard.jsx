@@ -16,11 +16,9 @@ import { getProfileCardByEmail } from "../graphql/queries";
 import { listMemberCards } from "../graphql/queries";
 import { getMemberCardByUsername } from "../graphql/queries";
 export default function MemberCard(props) {
-  const { memberCard, overrides, ...rest } = props;
+  const { memberCard,onMemberImageClick, overrides, ...rest } = props;
   const [profileCard, setProfileCard] = useState(null);
     const [profileImage, setProfileImage] = useState("");
-
-  
   const createProfileCardDetails = async () => {
       // const user = await Auth.currentAuthenticatedUser();
       try {
@@ -91,6 +89,7 @@ export default function MemberCard(props) {
           padding="0px 0px 0px 0px"
           objectFit="cover"
           src={profileImage}
+          onClick={() => onMemberImageClick(memberCard)}
           {...getOverrideProps(overrides, "image")}
         ></Image>
         <Text

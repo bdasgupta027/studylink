@@ -3,6 +3,7 @@ import SLNavBarHeader from "./ui-components/SLNavBarHeader"
 import ProfilePageDetails from "./ui-components/ProfilePageDetails"
 import StudyGroupCardCollection from "./ui-components/StudyGroupCardCollection"
 import { SLStudyGroupCard } from './ui-components/SLStudyGroupCard';
+import MemberDetailsPopup from './MemberDetailsPopup';
 import { API, Auth } from 'aws-amplify';
 import React, { useEffect, useState, useHistory } from 'react';
 import {Button, View } from "@aws-amplify/ui-react";
@@ -51,6 +52,9 @@ function StudyGroup() {
     // const { Toolbar } = toolbarPluginInstance;
     const [fileData, setFileData] = useState(null);
     const [fileStatus, setFileStatus] = useState(false);
+
+    const [selectedMember, setSelectedMember] = useState(null);
+    const [isMemberDetailsOpen, setMemberDetailsOpen] = useState(false);
     
     const uploadFile = async () => {
         let n = id + "/" + fileData.name
@@ -251,6 +255,12 @@ function StudyGroup() {
         return <div>Loading...</div>;
     }
 
+    const handleMemberImageClick = (member) => {
+        console.log("THIS IS MEMBER DETAILS,", member);
+        setSelectedMember(member);
+        setMemberDetailsOpen(true);
+      };
+
     return (
         <div className="studyGroupPage">
             <SLNavBarHeader profileImage={profileImage} setProfileImage={setProfileImage} />
@@ -282,7 +292,8 @@ function StudyGroup() {
                         </>
                     )}
                     <h1 style={{ color: '#047D95' }}>Member Usernames</h1>
-                    <MemCardCollection studyGroupId={id}/>
+                    <MemCardCollection studyGroupId={id} onMemberImageClick={handleMemberImageClick} />
+                    <MemberDetailsPopup isOpen={isMemberDetailsOpen} onClose={() => setMemberDetailsOpen(false)} member={selectedMember} />
                 </div>
             </div>
         </div>
