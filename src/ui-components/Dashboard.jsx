@@ -16,7 +16,7 @@ import ProfilePageDetails from "./SLProfilePageDetails";
 import { getProfileCard } from "../graphql/queries";
 // import { getProfileCard } from './graphql/queries';
 
-import StandardCardCollection from "./StandardCardCollection";
+import StandardCardCollection from "./SLStandardCardCollection";
 
 
 function Dashboard() {
@@ -50,7 +50,9 @@ function Dashboard() {
   return (
     <div>
       <SLNavBarHeader profileImage={profileImage} setProfileImage={setProfileImage} marginBottom="10vh" />
-      <StandardCardCollection marginLeft="5%"/>
+      <div style={{ backgroundColor:'#D9F3FA' ,padding:"20px" }}>
+        <StandardCardCollection marginLeft="5%" />
+      </div>
     </div>
   );
 }

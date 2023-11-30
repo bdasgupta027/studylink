@@ -97,12 +97,15 @@ export default function StandardCardCollection(props) {
             return <Placeholder key={index} size="large" />;
           }
           return (
-            <StandardCard
-              studyGroupCard={item}
-              margin="0 15px 15px 0"
-              key={item.id}
-              {...(overrideItems && overrideItems({ item, index }))}
-            ></StandardCard>
+            <div style={{cursor: "pointer"}}>
+              <StandardCard
+                boxShadow="5px 5px 5px "
+                studyGroupCard={item}
+                margin="0 15px 15px 0"
+                key={item.id}
+                {...(overrideItems && overrideItems({ item, index }))}
+              ></StandardCard>
+            </div>
           );
         }}
       </Collection>

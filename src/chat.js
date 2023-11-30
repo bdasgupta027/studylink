@@ -2,7 +2,6 @@ import "./chat.css"
 import SLNavBarHeader from "./ui-components/SLNavBarHeader"
 import ProfilePageDetails from "./ui-components/SLProfilePageDetails"
 import StudyGroupCardCollection from "./ui-components/StudyGroupCardCollection"
-import StandardCardCollection from "./ui-components/StandardCardCollection"
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import { getProfileCard } from './graphql/queries';
