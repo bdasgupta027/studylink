@@ -24,9 +24,6 @@ export default function AnnouncementCollection(props) {
   const [maxViewed, setMaxViewed] = React.useState(1);
   const pageSize = 6;
   const isPaginated = true;
-  // React.useEffect(() => {
-  //   loadPage(pageIndex, studyGroupId);
-  // }, [pageIndex, studyGroupId]);
   React.useEffect(() => {
     nextToken[instanceKey] = "";
     apiCache[instanceKey] = [];
@@ -43,12 +40,7 @@ export default function AnnouncementCollection(props) {
   const jumpToPage = (pageNum) => {
     setPageIndex(pageNum);
   };
-  React.useEffect(() => {
-    loadPage(pageIndex, props.studyGroupId); // Pass studyGroupId prop
-  }, [pageIndex, props.studyGroupId]);
-  
-  const loadPage = async (page, studyGroupId) => {
-    console.log("group is is:", studyGroupId);
+  const loadPage = async (page) => {
     const cacheUntil = page * pageSize + 1;
     const newCache = apiCache[instanceKey].slice();
     let newNext = nextToken[instanceKey];
@@ -56,7 +48,6 @@ export default function AnnouncementCollection(props) {
       setLoading(true);
       const variables = {
         limit: pageSize,
-        filter: { studygroupcardID: { eq: studyGroupId } },
       };
       if (newNext) {
         variables["nextToken"] = newNext;
@@ -89,10 +80,10 @@ export default function AnnouncementCollection(props) {
     <div>
       <Collection
         type="list"
-        isSearchable={true}
+        isSearchable="true"
         searchPlaceholder="Search..."
         direction="column"
-        justifyContent="left"
+        justifyContent="center"
         itemsPerPage={pageSize}
         isPaginated={!isApiPagination && isPaginated}
         items={itemsProp || (loading ? new Array(pageSize).fill({}) : items)}
@@ -106,6 +97,7 @@ export default function AnnouncementCollection(props) {
           return (
             <SocialPost
               announcement={item}
+              margin="0 0 5px 0"
               key={item.id}
               {...(overrideItems && overrideItems({ item, index }))}
             ></SocialPost>

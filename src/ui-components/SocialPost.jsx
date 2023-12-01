@@ -7,7 +7,7 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "./utils";
-import { Flex, Image, Text } from "@aws-amplify/ui-react";
+import { Flex, Text } from "@aws-amplify/ui-react";
 import MyIcon from "./MyIcon";
 export default function SocialPost(props) {
   const { announcement, overrides, ...rest } = props;
@@ -144,7 +144,7 @@ export default function SocialPost(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children={announcement?.date}
+                children={announcement?.createdAt}
                 {...getOverrideProps(overrides, "2nd December 2021")}
               ></Text>
             </Flex>
@@ -204,20 +204,6 @@ export default function SocialPost(props) {
             ></Text>
           </Flex>
         </Flex>
-        <Image
-          width="160px"
-          height="160px"
-          display="block"
-          gap="unset"
-          alignItems="unset"
-          justifyContent="unset"
-          shrink="0"
-          position="relative"
-          borderRadius="16px"
-          padding="0px 0px 0px 0px"
-          objectFit="unset"
-          {...getOverrideProps(overrides, "image")}
-        ></Image>
       </Flex>
     </Flex>
   );

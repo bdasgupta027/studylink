@@ -58,54 +58,58 @@ export default function SLNavBarHeader2(props) {
           objectFit="cover"
           src="https://i.postimg.cc/CKLBW65p/logo.png" 
         ></Image>
-        <Text
-          fontFamily="Inter"
-          fontSize="16px"
-          fontWeight="400"
-          color="rgba(13,26,38,1)"
-          lineHeight="24px"
-          textAlign="left" 
-          display="block"
-          direction="column"
-          justifyContent="unset"
-          width="unset"
-          height="unset"
-          gap="unset"
-          alignItems="unset"
-          shrink="0"
-          position="relative"
-          padding="0px 0px 0px 0px"
-          whiteSpace="pre-wrap"
-          children="Home"
-          onClick={() => {
-            homeOnClick();
-          }}
-          {...getOverrideProps(overrides, "Home")}
-        ></Text>
-        <Text
-          fontFamily="Inter"
-          fontSize="16px"
-          fontWeight="400"
-          color="rgba(13,26,38,1)"
-          lineHeight="24px"
-          textAlign="left"
-          display="block"
-          direction="column"
-          justifyContent="unset"
-          width="unset"
-          height="unset"
-          gap="unset"
-          alignItems="unset"
-          shrink="0"
-          position="relative"
-          padding="0px 0px 0px 0px"
-          whiteSpace="pre-wrap"
-          children="Contact"
-          onClick={() => {
-            contactOnClick();
-          }}
-          {...getOverrideProps(overrides, "Contact")}
-        ></Text>
+        <div style={{cursor: "pointer"}}>
+          <Text
+            fontFamily="Inter"
+            fontSize="16px"
+            fontWeight="400"
+            color="rgba(13,26,38,1)"
+            lineHeight="24px"
+            textAlign="left"
+            display="block"
+            direction="column"
+            justifyContent="unset"
+            width="unset"
+            height="unset"
+            gap="unset"
+            alignItems="unset"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            whiteSpace="pre-wrap"
+            children="Home"
+            onClick={() => {
+              homeOnClick();
+            }}
+            {...getOverrideProps(overrides, "Home")}
+          ></Text>
+        </div>
+        <div style={{cursor:"pointer"}}>
+          <Text
+            fontFamily="Inter"
+            fontSize="16px"
+            fontWeight="400"
+            color="rgba(13,26,38,1)"
+            lineHeight="24px"
+            textAlign="left"
+            display="block"
+            direction="column"
+            justifyContent="unset"
+            width="unset"
+            height="unset"
+            gap="unset"
+            alignItems="unset"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            whiteSpace="pre-wrap"
+            children="Contact"
+            onClick={() => {
+              contactOnClick();
+            }}
+            {...getOverrideProps(overrides, "Contact")}
+          ></Text>
+        </div>
       </Flex>
       <Flex
         gap="8px"

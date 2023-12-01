@@ -6,14 +6,14 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { listStudyGroupCards } from "../graphql/queries";
-import StandardCard from "./StandardCard";
+import { listAnnouncements } from "../graphql/queries";
+import SocialPost from "./SocialPost";
 import { getOverrideProps } from "./utils";
 import { Collection, Pagination, Placeholder } from "@aws-amplify/ui-react";
 import { API } from "aws-amplify";
 const nextToken = {};
 const apiCache = {};
-export default function StandardCardCollection(props) {
+export default function SocialPostCollection(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
   const [pageIndex, setPageIndex] = React.useState(1);
   const [hasMorePages, setHasMorePages] = React.useState(true);
@@ -54,10 +54,10 @@ export default function StandardCardCollection(props) {
       }
       const result = (
         await API.graphql({
-          query: listStudyGroupCards.replaceAll("__typename", ""),
+          query: listAnnouncements.replaceAll("__typename", ""),
           variables,
         })
-      ).data.listStudyGroupCards;
+      ).data.listAnnouncements;
       newCache.push(...result.items);
       newNext = result.nextToken;
     }
@@ -79,17 +79,15 @@ export default function StandardCardCollection(props) {
   return (
     <div>
       <Collection
-        type="grid"
+        type="list"
         isSearchable={true}
         searchPlaceholder="Search..."
-        templateColumns="1fr 1fr 1fr"
-        autoFlow="row"
-        alignItems="stretch"
-        justifyContent="stretch"
+        direction="column"
+        justifyContent="left"
         itemsPerPage={pageSize}
         isPaginated={!isApiPagination && isPaginated}
         items={itemsProp || (loading ? new Array(pageSize).fill({}) : items)}
-        {...getOverrideProps(overrides, "StandardCardCollection")}
+        {...getOverrideProps(overrides, "SocialPostCollection")}
         {...rest}
       >
         {(item, index) => {
@@ -97,15 +95,12 @@ export default function StandardCardCollection(props) {
             return <Placeholder key={index} size="large" />;
           }
           return (
-            <div style={{cursor: "pointer"}}>
-              <StandardCard
-                boxShadow="5px 5px 5px "
-                studyGroupCard={item}
-                margin="0 15px 15px 0"
-                key={item.id}
-                {...(overrideItems && overrideItems({ item, index }))}
-              ></StandardCard>
-            </div>
+            <SocialPost
+              announcement={item}
+              margin="0 0 10px 0"
+              key={item.id}
+              {...(overrideItems && overrideItems({ item, index }))}
+            ></SocialPost>
           );
         }}
       </Collection>
