@@ -337,8 +337,12 @@ function StudyGroup() {
                         <button style={buttonStyle} onClick={handleChatButtonClick}>Chat</button>
                         </>
                     )}
-                    <h1 style={{ color: '#047D95' }}>Member Usernames</h1>
-                    <MemCardCollection studyGroupId={id}/>
+                    {isJoined?(
+                        <>
+                            <h1 style={{ color: '#047D95' }}>Member Usernames</h1>
+                            <MemCardCollection studyGroupId={id} />
+                        </>
+                    ): null}
                 </div>
             </div>
             <hr style={{ border: '10px dotted black', width: '100%' }} />
