@@ -295,18 +295,36 @@ function StudyGroup() {
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between"}}>
                 <div style={{ display: 'flex', flexDirection: 'column' }}> 
                     {studyGroupCard && <SLStudyGroupCard studyGroupCard={studyGroupCard} marginTop='10px' />}
-                    <View display="flex" direction="column" justifyContent="center" alignItems="center" marginTop="10px">
-                        <ImageSlider id={id} />
-                        <input type="file" onChange={(e) => setFileData(e.target.files[0])} />
-                        <Button onClick={uploadFile} style={buttonStyle}>
-                            Upload Files
-                        </Button>
-                        {fileStatus && (
-                            <div >
-                                <p marginBottom>File Uploaded Successfully</p>
-                            </div>
-                        )}
-                    </View>
+                    {isJoined?(
+                        <View display="flex" direction="column" justifyContent="center" alignItems="center" marginTop="10px">
+                            <ImageSlider id={id} />
+                            <input
+                                type="file"
+                                accept=".pdf"
+                                onChange={(e) => {
+                                    const selectedFile = e.target.files[0];
+                                    if (selectedFile && selectedFile.type !== "application/pdf") {
+                                        // Notify the user that only PDF files are accepted
+                                        alert("Please select a PDF file.");
+                                        // Clear the input value to reset the selection
+                                        e.target.value = null;
+                                    } else {
+                                        // Set the file data if it's a PDF
+                                        setFileData(selectedFile);
+                                    }
+                                }}
+                            />
+
+                            <Button onClick={uploadFile} style={buttonStyle}>
+                                Upload Files
+                            </Button>
+                            {fileStatus && (
+                                <div >
+                                    <p marginBottom>File Uploaded Successfully</p>
+                                </div>
+                            )}
+                        </View>
+                    ):null}
                 </div>
                 <div className="sidebar" style={{ height: '100%'}}>
                     {!isJoined ? (

@@ -15,8 +15,8 @@ export default function SLNavBarHeader2(props) {
   const handleButtonOnClick = () => {
     navigate('/dashboard');
   };
-  const homeOnClick = useNavigateAction({ type: "reload" });
-  const contactOnClick = useNavigateAction({ type: "url", url: '"/contact/"' });
+  const homeOnClick = useNavigateAction({ type: "url", url: '/' });
+  const contactOnClick = useNavigateAction({ type: "url", url: '/contact' });
   return (
     <Flex
       gap="10px"

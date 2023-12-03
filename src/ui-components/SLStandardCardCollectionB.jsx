@@ -12,74 +12,7 @@ import { getOverrideProps } from "./utils";
 import { Collection, Pagination, Placeholder } from "@aws-amplify/ui-react";
 import { API } from "aws-amplify";
 
-const buttonStyle = {
-  marginTop: '20px',
-  display: 'inline-block',
-  padding: '5px 10px',
-  width: '200px',
-  fontSize: '24px',
-  cursor: 'pointer',
-  textAlign: 'center',
-  textDecoration: 'none',
-  outline: 'none',
-  color: '#fff',
-  backgroundColor: '#047D95',
-  border: 'none',
-  borderRadius: '5px',
-  fontWeight: "bold",
-  margin: "10px 20px"
-}
 
-async function addMember() {
-  try {
-    const user = await Auth.currentAuthenticatedUser();
-    console.log(user);
-
-    const existingMembersResponse = await API.graphql({
-      query: listMemberCards,
-      variables: {
-        filter: {
-          studyGroupId: {
-            eq: id,
-          },
-          userId: {
-            eq: user.attributes.sub,
-          },
-        },
-      },
-    });
-
-    const existingMembers = existingMembersResponse.data.listMemberCards.items;
-
-    if (existingMembers.length > 0) {
-      setIsJoined(true);
-      console.log('Member card already exists for the user in this study group.');
-    } else {
-      const newMember = {
-        id: uuid.v4(),
-        username: user.attributes.email,
-        userId: user.attributes.sub,
-        studyGroupId: id,
-      };
-
-      console.log('NEW MEMBER', newMember);
-
-      await API.graphql({
-        query: CreateMemberCardMutation,
-        variables: { input: newMember },
-      });
-
-      console.log('created');
-
-      setIsJoined(true);
-
-      // Call fetchMembers after the user joins the group
-      fetchMembers();
-    }
-  } catch (err) {
-    console.log(err);
-  }
-}
 
 const nextToken = {};
 const apiCache = {};
@@ -177,7 +110,6 @@ export default function StandardCardCollectionB(props) {
                 key={item.id}
                 {...(overrideItems && overrideItems({ item, index }))}
               ></StandardCard>
-              <button style={buttonStyle} onClick={addMember}>Join Group</button>
             </div>
           );
         }}

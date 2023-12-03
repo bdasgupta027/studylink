@@ -11,6 +11,8 @@ import { API, DataStore, Amplify, Auth, Hub } from 'aws-amplify'
 import { useEffect } from 'react';
 import { getProfileCard } from './graphql/queries';
 import { createProfileCard } from './graphql/mutations';
+import Contact from "./contact"
+
 
 function App() {
 
@@ -54,6 +56,7 @@ function App() {
           <Route path="/notes" element={<Notes />} />
           <Route path="/:id" element={<StudyGroup />} />
           <Route path="/chat/:id" element={<Chat />} />
+          <Route path="/contact" element={<Contact />}/>
         </Routes>
       </Router>
     </div>
