@@ -1,4 +1,5 @@
 import NavBar from "./ui-components/SLNavBarHeader2"
+import NavBar2 from "./ui-components/SLNavBarHeader"
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Button } from '@mui/material';
@@ -6,6 +7,10 @@ import { TextField } from '@mui/material';
 import { Grid } from "@mui/material";
 import Typography from '@mui/material/Typography';
 import emailjs from '@emailjs/browser';
+import { Auth } from "aws-amplify"
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import { useEffect, useState } from "react";
+
 
 // contact form code
 const validationSchema = yup.object({
@@ -28,6 +33,27 @@ const validationSchema = yup.object({
 });
 
 const Contact = () => {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const checkAuthentication = async () => {
+            try {
+                // Your authentication logic goes here, using Amplify or any other method
+                // For example, you might use Auth.currentAuthenticatedUser() from AWS Amplify
+
+                // Simulated authentication check
+                const user = await Auth.currentAuthenticatedUser();
+                setIsAuthenticated(true);
+                // Redirect or handle the case when the user is authenticated
+            } catch (error) {
+                setIsAuthenticated(false);
+                // Redirect or handle the case when the user is not authenticated
+            }
+        };
+
+        checkAuthentication();
+    }, []);
+
     // contact form code
     const formik = useFormik({
         initialValues: {
@@ -70,7 +96,11 @@ const Contact = () => {
 
     return ( 
         <div>
-            <NavBar></NavBar>
+            {isAuthenticated? (
+                <NavBar2></NavBar2>
+            ):(
+                <NavBar></NavBar>
+            )}
             <Grid
                 marginTop="10vh"
                 marginBottom="10vh"
