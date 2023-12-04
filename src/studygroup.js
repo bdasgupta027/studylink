@@ -55,6 +55,8 @@ function StudyGroup() {
 
     const [selectedMember, setSelectedMember] = useState(null);
     const [isMemberDetailsOpen, setMemberDetailsOpen] = useState(false);
+
+    const [groupMembers, setGroupMembers] = useState([]);
     
     const uploadFile = async () => {
         let n = id + "/" + fileData.name
@@ -158,6 +160,7 @@ function StudyGroup() {
             const membersData = response.data.listMemberCards.items;
             console.log("Membersssss", membersData);
             setMembers(membersData);
+            setGroupMembers(membersData);
         } catch (error) {
             console.error('Error fetching members:', error);
         }
@@ -260,6 +263,7 @@ function StudyGroup() {
         setSelectedMember(member);
         setMemberDetailsOpen(true);
       };
+      
 
     return (
         <div className="studyGroupPage">
