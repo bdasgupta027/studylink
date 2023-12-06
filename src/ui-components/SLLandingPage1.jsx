@@ -36,39 +36,31 @@ export default function SLLandingPage1(props) {
   );
   return (
     <View
-      width="1210px"
-      height="300px"
+      width="100%"
+      height="auto" // Set height to 'auto' to accommodate content
       marginTop="50px"
-      display="block"
-      gap="unset"
-      alignItems="unset"
-      justifyContent="unset"
+      display="flex"
+      justifyContent="center"
+      direction="row" // Ensure a horizontal layout
       position="relative"
-      padding="0px 0px 0px 0px"
+      padding="0px" // Adjust padding as needed
       {...getOverrideProps(overrides, "SLLandingPage1")}
       {...rest}
     >
       <Flex
         gap="10px"
-        direction="column"
-        width="1051px"
-        height="304px"
-        justifyContent="center"
-        alignItems="center"
-        overflow="hidden"
-        position="absolute"
-        top="0px"
-        left="0px"
-        padding="120px 120px 120px 120px"
-        backgroundColor="rgba(255,255,255,1)"
+        width="75%"
         display="flex"
+        direction="row"
+        justifyContent="center"
+        alignItems="flex-start" // Align text to the start of the container
+        padding="0px 20px" // Add padding for spacing
         {...getOverrideProps(overrides, "Left")}
       >
         <Flex
           gap="24px"
           direction="column"
-          width="unset"
-          height="unset"
+          width="50vw"
           justifyContent="center"
           alignItems="center"
           shrink="0"
@@ -81,8 +73,6 @@ export default function SLLandingPage1(props) {
           <Flex
             gap="16px"
             direction="column"
-            width="unset"
-            height="unset"
             justifyContent="center"
             alignItems="center"
             shrink="0"
@@ -101,11 +91,6 @@ export default function SLLandingPage1(props) {
               textAlign="center"
               display="block"
               direction="column"
-              justifyContent="unset"
-              width="unset"
-              height="unset"
-              gap="unset"
-              alignItems="unset"
               shrink="0"
               alignSelf="stretch"
               position="relative"
@@ -123,11 +108,6 @@ export default function SLLandingPage1(props) {
               textAlign="center"
               display="block"
               direction="column"
-              justifyContent="unset"
-              width="unset"
-              height="unset"
-              gap="unset"
-              alignItems="unset"
               shrink="0"
               alignSelf="stretch"
               position="relative"
@@ -145,12 +125,7 @@ export default function SLLandingPage1(props) {
               textAlign="center"
               display="block"
               direction="column"
-              justifyContent="unset"
               letterSpacing="0.01px"
-              width="unset"
-              height="unset"
-              gap="unset"
-              alignItems="unset"
               shrink="0"
               alignSelf="stretch"
               position="relative"
@@ -161,35 +136,13 @@ export default function SLLandingPage1(props) {
             ></Text>
           </Flex>
         </Flex>
-      </Flex>
-      <Flex
-        gap="10px"
-        direction="column"
-        width="418px"
-        height="304px"
-        justifyContent="center"
-        alignItems="center"
-        overflow="hidden"
-        position="absolute"
-        top="0px"
-        left="1051px"
-        padding="0px 0px 0px 0px"
-        display="flex"
-        {...getOverrideProps(overrides, "Right")}
-      >
         <Image
-          width="100%"
-          height="unset"
+          width="50%"
           display="block"
-          gap="unset"
-          alignItems="unset"
-          justifyContent="unset"
           grow="1"
           shrink="1"
           basis="0"
           position="relative"
-          padding="30px 30px 30px 30px"
-          objectFit="unset"
           src="https://t3.ftcdn.net/jpg/02/55/22/68/360_F_255226859_Rhqr5hflr2esVXHQE1sS1bWxmZxs0gWI.jpg"
           {...getOverrideProps(overrides, "image")}
         ></Image>

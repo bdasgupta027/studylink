@@ -18,7 +18,7 @@ import { getProfileCard } from './graphql/queries';
 import CreateAnnouncementForm from './ui-components/CreateAnnouncementForm';
 import PostCommentForm from './ui-components/PostCommentForm';
 // import { AnnouncementCollection } from './ui-components';
-import AnnouncementCollection from './ui-components/AnnouncementCollection';
+import AnnouncementCollection from './ui-components/SLAnnouncementCollection';
 
 // imports for notes uploading and display
 import { Storage } from 'aws-amplify';
@@ -310,7 +310,7 @@ function StudyGroup() {
         <div className="studyGroupPage">
             <SLNavBarHeader profileImage={profileImage} setProfileImage={setProfileImage} />
             
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between",}}>
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: "flex-start", overflow: "hidden"}}>
                 <div style={{ display: 'flex', flexDirection: 'column', width: '75%',}}> 
                     {studyGroupCard && <SLStudyGroupCard studyGroupCard={studyGroupCard} marginTop='10px' />}
                     {/* <div className="dashed-line" style={{ borderTop: '1px dashed #000', marginTop: '10px', paddingBottom: '10px' }} /> */}
