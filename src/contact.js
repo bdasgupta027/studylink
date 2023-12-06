@@ -7,9 +7,10 @@ import { TextField } from '@mui/material';
 import { Grid } from "@mui/material";
 import Typography from '@mui/material/Typography';
 import emailjs from '@emailjs/browser';
-import { Auth } from "aws-amplify"
+import { Auth, API } from "aws-amplify"
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import { useEffect, useState } from "react";
+import { getProfileCard } from "./graphql/queries";
 
 
 // contact form code
@@ -34,7 +35,34 @@ const validationSchema = yup.object({
 
 const Contact = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    // const [profileImage, setProfileImage] = useState("");
 
+    const [profileCard, setProfileCard] = useState(null);
+  const [profileImage, setProfileImage] = useState("");
+
+  const createProfileCardDetails = async () => {
+    const user = await Auth.currentAuthenticatedUser();
+    try {
+        const response = await API.graphql({
+            query: getProfileCard,
+            variables: { id: user.attributes.sub }
+        });
+        const fetchedProfileCard = response.data.getProfileCard;
+        setProfileCard(fetchedProfileCard);
+        setProfileImage(fetchedProfileCard.image);
+        console.log("FINAL PROFILE", fetchedProfileCard);
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+};
+    useEffect(() => {
+        createProfileCardDetails();
+    }, []); 
+
+    const updateProfileImage = (newImage) => {
+        setProfileImage(newImage);
+    };
     useEffect(() => {
         const checkAuthentication = async () => {
             try {
@@ -94,10 +122,27 @@ const Contact = () => {
         },
     });
 
+    const getProfileInfo = async () => {
+        const user = await Auth.currentAuthenticatedUser();
+        try {
+            const response = await API.graphql({
+                query: getProfileCard,
+                variables: { id: user.attributes.sub }
+            });
+            const fetchedProfileCard = response.data.getProfileCard;
+            // setProfileCard(fetchedProfileCard);
+            setProfileImage(fetchedProfileCard.image);
+            // console.log("FINAL PROFILE", fetchedProfileCard);
+        } catch (err) {
+            console.log(err);
+            return false;
+        }
+    };
+
     return ( 
         <div>
             {isAuthenticated? (
-                <NavBar2></NavBar2>
+                <NavBar2 profileImage={profileImage} setProfileImage={setProfileImage}></NavBar2>
             ):(
                 <NavBar></NavBar>
             )}

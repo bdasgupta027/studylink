@@ -227,7 +227,8 @@ function StudyGroup() {
                     },
                 },
             });
-
+            const existingMemberList = [existingMembersResponse.data.listMemberCards.items]
+            console.log("MEMBER LISTTTTT", existingMemberList);
             const existingMembers = existingMembersResponse.data.listMemberCards.items;
 
             if (existingMembers.length > 0) {
