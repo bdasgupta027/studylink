@@ -43,6 +43,35 @@ const buttonStyle = {
     fontWeight: "bold",
     margin: "10px 20px"
 }
+const smallerButtonStyle = {
+    marginTop: '20px',
+    display: 'inline-block',
+    padding: '5px 8px', // Adjusted padding for a smaller size
+    width: '150px', // Adjusted width for a smaller size
+    fontSize: '18px', // Adjusted font size for a smaller size
+    cursor: 'pointer',
+    textAlign: 'center',
+    textDecoration: 'none',
+    outline: 'none',
+    color: '#fff',
+    backgroundColor: '#047D95',
+    border: 'none',
+    borderRadius: '5px',
+    fontWeight: 'bold',
+    margin: '10px 20px',
+  };
+  
+const announcementStyle = {
+    backgroundColor: '#3498db',
+    color: '#fff',
+    padding: '20px',
+    textAlign: 'center',
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    marginTop: '5px',
+    marginBottom: '30px', // Add padding below
+};
 
 
 function StudyGroup() {
@@ -281,21 +310,22 @@ function StudyGroup() {
         <div className="studyGroupPage">
             <SLNavBarHeader profileImage={profileImage} setProfileImage={setProfileImage} />
             
-            <Button variant="contained" color="primary" onClick={handleAnnouncementFormOpen} style={{ marginBottom: '20px' }}>
-                Create an Announcement
-            </Button>
-
-            <Button variant="contained" color="secondary" onClick={handleCommentFormOpen} style={{ marginBottom: '20px' }}>
-                Post a Comment
-            </Button>
-
-            <CreateAnnouncementForm open={announcementFormOpen} handleClose={handleAnnouncementFormClose} studyGroupId={id}/>
-
-            <PostCommentForm open={commentFormOpen} handleClose={handleCommentFormClose} />
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between"}}>
-                <div style={{ display: 'flex', flexDirection: 'column' }}> 
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between",}}>
+                <div style={{ display: 'flex', flexDirection: 'column', width: '75%',}}> 
                     {studyGroupCard && <SLStudyGroupCard studyGroupCard={studyGroupCard} marginTop='10px' />}
+                    {/* <div className="dashed-line" style={{ borderTop: '1px dashed #000', marginTop: '10px', paddingBottom: '10px' }} /> */}
+                    <div style={announcementStyle}>
+                        Announcements
+                    </div>
                     {isJoined?(
+                    <AnnouncementCollection studyGroupId={id}/>
+                    ): null}
+                    
+                    <div style={announcementStyle}>
+                        Notes
+                    </div>
+                    <div>                    
+                        {isJoined?(
                         <View display="flex" direction="column" justifyContent="center" alignItems="center" marginTop="10px">
                             <ImageSlider id={id} />
                             <input
@@ -315,7 +345,7 @@ function StudyGroup() {
                                 }}
                             />
 
-                            <Button onClick={uploadFile} style={buttonStyle}>
+                            <Button onClick={uploadFile} style={smallerButtonStyle}>
                                 Upload Files
                             </Button>
                             {fileStatus && (
@@ -325,8 +355,9 @@ function StudyGroup() {
                             )}
                         </View>
                     ):null}
+</div>
                 </div>
-                <div className="sidebar" style={{ height: '100%'}}>
+                <div className="sidebar" style={{ height: '100%', width: '25%',}}>
                     {!isJoined ? (
                         <>
                         <button style={buttonStyle} onClick={addMember}>Join Group</button>
@@ -334,6 +365,8 @@ function StudyGroup() {
                     ) : (
                         <>
                         <button disabled style={buttonStyle} >Joined</button>
+                        <button style={buttonStyle} onClick={handleAnnouncementFormOpen}>Make Annoucement</button>
+                        <CreateAnnouncementForm open={announcementFormOpen} handleClose={handleAnnouncementFormClose} studyGroupId={id}/>
                         <button style={buttonStyle} onClick={handleChatButtonClick}>Chat</button>
                         </>
                     )}
@@ -345,8 +378,6 @@ function StudyGroup() {
                     ): null}
                 </div>
             </div>
-            <hr style={{ border: '10px dotted black', width: '100%' }} />
-            <AnnouncementCollection studyGroupId={id}/>
         </div>
     );
 

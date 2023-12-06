@@ -40,7 +40,12 @@ export default function AnnouncementCollection(props) {
   const jumpToPage = (pageNum) => {
     setPageIndex(pageNum);
   };
-  const loadPage = async (page) => {
+  
+  React.useEffect(() => {
+    loadPage(pageIndex, props.studyGroupId); // Pass studyGroupId prop
+  }, [pageIndex, props.studyGroupId]);
+
+  const loadPage = async (page,studyGroupId) => {
     const cacheUntil = page * pageSize + 1;
     const newCache = apiCache[instanceKey].slice();
     let newNext = nextToken[instanceKey];
@@ -48,7 +53,9 @@ export default function AnnouncementCollection(props) {
       setLoading(true);
       const variables = {
         limit: pageSize,
+        filter: { studygroupcardID: { eq: studyGroupId } },
       };
+      console.log(variables);
       if (newNext) {
         variables["nextToken"] = newNext;
       }
@@ -71,7 +78,7 @@ export default function AnnouncementCollection(props) {
     nextToken[instanceKey] = newNext;
   };
   React.useEffect(() => {
-    loadPage(pageIndex);
+    loadPage(pageIndex, props.studyGroupId);
   }, [pageIndex]);
   React.useEffect(() => {
     setMaxViewed(Math.max(maxViewed, pageIndex));
