@@ -7,7 +7,6 @@
 /* eslint-disable */
 import * as React from "react";
 import { withAuthenticator } from '@aws-amplify/ui-react';
-import SLNavBarHeader2 from "./SLNavBarHeader2";
 import SLNavBarHeader from "./SLNavBarHeader";
 import { DataStore, Auth, API } from 'aws-amplify';
 import { useState, useEffect } from "react";

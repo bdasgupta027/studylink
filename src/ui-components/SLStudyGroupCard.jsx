@@ -207,7 +207,7 @@ export function SLStudyGroupCard(props) {
           // }
           {...getOverrideProps(overrides, "Accepting Members: True")}
         >
-          {studyGroupCard?.acceptingMembers === 1 ? (
+          {studyGroupCard?.acceptingMembers !== 1 ? (
     <>
       <span><b>Accepting Members: </b></span>True
         </>

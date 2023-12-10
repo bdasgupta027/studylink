@@ -18,8 +18,8 @@ import { getProfileCard } from './graphql/queries';
 import CreateAnnouncementForm from './ui-components/CreateAnnouncementForm';
 import PostCommentForm from './ui-components/PostCommentForm';
 // import { AnnouncementCollection } from './ui-components';
+import CreateInvite from './ui-components/CreateInvite';
 import AnnouncementCollection from './ui-components/SLAnnouncementCollection';
-
 // imports for notes uploading and display
 import { Storage } from 'aws-amplify';
 
@@ -98,6 +98,7 @@ function StudyGroup() {
     const { id } = useParams();
     const [members, setMembers] = useState([]);
     const [studyGroupCard, setStudyGroupCard] = useState(null);
+    const [openCreateInvite, setOpenCreateInvite] = useState(false);
     const uuid = require('uuid');
     // for notes
     // const toolbarPluginInstance = toolbarPlugin();
@@ -122,6 +123,14 @@ function StudyGroup() {
     //     // Navigate to the '/chat' route when the button is clicked
     //     history.push('/chat');
     // };
+
+    const handleClickOpenCreateInvite = () => {
+        setOpenCreateInvite(true);
+      };
+    
+      const toggleCreateInvite= () => {
+        setOpenCreateInvite(!openCreateInvite);
+      };
 
     const createProfileCardDetails = async () => {
         const user = await Auth.currentAuthenticatedUser();
@@ -366,6 +375,12 @@ function StudyGroup() {
                     ) : (
                         <>
                         <button disabled style={buttonStyle} >Joined</button>
+                        {isJoined && (<Button onClick={handleClickOpenCreateInvite} style={buttonStyle}>
+                            Invite Member
+                        </Button>)}
+                        {openCreateInvite && (
+                        <CreateInvite open={openCreateInvite} toggleForm={toggleCreateInvite} studygroupid={id}/>
+                        )}
                         <button style={buttonStyle} onClick={handleAnnouncementFormOpen}>Make Annoucement</button>
                         <CreateAnnouncementForm open={announcementFormOpen} handleClose={handleAnnouncementFormClose} studyGroupId={id}/>
                         <button style={buttonStyle} onClick={handleChatButtonClick}>Chat</button>

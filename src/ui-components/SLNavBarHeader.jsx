@@ -8,22 +8,63 @@
 import * as React from "react";
 import { getOverrideProps, useNavigateAction } from "./utils";
 import { Flex, Image, Text, Button } from "@aws-amplify/ui-react";
-import MyIcon from "./MyIcon";
 import { Link } from "react-router-dom";
 import { Auth } from "aws-amplify";
+import { API } from 'aws-amplify';
+import { graphqlOperation } from 'aws-amplify';
+import IconButton from '@mui/material/IconButton';
 import { useState, useEffect } from "react";
 import StudyGroupForm from "./StudyGroupForm";
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import Notifications from "./Notifications";
+import { listInvites } from '../graphql/queries';
 
 export default function SLNavBarHeader(props) {
   const { profileCard, profileImage, overrides, ...rest } = props;
-  const [open, setOpen] = useState(false);
+  const [openCreateStudyGroupForm, setOpenCreateStudyGroupForm] = useState(false);
+  const [openNotifications, setOpenNotifications] = useState(false);
+  const [user, setUser] = useState(null);
+  const [invites, setInvites] = useState([]);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  useEffect(() => {
+    const fetchInvites = async () => {
+      const user = await Auth.currentAuthenticatedUser();
+      setUser(user.attributes.email);
+      try {
+        const filter = {
+          receiver: {
+            eq: user.attributes.email
+          }
+        };
+        const result = await API.graphql(
+          graphqlOperation(listInvites, {
+            filter,
+          })
+        );
+        const invites = result.data.listInvites.items;
+        setInvites(invites);
+      } catch (error) {
+        console.error('Error fetching invites:', error);
+      }
+    }
+    fetchInvites();
+  }, [openNotifications]);
+
+  const handleClickOpenCreateStudyGroupForm = () => {
+    setOpenCreateStudyGroupForm(true);
   };
 
-  const toggleForm = () => {
-    setOpen(!open);
+  const handleClickOpenNotifications = () => {
+    setOpenNotifications(true);
+  };
+
+  const toggleCreateStudyGroupForm = () => {
+    setOpenCreateStudyGroupForm(!openCreateStudyGroupForm);
+  };
+
+  const toggleNotifications = () => {
+    setOpenNotifications(!openNotifications);
   };
 
   const updateProfileImage = (newImage) => {
@@ -98,10 +139,10 @@ export default function SLNavBarHeader(props) {
           isDisabled={false}
           variation="primary"
           children="Create Study Group"
-          onClick={handleClickOpen}
+          onClick={handleClickOpenCreateStudyGroupForm}
         ></Button>
-          {open && (
-            <StudyGroupForm open={open} toggleForm={toggleForm} />
+          {openCreateStudyGroupForm && (
+            <StudyGroupForm open={openCreateStudyGroupForm} toggleForm={toggleCreateStudyGroupForm} />
           )}
         <Button
           width="unset"
@@ -131,20 +172,47 @@ export default function SLNavBarHeader(props) {
         padding="0px 0px 0px 0px"
         {...getOverrideProps(overrides, "Frame 32129767081")}
       >
-        <MyIcon
-          width="24px"
-          height="24px"
-          display="block"
-          gap="unset"
-          alignItems="unset"
-          justifyContent="unset"
-          overflow="hidden"
-          shrink="0"
-          position="relative"
-          padding="0px 0px 0px 0px"
-          type="notification"
-          {...getOverrideProps(overrides, "MyIcon")}
-        ></MyIcon>
+      {invites.length > 0 && (<Text>
+        {invites.length} Notification{invites.length>1?"s":""}
+      </Text>)}
+        <IconButton aria-label="notifications" size="large" color={invites.length>0 ? "primary" : "default"}
+        onClick={handleClickOpenNotifications}>
+          {invites.length === 0 && (
+              <NotificationsNoneIcon
+                width="32px"
+                height="32px"
+                display="block"
+                gap="unset"
+                alignItems="unset"
+                justifyContent="unset"
+                overflow="hidden"
+                shrink="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                type="notification"
+                {...getOverrideProps(overrides, "MyIcon")}
+              ></NotificationsNoneIcon>
+          )}
+          {invites.length > 0 && (
+              <NotificationsActiveIcon
+                width="32px"
+                height="32px"
+                display="block"
+                gap="unset"
+                alignItems="unset"
+                justifyContent="unset"
+                overflow="hidden"
+                shrink="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                type="notification"
+                {...getOverrideProps(overrides, "MyIcon")}
+              ></NotificationsActiveIcon>
+          )}
+        </IconButton>
+      {openNotifications && (
+            <Notifications open={openNotifications} toggleForm={toggleNotifications} userEmail={user} />
+          )}
       < Link to="/profile">
         <Image
           width="45px"
