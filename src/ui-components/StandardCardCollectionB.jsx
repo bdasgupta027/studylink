@@ -6,14 +6,14 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { listAnnouncements } from "../graphql/queries";
-import SocialPost from "./SocialPost";
+import { listStudyGroupCards } from "../graphql/queries";
+import StandardCard from "./StandardCard";
 import { getOverrideProps } from "./utils";
 import { Collection, Pagination, Placeholder } from "@aws-amplify/ui-react";
 import { API } from "aws-amplify";
 const nextToken = {};
 const apiCache = {};
-export default function AnnouncementCollection(props) {
+export default function StandardCardCollectionB(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
   const [pageIndex, setPageIndex] = React.useState(1);
   const [hasMorePages, setHasMorePages] = React.useState(true);
@@ -48,16 +48,17 @@ export default function AnnouncementCollection(props) {
       setLoading(true);
       const variables = {
         limit: pageSize,
+        filter: { acceptingMembers: { eq: true } },
       };
       if (newNext) {
         variables["nextToken"] = newNext;
       }
       const result = (
         await API.graphql({
-          query: listAnnouncements.replaceAll("__typename", ""),
+          query: listStudyGroupCards.replaceAll("__typename", ""),
           variables,
         })
-      ).data.listAnnouncements;
+      ).data.listStudyGroupCards;
       newCache.push(...result.items);
       newNext = result.nextToken;
     }
@@ -79,15 +80,17 @@ export default function AnnouncementCollection(props) {
   return (
     <div>
       <Collection
-        type="list"
-        isSearchable="true"
+        type="grid"
+        isSearchable={true}
         searchPlaceholder="Search..."
-        direction="column"
-        justifyContent="center"
+        templateColumns="1fr 1fr 1fr"
+        autoFlow="row"
+        alignItems="stretch"
+        justifyContent="stretch"
         itemsPerPage={pageSize}
         isPaginated={!isApiPagination && isPaginated}
         items={itemsProp || (loading ? new Array(pageSize).fill({}) : items)}
-        {...getOverrideProps(overrides, "AnnouncementCollection")}
+        {...getOverrideProps(overrides, "StandardCardCollectionB")}
         {...rest}
       >
         {(item, index) => {
@@ -95,12 +98,14 @@ export default function AnnouncementCollection(props) {
             return <Placeholder key={index} size="large" />;
           }
           return (
-            <SocialPost
-              announcement={item}
-              margin="0 0 5px 0"
+            <StandardCard
+              studyGroupCard={item}
+              height="auto"
+              width="auto"
+              margin="0 15px 15px 0"
               key={item.id}
               {...(overrideItems && overrideItems({ item, index }))}
-            ></SocialPost>
+            ></StandardCard>
           );
         }}
       </Collection>
