@@ -14,7 +14,7 @@ export default function CTASection(props) {
     <Flex
       gap="10px"
       direction="column"
-      width="1440px"
+      width="100%"
       height="unset"
       justifyContent="center"
       alignItems="flex-start"
