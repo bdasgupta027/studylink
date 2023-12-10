@@ -193,8 +193,8 @@ export default function StudyGroupCard(props) {
           whiteSpace="pre-wrap"
           children={
             studyGroupCard?.acceptingMembers == 1
-              ? "Accepting Members: False"
-              : "Accepting Members: True"
+              ? "Accepting Members: True"
+              : "Accepting Members: False"
           }
           {...getOverrideProps(overrides, "Accepting Members: True")}
         ></Text>

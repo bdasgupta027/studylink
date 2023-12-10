@@ -6,38 +6,6 @@ import { LazyLoading, LazyLoadingDisabled, AsyncCollection } from "@aws-amplify/
 
 
 
-type EagerInvite = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Invite, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly sender?: string | null;
-  readonly receiver?: string | null;
-  readonly studygroupid?: string | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazyInvite = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Invite, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly sender?: string | null;
-  readonly receiver?: string | null;
-  readonly studygroupid?: string | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type Invite = LazyLoading extends LazyLoadingDisabled ? EagerInvite : LazyInvite
-
-export declare const Invite: (new (init: ModelInit<Invite>) => Invite) & {
-  copyOf(source: Invite, mutator: (draft: MutableModel<Invite>) => MutableModel<Invite> | void): Invite;
-}
-
 type EagerReplies = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Replies, 'id'>;
@@ -266,6 +234,7 @@ type EagerAnnouncement = {
   readonly id: string;
   readonly title: string;
   readonly username: string;
+  readonly date: string;
   readonly announcement: string;
   readonly Comments?: (Comment | null)[] | null;
   readonly studygroupcardID: string;
@@ -282,6 +251,7 @@ type LazyAnnouncement = {
   readonly id: string;
   readonly title: string;
   readonly username: string;
+  readonly date: string;
   readonly announcement: string;
   readonly Comments: AsyncCollection<Comment>;
   readonly studygroupcardID: string;

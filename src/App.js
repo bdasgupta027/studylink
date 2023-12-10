@@ -8,7 +8,6 @@ import Dashboard from './ui-components/Dashboard';
 import EditProfile from './ui-components/SLEditProfile';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { API, DataStore, Amplify, Auth, Hub } from 'aws-amplify'
-import { PubSub } from '@aws-amplify/pubsub';
 import { useEffect } from 'react';
 import { getProfileCard } from './graphql/queries';
 import { createProfileCard } from './graphql/mutations';
@@ -36,7 +35,8 @@ function App() {
         await API.graphql({
           query: createProfileCard, 
           variables: { input: newUser, condition: null } 
-        });      
+        });
+        console.log("made it here");        
       }
     });
     return () => {
