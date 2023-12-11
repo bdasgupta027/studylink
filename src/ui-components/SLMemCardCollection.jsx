@@ -14,7 +14,7 @@ import { API } from "aws-amplify";
 const nextToken = {};
 const apiCache = {};
 export default function MemCardCollection(props) {
-  const { items: itemsProp, overrideItems, overrides, ...rest } = props;
+  const {studyGroupId, onMemberImageClick, items: itemsProp, overrideItems, overrides, ...rest } = props;
   const [pageIndex, setPageIndex] = React.useState(1);
   const [hasMorePages, setHasMorePages] = React.useState(true);
   const [items, setItems] = React.useState([]);
@@ -101,6 +101,7 @@ export default function MemCardCollection(props) {
             <MemberCard
               memberCard={item}
               key={item.id}
+              onMemberImageClick={onMemberImageClick}
               {...(overrideItems && overrideItems({ item, index }))}
             ></MemberCard>
           );

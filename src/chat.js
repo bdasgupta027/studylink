@@ -10,13 +10,15 @@ import * as mutations from "./graphql/mutations";
 import * as queries from "./graphql/queries";
 import * as subscriptions from "./graphql/subscriptions";
 import intlFormatDistance from "date-fns/intlFormatDistance";
-import { useParams } from 'react-router-dom';
+import { useParams, Link, useNavigate  } from 'react-router-dom';
+import MyIcon from "./ui-components/MyIcon";
 
 
 function Chat() {
     const [chats, setChats] = React.useState([]);
     const [user, setUser] = React.useState();
     const { id } = useParams();
+    const navigate = useNavigate();
     const getUserDetails = async () => {
         const user = await Auth.currentAuthenticatedUser();
         setUser(user);
@@ -75,6 +77,21 @@ function Chat() {
       <div>
         <div className="fullchat">
           <div className={`class2`}>
+          <div onClick={() => navigate(-1)}>
+      <MyIcon
+        width="24px"
+        height="24px"
+        display="block"
+        gap="unset"
+        alignItems="unset"
+        justifyContent="unset"
+        overflow="hidden"
+        shrink="0"
+        position="relative"
+        padding="0px 0px 0px 0px"
+        type="close"
+      ></MyIcon>
+    </div>
             
           {chats
             .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
