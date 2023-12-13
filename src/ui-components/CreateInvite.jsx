@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import { Auth } from 'aws-amplify';
 import { API } from 'aws-amplify';
 import { createInvite } from '../graphql/mutations';
-import InviteCreateForm from './InviteCreateForm.jsx'
+
 
 const CreateInviteMutation = `
 mutation CreateInvite(
